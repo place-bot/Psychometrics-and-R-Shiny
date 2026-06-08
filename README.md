@@ -10,7 +10,7 @@ https://place-bot.github.io/Psychometrics-and-R-Shiny/
 
 As of 2026-06-08, that URL returns 404 from the public web. The repository has a `gh-pages` branch with old generated HTML, but GitHub Pages does not appear to be publicly serving it. This repair moves the maintainable source into `main` and adds a GitHub Pages Actions workflow.
 
-After pushing `main`, set repository Pages to use **GitHub Actions** if it is not already enabled. The workflow in `.github/workflows/deploy-pages.yml` will build and publish the site.
+After pushing `main`, set repository Pages to deploy from the `gh-pages` branch at `/` if it is not already enabled. The workflow in `.github/workflows/deploy-pages.yml` builds the MkDocs source from `main` and publishes the generated site to `gh-pages`.
 
 ## Local Development
 
