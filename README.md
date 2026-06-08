@@ -1,6 +1,6 @@
 # Psychometrics and R Shiny Notes
 
-This repository contains the source for a MkDocs Material notes site covering psychometrics, CTT, IRT, CAT, and R Shiny.
+This repository contains the source for a MkDocs Material notes site covering psychometrics, CTT, IRT, and R Shiny.
 
 ## Website
 

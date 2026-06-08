@@ -1032,7 +1032,8 @@ server <- function(input, output, session) {
          xlab  = "年龄",         # x 轴标签
          ylab  = "人数"          # y 轴标签
    )
-   ```
+```
+
 3. `hist()` 会自动把 `ages` 按照区间分箱，并统计每个箱子的频数。
 4. **标出用户年龄**
 5. 调用 `abline(v = input$age, col = "red", lwd = 2)`：
@@ -1053,7 +1054,7 @@ server <- function(input, output, session) {
          col    = "red",    # 文字颜色
          pos    = 4         # 文字摆放方向：4 = 文字在坐标点的右侧
    )
-   ```
+```
 
    - `hist(..., plot = FALSE)`：先执行一次不绘图的直方图计算，用来获取原始频数。
    - `text(x, y, labels, col, pos)`：在指定坐标 `(x, y)` 处画文字。

@@ -17,9 +17,6 @@ Recovered pages:
 - docs/10_rules_ctt_irt/rule10_item_features.md <- 10_rules_ctt_irt/rule10_item_features/index.html
 - docs/assess.md <- assess/index.html
 - docs/binary.md <- binary/index.html
-- docs/cat/chapter1.md <- cat/chapter1/index.html
-- docs/cat/chapter2.md <- cat/chapter2/index.html
-- docs/cat/structure1.md <- cat/structure1/index.html
 - docs/ctt_irt_intro.md <- ctt_irt_intro/index.html
 - docs/estimate.md <- estimate/index.html
 - docs/index.md <- index.html

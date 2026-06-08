@@ -368,7 +368,7 @@ z_{si} = \frac{x_{si} - E[x_{si}]}{\sqrt{V[x_{si}]}}
 - **谨慎指数**（Tatsuoka, 1984; 1996）
 - **可标度性指数**（Reise & Waller, 1993）
 
-#### 5.2.3 \(Z_L\) 统计（Drasgow, Levine & Williams, 1985）
+#### 5.2.3 ZL 统计（Drasgow, Levine & Williams, 1985）
 
 **对数似然**：
 
@@ -396,7 +396,7 @@ Z_L|\theta_s = \frac{\sum[\text{LogL}|\theta_s - \sum E(\text{LogL}|\theta_s)]}{
 
 **表5.2 六项测验的人员拟合示例**
 
-| 被试 | 反应模式 | θ | T-INFO|θ | SEM|θ | \(Z_L\) |
+| 被试 | 反应模式 | θ | \(T\text{-INFO}(\theta)\) | \(SEM(\theta)\) | \(Z_L\) |
 | --- | --- | --- | --- | --- | --- |
 | 1 | 000011 | -0.96 | 0.99 | 1.006 | -4.10 |
 | 2 | 000101 | -0.96 | 0.99 | 1.006 | -3.68 |

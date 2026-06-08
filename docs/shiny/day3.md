@@ -112,7 +112,8 @@ shinyApp(ui = ui, server = server)
 
 ```text
   verbatimTextOutput("allText")
-  ```
+```
+
 - **Server 端**
 
 ```r
@@ -120,7 +121,7 @@ shinyApp(ui = ui, server = server)
       # 这里写需要“打印”的 R 代码
       summary(some_data)
   })
-  ```
+```
 
 ---
 

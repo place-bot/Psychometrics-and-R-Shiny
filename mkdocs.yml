@@ -1,5 +1,5 @@
 site_name: Psychometrics and R Shiny Notes
-site_description: Psychometrics, CTT, IRT, CAT, and R Shiny learning notes.
+site_description: Psychometrics, CTT, IRT, and R Shiny learning notes.
 site_author: Jingyi Guo
 site_url: https://place-bot.github.io/Psychometrics-and-R-Shiny/
 repo_url: https://github.com/place-bot/Psychometrics-and-R-Shiny
@@ -34,6 +34,7 @@ plugins:
 markdown_extensions:
   - admonition
   - attr_list
+  - fenced_code
   - md_in_html
   - tables
   - toc:
@@ -46,7 +47,6 @@ markdown_extensions:
         - square
         - begin
   - pymdownx.details
-  - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
 
@@ -117,10 +117,6 @@ nav:
           - 样本量: polytomous/16-sample-size.md
           - 特殊考虑: polytomous/17-special-considerations.md
           - 模型选择: polytomous/18-model-selection.md
-  - CAT:
-      - CAT 结构: cat/structure1.md
-      - CAT 第一章: cat/chapter1.md
-      - CAT 第二章: cat/chapter2.md
   - CTT/IRT 规则:
       - 规则总览: 10_rules_ctt_irt.md
       - 测量误差: 10_rules_ctt_irt/rule01_measurement_error.md
