@@ -1,0 +1,147 @@
+site_name: Psychometrics and R Shiny Notes
+site_description: Psychometrics, CTT, IRT, CAT, and R Shiny learning notes.
+site_author: Jingyi Guo
+site_url: https://place-bot.github.io/Psychometrics-and-R-Shiny/
+repo_url: https://github.com/place-bot/Psychometrics-and-R-Shiny
+repo_name: place-bot/Psychometrics-and-R-Shiny
+strict: true
+
+theme:
+  name: material
+  language: zh
+  favicon: assets/images/favicon.png
+  features:
+    - navigation.indexes
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue grey
+      accent: teal
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue grey
+      accent: teal
+
+plugins:
+  - search:
+      lang: zh
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+      inline_syntax:
+        - round
+      block_syntax:
+        - square
+        - begin
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - 首页: index.md
+  - 心理测量:
+      - CTT 与 IRT 概览: ctt_irt_intro.md
+      - 基于模型的测量: modelbased.md
+      - IRT 参数估计: estimate.md
+      - IRT 特质量表:
+          - scale/index.md
+          - 引言: scale/00-intro.md
+          - CTT 与 IRT 差异: scale/01-ctt-vs-irt.md
+          - 量表单位: scale/02-scale-units.md
+          - 测量量表特性: scale/03-measurement-scale.md
+          - 实际影响: scale/04-practical-impact.md
+          - 特定客观性: scale/05-specific-objectivity.md
+          - 充分统计量: scale/06-sufficient-statistic.md
+          - 温度计类比: scale/07-thermometer-analogy.md
+          - 总结: scale/08-summary.md
+      - 考生评分:
+          - score/index.md
+          - 引言: score/00-intro.md
+          - 最大似然评分: score/01-maximum-likelihood.md
+          - MAP 评分: score/02-map.md
+          - EAP 评分: score/03-eap.md
+          - 分数变换: score/04-score-transformation.md
+          - 项目和测验信息: score/05-information.md
+          - 总结: score/06-summary.md
+      - 模型拟合评估: assess.md
+  - IRT 模型:
+      - 二分项目模型:
+          - binary/index.md
+          - 引言: binary/00-intro.md
+          - 单维模型: binary/01-unidimensional-models.md
+          - 逻辑模型: binary/02-logistic-models.md
+          - 正态 Ogive 模型: binary/03-normal-ogive-models.md
+          - 其他单维模型: binary/04-other-unidimensional-models.md
+          - 多维模型: binary/05-multidimensional-models.md
+          - 探索性多维模型: binary/06-exploratory-multidimensional.md
+          - 验证性多维模型: binary/07-confirmatory-multidimensional.md
+          - 总结: binary/08-summary.md
+      - 多项项目模型:
+          - polytomous/index.md
+          - 引言: polytomous/00-intro.md
+          - 实例数据: polytomous/01-example-data.md
+          - 单维性与局部独立: polytomous/02-unidimensionality.md
+          - GRM: polytomous/03-grm.md
+          - M-GRM: polytomous/04-modified-grm.md
+          - Divide-by-Total: polytomous/05-divide-by-total.md
+          - PCM: polytomous/06-pcm.md
+          - 间接与直接模型: polytomous/07-indirect-direct.md
+          - 期望项目反应: polytomous/08-expected-response.md
+          - GPCM: polytomous/09-gpcm.md
+          - 部分计分示例: polytomous/10-partial-credit-example.md
+          - RSM: polytomous/11-rsm.md
+          - 六种得分方法: polytomous/12-six-scoring-methods.md
+          - NRM: polytomous/13-nrm.md
+          - 连续反应模型: polytomous/14-continuous-response.md
+          - 其他模型: polytomous/15-other-models.md
+          - 样本量: polytomous/16-sample-size.md
+          - 特殊考虑: polytomous/17-special-considerations.md
+          - 模型选择: polytomous/18-model-selection.md
+  - CAT:
+      - CAT 结构: cat/structure1.md
+      - CAT 第一章: cat/chapter1.md
+      - CAT 第二章: cat/chapter2.md
+  - CTT/IRT 规则:
+      - 规则总览: 10_rules_ctt_irt.md
+      - 测量误差: 10_rules_ctt_irt/rule01_measurement_error.md
+      - 测验长度: 10_rules_ctt_irt/rule02_test_length.md
+      - 测验形式: 10_rules_ctt_irt/rule03_test_forms.md
+      - 项目属性: 10_rules_ctt_irt/rule04_item_properties.md
+      - 分数意义: 10_rules_ctt_irt/rule05_score_meaning.md
+      - 区间量表: 10_rules_ctt_irt/rule06_interval_scale.md
+      - 混合格式: 10_rules_ctt_irt/rule07_mixed_formats.md
+      - 变化分数: 10_rules_ctt_irt/rule08_change_scores.md
+      - 因子分析: 10_rules_ctt_irt/rule09_factor_analysis.md
+      - 项目特征: 10_rules_ctt_irt/rule10_item_features.md
+  - R Shiny:
+      - 学习路径: shiny/intro.md
+      - Day 1 Hello World: shiny/day1.md
+      - Day 2 布局和主题: shiny/day2.md
+      - Day 3 输入控件: shiny/day3.md
+      - Day 4 输出展示: shiny/day4.md
+      - Day 5 反应式编程: shiny/day5.md
+      - Day 6 实战项目: shiny/day6.md
+      - Day 7 部署上线: shiny/day7.md
+  - 质量与维护:
+      - 内容核查记录: quality/content-review.md
+      - 参考资料: references.md
