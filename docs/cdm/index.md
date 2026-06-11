@@ -7,7 +7,7 @@
 ## 阅读顺序
 
 1. 先读理论背景：潜在结构模型（latent structure models）、有限混合模型（finite mixture models）、非参数混合模型（nonparametric mixture models）和一般可识别性语言。
-2. 再读数学工具：Kruskal 三路数组唯一性（three-way array uniqueness）、Segre 割线簇（secant varieties of Segre varieties）、代数统计（algebraic statistics）和图模型（graphical models）。
+2. 再读数学工具：Kruskal 三路数组唯一性（three-way array uniqueness）和图模型（graphical models）。
 3. 补 HMM、网络和机器学习背景：这些不是 CDM 主线，但能帮助理解隐藏状态（hidden states）、块模型（block models）和 EM 式学习（EM-like learning）。
 4. 进入 CDM 主线：DINA、DINO、G-DINA、LCDM、GDM、Fusion Model 和 GDINA 软件框架。
 5. 精读 Q 矩阵、可识别性、估计与正则化：这是后续写 continuous-Q 或 exploratory CDM 时最关键的理论与算法支撑。

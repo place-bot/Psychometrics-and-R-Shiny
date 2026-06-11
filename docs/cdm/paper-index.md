@@ -31,7 +31,6 @@
 | 主读 | Hall & Zhou (2003). Nonparametric estimation of component distributions in a multivariate mixture. | 理论背景 | `cdm/papers/hall-zhou-2003-nonparametric-mixtures.md` |
 | 主读 | Elmore, Hettmansperger & Thomas (2004). Estimating component cumulative distribution functions in finite mixture models. | 理论背景 | `cdm/papers/elmore-hettmansperger-thomas-2004-component-cdf.md` |
 | 主读 | Hall, Neeman, Pakyari & Elmore (2005). Nonparametric inference in multivariate mixtures. | 理论背景 | `cdm/papers/hall-neeman-pakyari-elmore-2005-multivariate-mixtures.md` |
-| 主读 | Elmore, Hall & Neeman (2005). An application of classical invariant theory to identifiability in nonparametric mixtures. | 理论背景；数学工具 | `cdm/papers/elmore-hall-neeman-2005-invariant-theory.md` |
 | 主读 | Cruz-Medina, Hettmansperger & Thomas (2004). Semiparametric mixture models and repeated measures: The multinomial cut point model. | 理论背景 | `cdm/papers/cruz-medina-hettmansperger-thomas-2004-cut-point.md` |
 | 背景 | Benaglia, Chauveau & Hunter (2009). An EM-like algorithm for semi and nonparametric estimation in multivariate mixtures. | 理论背景；估计 | `cdm/papers/benaglia-chauveau-hunter-2009-em-like-mixtures.md` |
 
@@ -41,14 +40,7 @@
 | --- | --- | --- | --- |
 | 精读 | Kruskal (1977). Three-way arrays: Rank and uniqueness of trilinear decompositions. | 数学工具；可识别性 | `cdm/papers/kruskal-1977-three-way-arrays.md` |
 | 背景 | Kruskal (1976). More factors than subjects, tests and treatments. | 数学工具 | `cdm/papers/kruskal-1976-indeterminacy.md` |
-| 主读 | Abo, Ottaviani & Peterson (2009). Induction for secant varieties of Segre varieties. | 数学工具 | `cdm/papers/abo-ottaviani-peterson-2009-segre.md` |
-| 主读 | Catalisano, Geramita & Gimigliano (2002). Ranks of tensors, secant varieties of Segre varieties and fat points. | 数学工具 | `cdm/papers/catalisano-geramita-gimigliano-2002-tensor-ranks.md` |
-| 主读 | Catalisano, Geramita & Gimigliano (2005). Higher secant varieties of the Segre varieties \(P^1 \times \cdots \times P^1\). | 数学工具 | `cdm/papers/catalisano-geramita-gimigliano-2005-higher-secant.md` |
-| 主读 | Cox, Little & O'Shea (1997). Ideals, Varieties, and Algorithms. | 数学工具 | `cdm/papers/cox-little-oshea-1997-ideals-varieties-algorithms.md` |
-| 主读 | Pachter & Sturmfels (2005). Algebraic Statistics for Computational Biology. | 数学工具 | `cdm/papers/pachter-sturmfels-2005-algebraic-statistics.md` |
 | 主读 | Lauritzen (1996). Graphical Models. | 数学工具 | `cdm/papers/lauritzen-1996-graphical-models.md` |
-| 背景 | Drton (2006). Algebraic techniques for Gaussian models. | 数学工具 | `cdm/papers/drton-2006-gaussian-algebraic-techniques.md` |
-| 暂缓 | Garcia, Stillman & Sturmfels (2005). Algebraic geometry of Bayesian networks. | 数学工具 | `cdm/papers/garcia-stillman-sturmfels-2005-bayesian-networks.md` |
 
 ## HMM、网络与机器学习背景
 

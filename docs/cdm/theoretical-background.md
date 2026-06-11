@@ -39,7 +39,6 @@
 | 主读 | Hall & Zhou (2003). Nonparametric estimation of component distributions in a multivariate mixture. | `cdm/papers/hall-zhou-2003-nonparametric-mixtures.md` | 多变量混合的非参数估计（nonparametric estimation）。 |
 | 主读 | Elmore, Hettmansperger & Thomas (2004). Estimating component cumulative distribution functions in finite mixture models. | `cdm/papers/elmore-hettmansperger-thomas-2004-component-cdf.md` | component distribution 的估计方法，和非参数 mixture 线相连。 |
 | 主读 | Hall, Neeman, Pakyari & Elmore (2005). Nonparametric inference in multivariate mixtures. | `cdm/papers/hall-neeman-pakyari-elmore-2005-multivariate-mixtures.md` | 多变量非参数 mixture 的推断框架。 |
-| 主读 | Elmore, Hall & Neeman (2005). An application of classical invariant theory to identifiability in nonparametric mixtures. | `cdm/papers/elmore-hall-neeman-2005-invariant-theory.md` | 非参数 mixture 的识别证明工具，和数学工具页交叉。 |
 | 主读 | Cruz-Medina, Hettmansperger & Thomas (2004). Semiparametric mixture models and repeated measures: The multinomial cut point model. | `cdm/papers/cruz-medina-hettmansperger-thomas-2004-cut-point.md` | repeated measures 与半参数 mixture 的具体模型。 |
 | 背景 | Benaglia, Chauveau & Hunter (2009). An EM-like algorithm for semi and nonparametric estimation in multivariate mixtures. | `cdm/papers/benaglia-chauveau-hunter-2009-em-like-mixtures.md` | 读算法思路即可，后续可和 CDM 的 EM、MML、变分方法对照。 |
 
