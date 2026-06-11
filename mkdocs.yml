@@ -1,5 +1,5 @@
 site_name: Psychometrics and R Shiny Notes
-site_description: Psychometrics, CTT, IRT, and R Shiny learning notes.
+site_description: Psychometrics, CTT, IRT, CDM, and R Shiny learning notes.
 site_author: Jingyi Guo
 site_url: https://place-bot.github.io/Psychometrics-and-R-Shiny/
 repo_url: https://github.com/place-bot/Psychometrics-and-R-Shiny
@@ -119,16 +119,21 @@ nav:
           - 模型选择: polytomous/18-model-selection.md
   - CTT/IRT 规则:
       - 规则总览: 10_rules_ctt_irt.md
-      - 测量误差: 10_rules_ctt_irt/rule01_measurement_error.md
-      - 测验长度: 10_rules_ctt_irt/rule02_test_length.md
-      - 测验形式: 10_rules_ctt_irt/rule03_test_forms.md
-      - 项目属性: 10_rules_ctt_irt/rule04_item_properties.md
-      - 分数意义: 10_rules_ctt_irt/rule05_score_meaning.md
-      - 区间量表: 10_rules_ctt_irt/rule06_interval_scale.md
-      - 混合格式: 10_rules_ctt_irt/rule07_mixed_formats.md
-      - 变化分数: 10_rules_ctt_irt/rule08_change_scores.md
-      - 因子分析: 10_rules_ctt_irt/rule09_factor_analysis.md
-      - 项目特征: 10_rules_ctt_irt/rule10_item_features.md
+      - 测验设计:
+          - 测量误差: 10_rules_ctt_irt/rule01_measurement_error.md
+          - 测验长度: 10_rules_ctt_irt/rule02_test_length.md
+          - 测验形式: 10_rules_ctt_irt/rule03_test_forms.md
+      - 分数与量表:
+          - 分数意义: 10_rules_ctt_irt/rule05_score_meaning.md
+          - 区间量表: 10_rules_ctt_irt/rule06_interval_scale.md
+          - 变化分数: 10_rules_ctt_irt/rule08_change_scores.md
+      - 项目与模型:
+          - 项目属性: 10_rules_ctt_irt/rule04_item_properties.md
+          - 混合格式: 10_rules_ctt_irt/rule07_mixed_formats.md
+          - 因子分析: 10_rules_ctt_irt/rule09_factor_analysis.md
+          - 项目特征: 10_rules_ctt_irt/rule10_item_features.md
+  - CDM:
+      - 总览: cdm/index.md
   - R Shiny:
       - 学习路径: shiny/intro.md
       - Day 1 Hello World: shiny/day1.md
