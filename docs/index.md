@@ -6,13 +6,13 @@
 
 ## 快速入口
 
-- [CTT 与 IRT 概览](ctt_irt_intro.md)
-- [二分项目 IRT 模型](binary/index.md)
-- [多项 IRT 模型](polytomous/index.md)
-- [考生评分与测验信息](score/index.md)
+- [心理测量基础](psychometrics/index.md)
+- [IRT 模型](irt-models/index.md)
+- [IRT 估计与评估](irt-estimation/index.md)
+- [CTT/IRT 应用规则](10_rules_ctt_irt/index.md)
 - [认知诊断模型（CDM）](cdm/index.md)
-- [R Shiny 学习路径](shiny/intro.md)
-- [内容核查记录](quality/content-review.md)
+- [R Shiny](shiny/index.md)
+- [质量与维护](quality/index.md)
 
 ## 记号示例
 

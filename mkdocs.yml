@@ -60,9 +60,11 @@ extra_javascript:
 nav:
   - 首页: index.md
   - 心理测量基础:
+      - 总览: psychometrics/index.md
       - CTT 与 IRT 概览: ctt_irt_intro.md
       - 基于模型的测量: modelbased.md
   - IRT 模型:
+      - 总览: irt-models/index.md
       - 二分项目模型:
           - 总览: binary/index.md
           - 基础模型:
@@ -103,6 +105,7 @@ nav:
               - 特殊考虑: polytomous/17-special-considerations.md
               - 模型选择: polytomous/18-model-selection.md
   - IRT 估计与评估:
+      - 总览: irt-estimation/index.md
       - IRT 参数估计: estimate.md
       - IRT 特质量表:
           - 总览: scale/index.md
@@ -131,7 +134,7 @@ nav:
               - 总结: score/06-summary.md
       - 模型拟合评估: assess.md
   - CTT/IRT 应用规则:
-      - 规则总览: 10_rules_ctt_irt.md
+      - 规则总览: 10_rules_ctt_irt/index.md
       - 测验设计:
           - 测量误差: 10_rules_ctt_irt/rule01_measurement_error.md
           - 测验长度: 10_rules_ctt_irt/rule02_test_length.md
@@ -159,6 +162,7 @@ nav:
           - 连续化与扩展模型: cdm/continuous-extensions.md
       - 论文索引: cdm/paper-index.md
   - R Shiny:
+      - 总览: shiny/index.md
       - 学习路径: shiny/intro.md
       - 入门基础:
           - Day 1 Hello World: shiny/day1.md
@@ -171,5 +175,6 @@ nav:
           - Day 6 实战项目: shiny/day6.md
           - Day 7 部署上线: shiny/day7.md
   - 质量与维护:
+      - 总览: quality/index.md
       - 内容核查记录: quality/content-review.md
       - 参考资料: references.md
