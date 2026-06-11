@@ -146,7 +146,18 @@ nav:
           - 因子分析: 10_rules_ctt_irt/rule09_factor_analysis.md
           - 项目特征: 10_rules_ctt_irt/rule10_item_features.md
   - CDM:
-      - 总览: cdm/index.md
+      - 阅读路线: cdm/index.md
+      - 理论背景:
+          - 潜在结构与混合模型: cdm/theoretical-background.md
+          - 数学工具: cdm/mathematical-tools.md
+          - HMM、网络与机器学习背景: cdm/hmm-network-ml.md
+      - CDM 主线:
+          - 核心模型: cdm/core-models.md
+          - Q 矩阵验证与学习: cdm/q-matrix.md
+          - 可识别性理论: cdm/identifiability.md
+          - 估计、正则化与计算: cdm/estimation-computation.md
+          - 连续化与扩展模型: cdm/continuous-extensions.md
+      - 论文索引: cdm/paper-index.md
   - R Shiny:
       - 学习路径: shiny/intro.md
       - 入门基础:
