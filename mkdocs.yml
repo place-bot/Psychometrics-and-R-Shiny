@@ -161,6 +161,8 @@ nav:
           - 估计、正则化与计算: cdm/estimation-computation.md
           - 连续化与扩展模型: cdm/continuous-extensions.md
       - 论文索引: cdm/paper-index.md
+      - 单篇论文精读:
+          - Allman et al. (2009): cdm/papers/allman-matias-rhodes-2009-latent-structure-identifiability.md
   - R Shiny:
       - 总览: shiny/index.md
       - 学习路径: shiny/intro.md

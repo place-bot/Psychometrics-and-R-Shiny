@@ -13,7 +13,7 @@
 
 | 阅读级别 | 论文 | 后续单篇笔记位置 | 读法 |
 | --- | --- | --- | --- |
-| 精读 | Allman, Matias & Rhodes (2009). Identifiability of parameters in latent structure models with many observed variables. | `cdm/papers/allman-matias-rhodes-2009-latent-structure-identifiability.md` | CDM 识别理论的上游。重点读 three-block 分解、Kruskal 条件和 generic identifiability 的表达方式。 |
+| 精读 | Allman, Matias & Rhodes (2009). Identifiability of parameters in latent structure models with many observed variables. | [单篇笔记](papers/allman-matias-rhodes-2009-latent-structure-identifiability.md) | CDM 识别理论的上游。重点读 three-block 分解、Kruskal 条件和 generic identifiability 的表达方式。 |
 | 背景 | Allman & Rhodes (2006/2009). Tree topology and covarion identifiability papers. | `cdm/papers/allman-rhodes-phylogenetic-identifiability.md` | 不作为 CDM 主证明，但能帮助理解 mixture/covarion 模型里如何写 identifiability。 |
 | 背景 | Koopmans & Reiersøl (1950). The identification of structural characteristics. | `cdm/papers/koopmans-reiersol-1950-identification.md` | 一般识别问题的经典统计背景，作为术语和思想来源。 |
 | 背景 | Koopmans (1950). Statistical Inference in Dynamic Economic Models. | `cdm/papers/koopmans-1950-dynamic-economic-models.md` | 只读 identification 相关背景，不进入 CDM 主线。 |

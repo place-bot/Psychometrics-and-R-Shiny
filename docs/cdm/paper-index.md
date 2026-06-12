@@ -15,7 +15,7 @@
 
 | 级别 | 文献 | 主专题 | 未来路径 |
 | --- | --- | --- | --- |
-| 精读 | Allman, Matias & Rhodes (2009). Identifiability of parameters in latent structure models with many observed variables. | 理论背景；可识别性 | `cdm/papers/allman-matias-rhodes-2009-latent-structure-identifiability.md` |
+| 精读 | Allman, Matias & Rhodes (2009). Identifiability of parameters in latent structure models with many observed variables. | 理论背景；可识别性 | [单篇笔记](papers/allman-matias-rhodes-2009-latent-structure-identifiability.md) |
 | 背景 | Allman & Rhodes (2006/2009). Tree topology and covarion identifiability papers. | 理论背景 | `cdm/papers/allman-rhodes-phylogenetic-identifiability.md` |
 | 精读 | Teicher (1967). Identifiability of mixtures of product measures. | 理论背景 | `cdm/papers/teicher-1967-product-mixtures.md` |
 | 精读 | Yakowitz & Spragins (1968). On the identifiability of finite mixtures. | 理论背景 | `cdm/papers/yakowitz-spragins-1968-finite-mixtures.md` |
