@@ -1,0 +1,4964 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Psychometrics, CTT, IRT, CDM, and R Shiny learning notes.">
+      
+      
+        <meta name="author" content="Jingyi Guo">
+      
+      
+        <link rel="canonical" href="https://place-bot.github.io/Psychometrics-and-R-Shiny/10_rules_ctt_irt/rule09_factor_analysis/">
+      
+      
+        <link rel="prev" href="../rule07_mixed_formats/">
+      
+      
+        <link rel="next" href="../rule10_item_features/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>因子分析 - Psychometrics and R Shiny Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#9" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Psychometrics and R Shiny Notes" class="md-header__button md-logo" aria-label="Psychometrics and R Shiny Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Psychometrics and R Shiny Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              因子分析
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/place-bot/Psychometrics-and-R-Shiny" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    place-bot/Psychometrics-and-R-Shiny
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Psychometrics and R Shiny Notes" class="md-nav__button md-logo" aria-label="Psychometrics and R Shiny Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Psychometrics and R Shiny Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/place-bot/Psychometrics-and-R-Shiny" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    place-bot/Psychometrics-and-R-Shiny
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../psychometrics/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    心理测量基础
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            心理测量基础
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ctt_irt_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CTT 与 IRT 概览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modelbased/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    基于模型的测量
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../irt-models/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    IRT 模型
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            IRT 模型
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../binary/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    二分项目模型
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            二分项目模型
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_2" id="__nav_3_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    基础模型
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            基础模型
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary/00-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    引言
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary/01-unidimensional-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    单维模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary/02-logistic-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    逻辑模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary/03-normal-ogive-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    正态 Ogive 模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary/04-other-unidimensional-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    其他单维模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_3" id="__nav_3_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    多维模型
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            多维模型
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary/05-multidimensional-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    多维模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary/06-exploratory-multidimensional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    探索性多维模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary/07-confirmatory-multidimensional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    验证性多维模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary/08-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    总结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../polytomous/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    多项项目模型
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            多项项目模型
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_2" id="__nav_3_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    数据与假设
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            数据与假设
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/00-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    引言
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/01-example-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    实例数据
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/02-unidimensionality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    单维性与局部独立
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_3" id="__nav_3_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    等级反应模型
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            等级反应模型
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/03-grm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GRM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/04-modified-grm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    M-GRM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/05-divide-by-total/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Divide-by-Total
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_4" id="__nav_3_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    部分计分模型
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            部分计分模型
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/06-pcm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PCM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/07-indirect-direct/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    间接与直接模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/08-expected-response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    期望项目反应
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/09-gpcm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GPCM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/10-partial-credit-example/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    部分计分示例
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/11-rsm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RSM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_5" id="__nav_3_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    扩展模型
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            扩展模型
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/12-six-scoring-methods/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    六种得分方法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/13-nrm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    NRM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/14-continuous-response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    连续反应模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/15-other-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    其他模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_6" id="__nav_3_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    设计与选择
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            设计与选择
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/16-sample-size/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    样本量
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/17-special-considerations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    特殊考虑
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/18-model-selection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    模型选择
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../irt-estimation/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    IRT 估计与评估
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            IRT 估计与评估
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../estimate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IRT 参数估计
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../scale/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    IRT 特质量表
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            IRT 特质量表
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3_2" id="__nav_4_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    概念基础
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            概念基础
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scale/00-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    引言
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scale/01-ctt-vs-irt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CTT 与 IRT 差异
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scale/02-scale-units/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    量表单位
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3_3" id="__nav_4_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    量表性质
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            量表性质
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scale/03-measurement-scale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    测量量表特性
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scale/04-practical-impact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    实际影响
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scale/05-specific-objectivity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    特定客观性
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scale/06-sufficient-statistic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    充分统计量
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3_4" id="__nav_4_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    类比与总结
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            类比与总结
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scale/07-thermometer-analogy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    温度计类比
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scale/08-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    总结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../score/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    考生评分
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            考生评分
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4_2" id="__nav_4_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    评分方法
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            评分方法
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../score/00-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    引言
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../score/01-maximum-likelihood/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    最大似然评分
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../score/02-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MAP 评分
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../score/03-eap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    EAP 评分
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4_3" id="__nav_4_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    分数解释
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            分数解释
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../score/04-score-transformation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分数变换
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../score/05-information/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    项目和测验信息
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../score/06-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    总结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assess/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    模型拟合评估
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    CTT/IRT 应用规则
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            CTT/IRT 应用规则
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    测验设计
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            测验设计
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rule01_measurement_error/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    测量误差
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rule02_test_length/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    测验长度
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rule03_test_forms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    测验形式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    分数与量表
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            分数与量表
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rule05_score_meaning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分数意义
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rule06_interval_scale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    区间量表
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rule08_change_scores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    变化分数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    项目与模型
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            项目与模型
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rule04_item_properties/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    项目属性
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rule07_mixed_formats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    混合格式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    因子分析
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    因子分析
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 二元项目因素分析的重要性
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 二元项目因素分析的重要性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 二元项目的特殊性质
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-cttphi" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. CTT中Phi相关的根本问题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. CTT中Phi相关的根本问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-phi" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Phi相关系数的推导
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-phi" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Phi相关上界的推导
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 难度因素的产生机制
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 四分相关的改进尝试
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 四分相关的改进尝试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 四分相关的理论基础
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 四分相关的计算
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 四分相关的问题分析
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-irt" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. IRT中全信息因素分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. IRT中全信息因素分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-irt" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 多维IRT模型
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 线性化表示
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 参数估计：边际最大似然
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-em" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4 EM算法详细推导
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.5 信息函数与测量精度
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 模型选择与应用
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 模型选择与应用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 因素数量的确定
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 实际应用示例
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rule10_item_features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    项目特征
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../cdm/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    CDM
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            CDM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    理论背景
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            理论背景
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cdm/theoretical-background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    潜在结构与混合模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cdm/mathematical-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    数学工具
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cdm/hmm-network-ml/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    HMM、网络与机器学习背景
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    CDM 主线
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            CDM 主线
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cdm/core-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    核心模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cdm/q-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Q 矩阵验证与学习
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cdm/identifiability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    可识别性理论
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cdm/estimation-computation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    估计、正则化与计算
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cdm/continuous-extensions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    连续化与扩展模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cdm/paper-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    论文索引
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    单篇论文精读
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            单篇论文精读
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cdm/papers/allman-matias-rhodes-2009-latent-structure-identifiability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Allman et al. (2009)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../shiny/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    R Shiny
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            R Shiny
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shiny/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    学习路径
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    入门基础
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            入门基础
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shiny/day1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day 1 Hello World
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shiny/day2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day 2 布局和主题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_4" id="__nav_7_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    交互与输出
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_4">
+            <span class="md-nav__icon md-icon"></span>
+            交互与输出
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shiny/day3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day 3 输入控件
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shiny/day4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day 4 输出展示
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shiny/day5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day 5 反应式编程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_5" id="__nav_7_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    项目与部署
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_5">
+            <span class="md-nav__icon md-icon"></span>
+            项目与部署
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shiny/day6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day 6 实战项目
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shiny/day7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day 7 部署上线
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../quality/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    质量与维护
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            质量与维护
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quality/content-review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    内容核查记录
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    参考资料
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 二元项目因素分析的重要性
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 二元项目因素分析的重要性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 二元项目的特殊性质
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-cttphi" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. CTT中Phi相关的根本问题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. CTT中Phi相关的根本问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-phi" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Phi相关系数的推导
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-phi" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Phi相关上界的推导
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 难度因素的产生机制
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 四分相关的改进尝试
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 四分相关的改进尝试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 四分相关的理论基础
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 四分相关的计算
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 四分相关的问题分析
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-irt" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. IRT中全信息因素分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. IRT中全信息因素分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-irt" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 多维IRT模型
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 线性化表示
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 参数估计：边际最大似然
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-em" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4 EM算法详细推导
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.5 信息函数与测量精度
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 模型选择与应用
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 模型选择与应用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 因素数量的确定
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 实际应用示例
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="9">规则9详解：二元项目的因素分析<a class="headerlink" href="#9" title="Permanent link">&para;</a></h1>
+<p>规则对比</p>
+<table>
+<thead>
+<tr>
+<th>CTT</th>
+<th>IRT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>二元项目的因素分析产生假象而非因素</td>
+<td>原始项目数据的因素分析产生完全信息因素分析</td>
+</tr>
+</tbody>
+</table>
+<h2 id="1">1. 二元项目因素分析的重要性<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>二元项目与因素分析</p>
+<p><strong>为什么需要因素分析？</strong></p>
+<p>因素分析是验证测验结构效度的核心方法，帮助我们理解：</p>
+<ul>
+<li>测验是否真的测量了预期的构念</li>
+<li>有多少个潜在维度</li>
+<li>各个项目如何反映这些维度</li>
+</ul>
+<p><strong>二元项目的普遍性</strong>：</p>
+<ul>
+<li><strong>能力测验</strong>：对/错、答对/答错</li>
+<li><strong>诊断量表</strong>：是/否、有/无症状</li>
+<li><strong>行为观察</strong>：出现/未出现</li>
+<li><strong>态度测验</strong>：同意/不同意（二分化处理）</li>
+</ul>
+<h3 id="11">1.1 二元项目的特殊性质<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p><strong>特殊性1：有限的变异范围</strong></p>
+<p>二元项目只能取0或1，变异范围受到严格限制。</p>
+<p><strong>特殊性2：非正态分布</strong></p>
+<p>二元项目遵循伯努利分布：</p>
+<div class="arithmatex">\[
+P(X = x) = p^x(1-p)^{1-x}, \quad x \in \{0,1\}
+\]</div>
+<p><strong>特殊性3：方差与均值的依赖关系</strong></p>
+<div class="arithmatex">\[
+\text{Var}(X) = p(1-p)
+\]</div>
+<p>方差完全由均值决定，这导致了独特的统计性质。</p>
+<p><strong>特殊性4：相关系数的限制</strong></p>
+<p>两个二元项目间的相关系数受到边际分布的严重限制。</p>
+<h2 id="2-cttphi">2. CTT中Phi相关的根本问题<a class="headerlink" href="#2-cttphi" title="Permanent link">&para;</a></h2>
+<h3 id="21-phi">2.1 Phi相关系数的推导<a class="headerlink" href="#21-phi" title="Permanent link">&para;</a></h3>
+<p>Phi相关系数</p>
+<p><strong>联合分布表</strong>：</p>
+<p>设两个二元变量 <span class="arithmatex">\(X\)</span> 和 <span class="arithmatex">\(Y\)</span>，取值为0或1</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><span class="arithmatex">\(Y=1\)</span></th>
+<th><span class="arithmatex">\(Y=0\)</span></th>
+<th>总计</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(X=1\)</span></td>
+<td><span class="arithmatex">\(p_{11}\)</span></td>
+<td><span class="arithmatex">\(p_{10}\)</span></td>
+<td><span class="arithmatex">\(p_1\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(X=0\)</span></td>
+<td><span class="arithmatex">\(p_{01}\)</span></td>
+<td><span class="arithmatex">\(p_{00}\)</span></td>
+<td><span class="arithmatex">\(1-p_1\)</span></td>
+</tr>
+<tr>
+<td>总计</td>
+<td><span class="arithmatex">\(p_2\)</span></td>
+<td><span class="arithmatex">\(1-p_2\)</span></td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>推导步骤</strong>：</p>
+<p><strong>步骤1：计算协方差</strong></p>
+<div class="arithmatex">\[
+\text{Cov}(X,Y) = E[XY] - E[X]E[Y]
+\]</div>
+<p>由于：</p>
+<div class="arithmatex">\[
+E[XY] = 1 \cdot 1 \cdot p_{11} + 1 \cdot 0 \cdot p_{10} + 0 \cdot 1 \cdot p_{01} + 0 \cdot 0 \cdot p_{00} = p_{11}
+\]</div>
+<div class="arithmatex">\[
+E[X] = p_1, \quad E[Y] = p_2
+\]</div>
+<p>因此：</p>
+<div class="arithmatex">\[
+\text{Cov}(X,Y) = p_{11} - p_1 p_2
+\]</div>
+<p><strong>步骤2：计算标准差</strong></p>
+<div class="arithmatex">\[
+\text{Var}(X) = p_1(1-p_1), \quad \sigma_X = \sqrt{p_1(1-p_1)}
+\]</div>
+<div class="arithmatex">\[
+\text{Var}(Y) = p_2(1-p_2), \quad \sigma_Y = \sqrt{p_2(1-p_2)}
+\]</div>
+<p><strong>步骤3：Phi相关公式</strong></p>
+<div class="arithmatex">\[
+\phi = \frac{\text{Cov}(X,Y)}{\sigma_X \sigma_Y} = \frac{p_{11} - p_1 p_2}{\sqrt{p_1(1-p_1)p_2(1-p_2)}}
+\]</div>
+<h3 id="22-phi">2.2 Phi相关上界的推导<a class="headerlink" href="#22-phi" title="Permanent link">&para;</a></h3>
+<p><strong>问题</strong>：求 <span class="arithmatex">\(\phi\)</span> 的最大可能值</p>
+<p><strong>约束条件</strong>：</p>
+<div class="arithmatex">\[
+\begin{align}
+p_{11} + p_{10} &amp;= p_1 \
+p_{11} + p_{01} &amp;= p_2 \
+p_{11}, p_{10}, p_{01}, p_{00} &amp;\geq 0 \
+p_{11} + p_{10} + p_{01} + p_{00} &amp;= 1
+\end{align}
+\]</div>
+<p><strong>最大化 <span class="arithmatex">\(p_{11}\)</span></strong>：</p>
+<p>由约束条件：</p>
+<div class="arithmatex">\[
+p_{11} \leq \min(p_1, p_2)
+\]</div>
+<p>当 <span class="arithmatex">\(p_{11} = \min(p_1, p_2)\)</span> 时，<span class="arithmatex">\(\phi\)</span> 达到最大值。</p>
+<p><strong>情况1</strong>：<span class="arithmatex">\(p_1 \leq p_2\)</span></p>
+<div class="arithmatex">\[
+p_{11,\max} = p_1
+\]</div>
+<div class="arithmatex">\[
+\phi_{\max} = \frac{p_1 - p_1p_2}{\sqrt{p_1(1-p_1)p_2(1-p_2)}} = \frac{p_1(1-p_2)}{\sqrt{p_1(1-p_1)p_2(1-p_2)}}
+\]</div>
+<div class="arithmatex">\[
+= \sqrt{\frac{p_1(1-p_2)}{(1-p_1)p_2}}
+\]</div>
+<p><strong>一般公式</strong>：</p>
+<div class="arithmatex">\[
+\phi_{\max} = \sqrt{\frac{\min(p_1, p_2) \cdot \min(1-p_1, 1-p_2)}{\max(p_1, p_2) \cdot \max(1-p_1, 1-p_2)}}
+\]</div>
+<h3 id="23">2.3 难度因素的产生机制<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<p>假设有4个项目，真实的因素结构是：</p>
+<ul>
+<li>项目1和2：测量因素A，难度分别为0.2和0.8</li>
+<li>项目3和4：测量因素B，难度分别为0.2和0.8</li>
+</ul>
+<p><strong>理想的相关矩阵</strong>（如果没有难度效应）：</p>
+<div class="arithmatex">\[
+R_{\text{理想}} = \begin{pmatrix}
+1 &amp; 0.8 &amp; 0 &amp; 0 \
+0.8 &amp; 1 &amp; 0 &amp; 0 \
+0 &amp; 0 &amp; 1 &amp; 0.8 \
+0 &amp; 0 &amp; 0.8 &amp; 1
+\end{pmatrix}
+\]</div>
+<p><strong>实际的Phi相关矩阵</strong>：</p>
+<p>由于难度限制，相关被压缩。根据前面的公式，当 <span class="arithmatex">\(p_1 = 0.2, p_2 = 0.8\)</span> 时：</p>
+<div class="arithmatex">\[
+\phi_{\max} = \sqrt{\frac{0.2 \times 0.2}{0.8 \times 0.8}} = 0.25
+\]</div>
+<p>因此，即使真实相关为0.8，观察到的相关最多只能是 <span class="arithmatex">\(0.8 \times 0.25 = 0.2\)</span>。</p>
+<h2 id="3">3. 四分相关的改进尝试<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 四分相关的理论基础<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p>四分相关（Tetrachoric Correlation）</p>
+<p><strong>核心假设</strong>：每个二元项目背后都有一个潜在的连续正态变量</p>
+<p><strong>模型</strong>：
+设潜在变量 <span class="arithmatex">\(Z_1 \sim N(0,1)\)</span> 和 <span class="arithmatex">\(Z_2 \sim N(0,1)\)</span>，阈值为 <span class="arithmatex">\(\tau_1\)</span> 和 <span class="arithmatex">\(\tau_2\)</span>：</p>
+<div class="arithmatex">\[
+X = \begin{cases}
+1 &amp; \text{如果} Z_1 &gt; \tau_1 \
+0 &amp; \text{如果} Z_1 \leq \tau_1
+\end{cases}
+\]</div>
+<div class="arithmatex">\[
+Y = \begin{cases}
+1 &amp; \text{如果} Z_2 &gt; \tau_2 \
+0 &amp; \text{如果} Z_2 \leq \tau_2
+\end{cases}
+\]</div>
+<p><strong>目标</strong>：估计 <span class="arithmatex">\(\rho = \text{Cor}(Z_1, Z_2)\)</span></p>
+<h3 id="32">3.2 四分相关的计算<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p><strong>步骤1：从边际概率推断阈值</strong></p>
+<div class="arithmatex">\[
+p_1 = P(X=1) = P(Z_1 &gt; \tau_1) = 1 - \Phi(\tau_1)
+\]</div>
+<p>因此：</p>
+<div class="arithmatex">\[
+\tau_1 = \Phi^{-1}(1-p_1) = -\Phi^{-1}(p_1)
+\]</div>
+<p>同理：</p>
+<div class="arithmatex">\[
+\tau_2 = -\Phi^{-1}(p_2)
+\]</div>
+<p><strong>步骤2：利用联合概率</strong></p>
+<div class="arithmatex">\[
+p_{11} = P(X=1, Y=1) = P(Z_1 &gt; \tau_1, Z_2 &gt; \tau_2)
+\]</div>
+<p>这是一个双变量正态分布的积分：</p>
+<div class="arithmatex">\[
+p_{11} = \int_{\tau_1}^{\infty} \int_{\tau_2}^{\infty} \frac{1}{2\pi\sqrt{1-\rho^2}} \exp\left(-\frac{z_1^2 - 2\rho z_1 z_2 + z_2^2}{2(1-\rho^2)}\right) dz_2 dz_1
+\]</div>
+<p><strong>步骤3：数值求解</strong></p>
+<p>定义函数：</p>
+<div class="arithmatex">\[
+L(\rho, \tau_1, \tau_2) = \int_{\tau_1}^{\infty} \int_{\tau_2}^{\infty} \phi_2(z_1, z_2; \rho) dz_2 dz_1
+\]</div>
+<p>需要解方程：</p>
+<div class="arithmatex">\[
+L(\rho, \tau_1, \tau_2) = p_{11}
+\]</div>
+<h3 id="33">3.3 四分相关的问题分析<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<p><strong>问题1：计算不稳定性</strong></p>
+<p>当 <span class="arithmatex">\(p\)</span> 接近0或1时，阈值趋向无穷：</p>
+<div class="arithmatex">\[
+\lim_{p \to 0} \Phi^{-1}(p) = -\infty, \quad \lim_{p \to 1} \Phi^{-1}(p) = +\infty
+\]</div>
+<p>这导致数值积分极不稳定。</p>
+<p><strong>问题2：非正定矩阵问题</strong></p>
+<p>考虑3个项目的情况，即使每对项目的四分相关都合理，整个矩阵可能非正定。</p>
+<p><strong>例子</strong>：</p>
+<div class="arithmatex">\[
+R = \begin{pmatrix}
+1 &amp; 0.9 &amp; 0.9 \
+0.9 &amp; 1 &amp; -0.8 \
+0.9 &amp; -0.8 &amp; 1
+\end{pmatrix}
+\]</div>
+<p>计算特征值：</p>
+<div class="arithmatex">\[
+\det(R - \lambda I) = 0
+\]</div>
+<p>得到：<span class="arithmatex">\(\lambda_1 = 2.62\)</span>, <span class="arithmatex">\(\lambda_2 = 0.38\)</span>, <span class="arithmatex">\(\lambda_3 = -0.00\)</span></p>
+<p>负特征值使得因素分析无法进行。</p>
+<h2 id="4-irt">4. IRT中全信息因素分析<a class="headerlink" href="#4-irt" title="Permanent link">&para;</a></h2>
+<h3 id="41-irt">4.1 多维IRT模型<a class="headerlink" href="#41-irt" title="Permanent link">&para;</a></h3>
+<p>全信息因素分析（Full Information Factor Analysis, FIFA）</p>
+<p><strong>核心思想</strong>：直接对原始反应数据建模，不需要计算相关矩阵</p>
+<p><strong>二维2参数逻辑模型（M2PL）</strong>：</p>
+<div class="arithmatex">\[
+P_i(\mathbf{\theta}) = \frac{\exp(\mathbf{a}_i' \mathbf{\theta} + d_i)}{1 + \exp(\mathbf{a}_i' \mathbf{\theta} + d_i)}
+\]</div>
+<p>其中：
+- <span class="arithmatex">\(\mathbf{\theta} = (\theta_1, \theta_2, \ldots, \theta_m)'\)</span>：个体在 <span class="arithmatex">\(m\)</span> 个因素上的得分向量
+- <span class="arithmatex">\(\mathbf{a}_i = (a_{i1}, a_{i2}, \ldots, a_{im})'\)</span>：项目 <span class="arithmatex">\(i\)</span> 在各因素上的载荷向量
+- <span class="arithmatex">\(d_i\)</span>：项目 <span class="arithmatex">\(i\)</span> 的截距参数</p>
+<h3 id="42">4.2 线性化表示<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<p>对数几率形式：</p>
+<div class="arithmatex">\[
+\text{logit}(P_i(\mathbf{\theta})) = \ln\left(\frac{P_i(\mathbf{\theta})}{1-P_i(\mathbf{\theta})}\right) = \mathbf{a}_i' \mathbf{\theta} + d_i
+\]</div>
+<p>展开为：</p>
+<div class="arithmatex">\[
+\text{logit}(P_i(\mathbf{\theta})) = \sum_{k=1}^m a_{ik} \theta_k + d_i
+\]</div>
+<p>这是 <span class="arithmatex">\(\mathbf{\theta}\)</span> 的线性函数，类似于线性因素分析。</p>
+<h3 id="43">4.3 参数估计：边际最大似然<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
+<p><strong>个体似然</strong>：</p>
+<p>对于个体 <span class="arithmatex">\(j\)</span> 的反应向量 <span class="arithmatex">\(\mathbf{u}_j = (u_{1j}, u_{2j}, \ldots, u_{Ij})'\)</span>：</p>
+<div class="arithmatex">\[
+L_j(\mathbf{\theta}) = \prod_{i=1}^I P_i(\mathbf{\theta})^{u_{ij}} [1-P_i(\mathbf{\theta})]^{1-u_{ij}}
+\]</div>
+<p><strong>边际似然</strong>：</p>
+<div class="arithmatex">\[
+L_j = \int L_j(\mathbf{\theta}) g(\mathbf{\theta}) d\mathbf{\theta}
+\]</div>
+<p>其中 <span class="arithmatex">\(g(\mathbf{\theta})\)</span> 通常假设为多元正态分布：</p>
+<div class="arithmatex">\[
+g(\mathbf{\theta}) = \frac{1}{(2\pi)^{m/2}|\mathbf{\Sigma}|^{1/2}} \exp\left(-\frac{1}{2}\mathbf{\theta}'\mathbf{\Sigma}^{-1}\mathbf{\theta}\right)
+\]</div>
+<p><strong>对数似然</strong>：</p>
+<div class="arithmatex">\[
+\ln L = \sum_{j=1}^J \ln L_j = \sum_{j=1}^J \ln \left[\int L_j(\mathbf{\theta}) g(\mathbf{\theta}) d\mathbf{\theta}\right]
+\]</div>
+<h3 id="44-em">4.4 EM算法详细推导<a class="headerlink" href="#44-em" title="Permanent link">&para;</a></h3>
+<p><strong>E步（期望步）</strong>：</p>
+<p>计算完全数据对数似然的期望：</p>
+<div class="arithmatex">\[
+Q(\mathbf{\Psi}|\mathbf{\Psi}^{(t)}) = \sum_{j=1}^J \int \ln[L_j(\mathbf{\theta})g(\mathbf{\theta})] h_j(\mathbf{\theta}|\mathbf{\Psi}^{(t)}) d\mathbf{\theta}
+\]</div>
+<p>其中后验分布：</p>
+<div class="arithmatex">\[
+h_j(\mathbf{\theta}|\mathbf{\Psi}^{(t)}) = \frac{L_j(\mathbf{\theta}|\mathbf{\Psi}^{(t)}) g(\mathbf{\theta})}{\int L_j(\mathbf{\theta}|\mathbf{\Psi}^{(t)}) g(\mathbf{\theta}) d\mathbf{\theta}}
+\]</div>
+<p>计算后验矩：</p>
+<div class="arithmatex">\[
+\mathbf{\mu}_j = E[\mathbf{\theta}_j|\mathbf{u}_j] = \int \mathbf{\theta} h_j(\mathbf{\theta}) d\mathbf{\theta}
+\]</div>
+<div class="arithmatex">\[
+\mathbf{\Sigma}_j = E[\mathbf{\theta}_j\mathbf{\theta}_j'|\mathbf{u}_j] = \int \mathbf{\theta}\mathbf{\theta}' h_j(\mathbf{\theta}) d\mathbf{\theta}
+\]</div>
+<p><strong>M步（最大化步）</strong>：</p>
+<p>对于项目 <span class="arithmatex">\(i\)</span>，最大化：</p>
+<div class="arithmatex">\[
+Q_i = \sum_{j=1}^J E_{\mathbf{\theta}_j|\mathbf{u}_j}\left[u_{ij} \ln P_i(\mathbf{\theta}_j) + (1-u_{ij}) \ln(1-P_i(\mathbf{\theta}_j))\right]
+\]</div>
+<p>使用Newton-Raphson：</p>
+<p>梯度：</p>
+<div class="arithmatex">\[
+\frac{\partial Q_i}{\partial a_{ik}} = \sum_{j=1}^J E\left[\theta_{kj}(u_{ij} - P_i(\mathbf{\theta}_j))\right]
+\]</div>
+<p>Hessian矩阵：</p>
+<div class="arithmatex">\[
+\frac{\partial^2 Q_i}{\partial a_{ik} \partial a_{il}} = -\sum_{j=1}^J E\left[\theta_{kj}\theta_{lj}P_i(\mathbf{\theta}_j)(1-P_i(\mathbf{\theta}_j))\right]
+\]</div>
+<h3 id="45">4.5 信息函数与测量精度<a class="headerlink" href="#45" title="Permanent link">&para;</a></h3>
+<p><strong>项目信息函数</strong>：</p>
+<div class="arithmatex">\[
+I_i(\mathbf{\theta}) = \frac{[\nabla P_i(\mathbf{\theta})][\nabla P_i(\mathbf{\theta})]'}{P_i(\mathbf{\theta})[1-P_i(\mathbf{\theta})]}
+\]</div>
+<p>其中：</p>
+<div class="arithmatex">\[
+\nabla P_i(\mathbf{\theta}) = \frac{\partial P_i(\mathbf{\theta})}{\partial \mathbf{\theta}} = P_i(\mathbf{\theta})[1-P_i(\mathbf{\theta})]\mathbf{a}_i
+\]</div>
+<p>因此：</p>
+<div class="arithmatex">\[
+I_i(\mathbf{\theta}) = P_i(\mathbf{\theta})[1-P_i(\mathbf{\theta})]\mathbf{a}_i\mathbf{a}_i'
+\]</div>
+<p><strong>总信息矩阵</strong>：</p>
+<div class="arithmatex">\[
+\mathbf{I}(\mathbf{\theta}) = \sum_{i=1}^I I_i(\mathbf{\theta}) = \sum_{i=1}^I P_i(\mathbf{\theta})[1-P_i(\mathbf{\theta})]\mathbf{a}_i\mathbf{a}_i'
+\]</div>
+<p><strong>标准误矩阵</strong>：</p>
+<div class="arithmatex">\[
+\text{SE}(\hat{\mathbf{\theta}}) = \mathbf{I}(\mathbf{\theta})^{-1/2}
+\]</div>
+<h2 id="5">5. 模型选择与应用<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<h3 id="51">5.1 因素数量的确定<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
+<p><strong>信息准则</strong>：</p>
+<div class="arithmatex">\[
+\text{AIC} = -2\ln L + 2p
+\]</div>
+<div class="arithmatex">\[
+\text{BIC} = -2\ln L + p\ln N
+\]</div>
+<p>其中 <span class="arithmatex">\(p\)</span> 是参数数量：</p>
+<div class="arithmatex">\[
+p = I \times (m + 1) + \frac{m(m-1)}{2}
+\]</div>
+<ul>
+<li><span class="arithmatex">\(I \times m\)</span>：载荷参数</li>
+<li><span class="arithmatex">\(I\)</span>：截距参数</li>
+<li><span class="arithmatex">\(\frac{m(m-1)}{2}\)</span>：因素相关参数</li>
+</ul>
+<h3 id="52">5.2 实际应用示例<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
+<p><strong>载荷矩阵的解释</strong>：</p>
+<div class="arithmatex">\[
+\text{总区分度} = ||\mathbf{a}_i|| = \sqrt{\sum_{k=1}^m a_{ik}^2}
+\]</div>
+<p><strong>因素贡献比例</strong>：</p>
+<div class="arithmatex">\[
+\text{贡献}_{ik} = \frac{a_{ik}^2}{\sum_{l=1}^m a_{il}^2}
+\]</div>
+<p><strong>共同度</strong>：</p>
+<div class="arithmatex">\[
+h_i^2 = \frac{\sum_{k=1}^m a_{ik}^2}{1 + \sum_{k=1}^m a_{ik}^2}
+\]</div>
+<p>实践建议</p>
+<p><strong>数据准备</strong></p>
+<ul>
+<li>检查数据质量（缺失值、异常反应）</li>
+<li>编码二元反应为0/1</li>
+<li>检查项目的基本统计量</li>
+</ul>
+<p><strong>模型拟合</strong></p>
+<ul>
+<li>从单因素模型开始</li>
+<li>逐步增加因素数量</li>
+<li>比较不同模型的拟合指标</li>
+</ul>
+<p><strong>结果解释</strong></p>
+<ul>
+<li>分析载荷模式</li>
+<li>计算因素相关</li>
+<li>评估项目质量</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.indexes", "navigation.sections", "navigation.top", "search.highlight", "search.suggest", "toc.follow"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,6045 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Psychometrics, CTT, IRT, CDM, and R Shiny learning notes.">
+      
+      
+        <meta name="author" content="Jingyi Guo">
+      
+      
+        <link rel="canonical" href="https://place-bot.github.io/Psychometrics-and-R-Shiny/score/01-maximum-likelihood/">
+      
+      
+        <link rel="prev" href="../00-intro/">
+      
+      
+        <link rel="next" href="../02-map/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>最大似然评分 - Psychometrics and R Shiny Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Psychometrics and R Shiny Notes" class="md-header__button md-logo" aria-label="Psychometrics and R Shiny Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Psychometrics and R Shiny Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              最大似然评分
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/place-bot/Psychometrics-and-R-Shiny" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    place-bot/Psychometrics-and-R-Shiny
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Psychometrics and R Shiny Notes" class="md-nav__button md-logo" aria-label="Psychometrics and R Shiny Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Psychometrics and R Shiny Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/place-bot/Psychometrics-and-R-Shiny" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    place-bot/Psychometrics-and-R-Shiny
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../psychometrics/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    心理测量基础
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            心理测量基础
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ctt_irt_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CTT 与 IRT 概览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modelbased/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    基于模型的测量
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../irt-models/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    IRT 模型
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            IRT 模型
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../binary/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    二分项目模型
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            二分项目模型
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_2" id="__nav_3_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    基础模型
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            基础模型
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary/00-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    引言
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary/01-unidimensional-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    单维模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary/02-logistic-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    逻辑模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary/03-normal-ogive-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    正态 Ogive 模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary/04-other-unidimensional-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    其他单维模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_3" id="__nav_3_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    多维模型
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            多维模型
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary/05-multidimensional-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    多维模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary/06-exploratory-multidimensional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    探索性多维模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary/07-confirmatory-multidimensional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    验证性多维模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary/08-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    总结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../polytomous/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    多项项目模型
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            多项项目模型
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_2" id="__nav_3_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    数据与假设
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            数据与假设
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/00-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    引言
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/01-example-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    实例数据
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/02-unidimensionality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    单维性与局部独立
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_3" id="__nav_3_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    等级反应模型
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            等级反应模型
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/03-grm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GRM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/04-modified-grm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    M-GRM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/05-divide-by-total/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Divide-by-Total
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_4" id="__nav_3_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    部分计分模型
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            部分计分模型
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/06-pcm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PCM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/07-indirect-direct/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    间接与直接模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/08-expected-response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    期望项目反应
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/09-gpcm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GPCM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/10-partial-credit-example/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    部分计分示例
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/11-rsm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RSM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_5" id="__nav_3_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    扩展模型
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            扩展模型
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/12-six-scoring-methods/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    六种得分方法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/13-nrm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    NRM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/14-continuous-response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    连续反应模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/15-other-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    其他模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_6" id="__nav_3_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    设计与选择
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            设计与选择
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/16-sample-size/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    样本量
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/17-special-considerations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    特殊考虑
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../polytomous/18-model-selection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    模型选择
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../irt-estimation/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    IRT 估计与评估
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            IRT 估计与评估
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../estimate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IRT 参数估计
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../scale/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    IRT 特质量表
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            IRT 特质量表
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3_2" id="__nav_4_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    概念基础
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            概念基础
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scale/00-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    引言
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scale/01-ctt-vs-irt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CTT 与 IRT 差异
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scale/02-scale-units/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    量表单位
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3_3" id="__nav_4_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    量表性质
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            量表性质
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scale/03-measurement-scale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    测量量表特性
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scale/04-practical-impact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    实际影响
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scale/05-specific-objectivity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    特定客观性
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scale/06-sufficient-statistic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    充分统计量
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3_4" id="__nav_4_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    类比与总结
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            类比与总结
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scale/07-thermometer-analogy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    温度计类比
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scale/08-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    总结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    考生评分
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            考生评分
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_4_2" id="__nav_4_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    评分方法
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            评分方法
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    引言
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    最大似然评分
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    最大似然评分
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 基本思想：寻找最可能的能力值
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 似然函数的构建
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 似然函数的构建">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.1 从单个题目到整体模式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.2 计算特定反应的似然
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.3 局部独立性与似然的乘积
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.4 具体计算示例
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 对数似然的使用
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 对数似然的使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.1 为什么使用对数似然？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.2 对数变换的优势
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.3 对数似然的数值特性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-newton-raphson" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 Newton-Raphson算法
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 Newton-Raphson算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.1 算法的基本思想
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.2 推导过程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-2pl" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.3 2PL模型的导数公式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fisher" class="md-nav__link">
+    <span class="md-ellipsis">
+      补充：Fisher信息量的严谨定义
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#144" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.4 算法步骤详解
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#145" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.5 具体计算示例
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#146" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.6 从不同起点的收敛
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-ml" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5 ML估计的统计性质
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5 ML估计的统计性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5.1 渐近性质
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5.2 标准误的计算
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-ml" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5.3 ML估计的局限性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-ml" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6 ML评分的实例分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6 ML评分的实例分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-rascha" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6.1 Rasch型测验（测验A）的结果
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6.2 变区分度测验（测验B）的结果
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6.3 测验信息的作用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#164" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6.4 区分度参数的系统影响
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-ml" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7 ML评分的总结与展望
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MAP 评分
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-eap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    EAP 评分
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4_3" id="__nav_4_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    分数解释
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            分数解释
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-score-transformation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分数变换
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-information/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    项目和测验信息
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    总结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assess/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    模型拟合评估
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../10_rules_ctt_irt/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    CTT/IRT 应用规则
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            CTT/IRT 应用规则
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    测验设计
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            测验设计
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_rules_ctt_irt/rule01_measurement_error/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    测量误差
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_rules_ctt_irt/rule02_test_length/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    测验长度
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_rules_ctt_irt/rule03_test_forms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    测验形式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    分数与量表
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            分数与量表
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_rules_ctt_irt/rule05_score_meaning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分数意义
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_rules_ctt_irt/rule06_interval_scale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    区间量表
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_rules_ctt_irt/rule08_change_scores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    变化分数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    项目与模型
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            项目与模型
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_rules_ctt_irt/rule04_item_properties/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    项目属性
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_rules_ctt_irt/rule07_mixed_formats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    混合格式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_rules_ctt_irt/rule09_factor_analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    因子分析
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_rules_ctt_irt/rule10_item_features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    项目特征
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../cdm/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    CDM
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            CDM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    理论背景
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            理论背景
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cdm/theoretical-background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    潜在结构与混合模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cdm/mathematical-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    数学工具
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cdm/hmm-network-ml/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    HMM、网络与机器学习背景
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    CDM 主线
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            CDM 主线
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cdm/core-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    核心模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cdm/q-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Q 矩阵验证与学习
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cdm/identifiability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    可识别性理论
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cdm/estimation-computation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    估计、正则化与计算
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cdm/continuous-extensions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    连续化与扩展模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cdm/paper-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    论文索引
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    单篇论文精读
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            单篇论文精读
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cdm/papers/allman-matias-rhodes-2009-latent-structure-identifiability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Allman et al. (2009)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../shiny/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    R Shiny
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            R Shiny
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shiny/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    学习路径
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    入门基础
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            入门基础
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shiny/day1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day 1 Hello World
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shiny/day2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day 2 布局和主题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_4" id="__nav_7_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    交互与输出
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_4">
+            <span class="md-nav__icon md-icon"></span>
+            交互与输出
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shiny/day3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day 3 输入控件
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shiny/day4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day 4 输出展示
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shiny/day5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day 5 反应式编程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_5" id="__nav_7_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    项目与部署
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_5">
+            <span class="md-nav__icon md-icon"></span>
+            项目与部署
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shiny/day6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day 6 实战项目
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shiny/day7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day 7 部署上线
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../quality/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    质量与维护
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            质量与维护
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quality/content-review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    内容核查记录
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    参考资料
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 基本思想：寻找最可能的能力值
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 似然函数的构建
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 似然函数的构建">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.1 从单个题目到整体模式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.2 计算特定反应的似然
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.3 局部独立性与似然的乘积
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.4 具体计算示例
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 对数似然的使用
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 对数似然的使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.1 为什么使用对数似然？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.2 对数变换的优势
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.3 对数似然的数值特性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-newton-raphson" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 Newton-Raphson算法
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 Newton-Raphson算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.1 算法的基本思想
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.2 推导过程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-2pl" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.3 2PL模型的导数公式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fisher" class="md-nav__link">
+    <span class="md-ellipsis">
+      补充：Fisher信息量的严谨定义
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#144" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.4 算法步骤详解
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#145" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.5 具体计算示例
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#146" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.6 从不同起点的收敛
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-ml" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5 ML估计的统计性质
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5 ML估计的统计性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5.1 渐近性质
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5.2 标准误的计算
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-ml" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5.3 ML估计的局限性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-ml" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6 ML评分的实例分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6 ML评分的实例分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-rascha" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6.1 Rasch型测验（测验A）的结果
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6.2 变区分度测验（测验B）的结果
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6.3 测验信息的作用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#164" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6.4 区分度参数的系统影响
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-ml" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7 ML评分的总结与展望
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="1">1. 最大似然评分<a class="headerlink" href="#1" title="Permanent link">&para;</a></h1>
+<h2 id="11">1.1 基本思想：寻找最可能的能力值<a class="headerlink" href="#11" title="Permanent link">&para;</a></h2>
+<p>最大似然（Maximum Likelihood, ML）评分的核心思想可以用一个简单的问题来表达：</p>
+<p>ML的核心问题</p>
+<p>给定考生的反应模式（哪些题答对，哪些题答错）和已知的题目参数，什么样的能力值<span class="arithmatex">\(\theta\)</span>最可能产生这种反应模式？</p>
+<p>让我们通过一个日常生活的例子来理解这个思想：</p>
+<p>投篮能力的类比</p>
+<p>假设一个篮球运动员投了10次篮，进了7个。我们想估计他的投篮能力。</p>
+<ul>
+<li>如果他的真实命中率是30%，那么10投7中的可能性很小</li>
+<li>如果他的真实命中率是70%，那么10投7中的可能性很大</li>
+<li>如果他的真实命中率是90%，那么10投7中的可能性又变小了</li>
+</ul>
+<p>最大似然估计就是找到那个使"10投7中"这个结果最可能发生的命中率。</p>
+<h2 id="12">1.2 似然函数的构建<a class="headerlink" href="#12" title="Permanent link">&para;</a></h2>
+<h3 id="121">1.2.1 从单个题目到整体模式<a class="headerlink" href="#121" title="Permanent link">&para;</a></h3>
+<p>让我们通过一个具体例子来理解似然函数的构建过程。</p>
+<p>三题测验示例</p>
+<p>考虑一个已在2PL模型下校准的三题测验。2PL模型的项目反应函数是：</p>
+<div class="arithmatex">\[P_i(u_i = 1|\theta) = \frac{1}{1 + \exp(-\alpha_i(\theta - \beta_i))}\]</div>
+<p>其中：</p>
+<ul>
+<li><span class="arithmatex">\(P_i\)</span>：答对题目<span class="arithmatex">\(i\)</span>的概率</li>
+<li><span class="arithmatex">\(\theta\)</span>：考生的能力参数</li>
+<li><span class="arithmatex">\(\alpha_i\)</span>：题目<span class="arithmatex">\(i\)</span>的区分度参数</li>
+<li><span class="arithmatex">\(\beta_i\)</span>：题目<span class="arithmatex">\(i\)</span>的难度参数</li>
+</ul>
+<p>题目参数：</p>
+<ul>
+<li>题目1：<span class="arithmatex">\(\alpha_1 = 1.0\)</span>，<span class="arithmatex">\(\beta_1 = -1.5\)</span>（容易题，区分度中等）</li>
+<li>题目2：<span class="arithmatex">\(\alpha_2 = 1.5\)</span>，<span class="arithmatex">\(\beta_2 = 0.0\)</span>（中等题，区分度较高）</li>
+<li>题目3：<span class="arithmatex">\(\alpha_3 = 2.0\)</span>，<span class="arithmatex">\(\beta_3 = 1.5\)</span>（困难题，区分度很高）</li>
+</ul>
+<p>这些参数产生的项目反应曲线（IRC）如图7.1a所示：</p>
+<p><img alt="三个示例项目的项目反应曲线" src="../../assets/images/ch7_fig7.1a.png" /></p>
+<p>理解项目反应曲线</p>
+<p>项目反应曲线告诉我们：</p>
+<ul>
+<li><strong>横轴</strong>：考生的能力水平<span class="arithmatex">\(\theta\)</span></li>
+<li><strong>纵轴</strong>：答对该题的概率</li>
+<li><strong>曲线形状</strong>：S形曲线，能力越高，答对概率越大</li>
+<li><strong>区分度影响</strong>：区分度越高，曲线越陡峭</li>
+<li><strong>难度影响</strong>：难度越高，曲线越往右移</li>
+</ul>
+<h3 id="122">1.2.2 计算特定反应的似然<a class="headerlink" href="#122" title="Permanent link">&para;</a></h3>
+<p>在理解似然之前，我们需要澄清一个关键概念：</p>
+<p>似然vs概率的关键区别</p>
+<p><strong>概率（Probability）</strong>：</p>
+<ul>
+<li>事前计算：给定参数，预测结果</li>
+<li>问题形式："如果考生能力是<span class="arithmatex">\(\theta = 1.0\)</span>，他答对题目1的概率是多少？"</li>
+<li>计算：</li>
+</ul>
+<div class="arithmatex">\[
+P_1(\theta = 1.0)
+= \frac{1}{1 + \exp[-1.0(1.0-(-1.5))]}
+= \frac{1}{1 + \exp(-2.5)}
+\approx 0.924
+\]</div>
+<p><strong>似然（Likelihood）</strong>：</p>
+<ul>
+<li>事后计算：给定结果，评估参数</li>
+<li>问题形式："考生答对了题目1，那么<span class="arithmatex">\(\theta = 1.0\)</span>的似然是多少？"</li>
+<li>计算：</li>
+</ul>
+<div class="arithmatex">\[
+L(\theta = 1.0 \mid u_1 = 1) = P_1(\theta = 1.0) = 0.924
+\]</div>
+<p>对于具体的反应模式，每个题目贡献的似然为：</p>
+<p>单题似然计算</p>
+<p>如果考生在题目<span class="arithmatex">\(i\)</span>上的反应为<span class="arithmatex">\(u_i\)</span>（1=答对，0=答错），则该题贡献的似然为：</p>
+<div class="arithmatex">\[L_i(\theta|u_i) = \begin{cases}
+P_i(\theta) &amp; \text{如果 } u_i = 1 \text{（答对）} \
+1 - P_i(\theta) &amp; \text{如果 } u_i = 0 \text{（答错）}
+\end{cases}\]</div>
+<p>这可以用一个更紧凑的表达式表示：</p>
+<div class="arithmatex">\[L_i(\theta|u_i) = P_i(\theta)^{u_i} \cdot [1-P_i(\theta)]^{1-u_i}\]</div>
+<h3 id="123">1.2.3 局部独立性与似然的乘积<a class="headerlink" href="#123" title="Permanent link">&para;</a></h3>
+<p>IRT的一个核心假设是局部独立性（Local Independence）。这个概念需要仔细理解：</p>
+<p>局部独立性的深入理解</p>
+<p><strong>表面相关</strong>：</p>
+<ul>
+<li>在现实中，不同题目的得分通常是相关的</li>
+<li>聪明的学生倾向于答对更多题目</li>
+<li>这种相关性是因为他们共享一个潜在的能力因素</li>
+</ul>
+<p><strong>条件独立</strong>：</p>
+<ul>
+<li>但是，如果我们已知学生的能力<span class="arithmatex">\(\theta\)</span></li>
+<li>那么各题目的反应就变成独立的了</li>
+<li>这就像知道了投篮能力后，每次投篮都是独立事件</li>
+</ul>
+<p><strong>表达式</strong>：</p>
+<div class="arithmatex">\[P(u_1, u_2, ..., u_I | \theta) = P(u_1|\theta) \times P(u_2|\theta) \times ... \times P(u_I|\theta)\]</div>
+<p>因此，整个反应模式的似然是各题目似然的乘积：</p>
+<p>完整反应模式的似然</p>
+<p>对于反应向量<span class="arithmatex">\(\mathbf{u} = (u_1, u_2, ..., u_I)\)</span>，总似然为：</p>
+<div class="arithmatex">\[L(\mathbf{u}|\theta) = \prod_{i=1}^I L_i(\theta|u_i) = \prod_{i=1}^I P_i(\theta)^{u_i} \cdot [1-P_i(\theta)]^{1-u_i}\]</div>
+<p>为了方便，我们经常用<span class="arithmatex">\(Q_i(\theta) = 1 - P_i(\theta)\)</span>表示答错的概率，所以：</p>
+<div class="arithmatex">\[L(\mathbf{u}|\theta) = \prod_{i=1}^I P_i(\theta)^{u_i} \cdot Q_i(\theta)^{1-u_i}\]</div>
+<h3 id="124">1.2.4 具体计算示例<a class="headerlink" href="#124" title="Permanent link">&para;</a></h3>
+<p>让我们通过详细计算来理解似然函数的构建：</p>
+<p>计算反应模式(1,1,0)的似然函数</p>
+<p>考生反应：答对题目1和2，答错题目3，即<span class="arithmatex">\(\mathbf{u} = (1, 1, 0)\)</span></p>
+<p>对于任意<span class="arithmatex">\(\theta\)</span>值，似然为：</p>
+<div class="arithmatex">\[L(\theta|1,1,0) = P_1(\theta) \times P_2(\theta) \times [1-P_3(\theta)]\]</div>
+<p>让我们计算几个具体的<span class="arithmatex">\(\theta\)</span>值：</p>
+<p><strong>步骤1：计算<span class="arithmatex">\(\theta = -1.0\)</span>时的似然</strong></p>
+<p>题目1（<span class="arithmatex">\(\alpha_1 = 1.0, \beta_1 = -1.5\)</span>）：</p>
+<div class="arithmatex">\[P_1(-1.0) = \frac{1}{1+\exp(-1.0 \times (-1.0-(-1.5)))} = \frac{1}{1+\exp(-1.0 \times 0.5)} = \frac{1}{1+\exp(-0.5)}\]</div>
+<p>计算 <span class="arithmatex">\(\exp(-0.5) = e^{-0.5} \approx 0.606\)</span>，所以：</p>
+<div class="arithmatex">\[
+P_1(-1.0) = \frac{1}{1+0.606} = \frac{1}{1.606} \approx 0.622
+\]</div>
+<p>题目2（<span class="arithmatex">\(\alpha_2 = 1.5, \beta_2 = 0.0\)</span>）：</p>
+<div class="arithmatex">\[P_2(-1.0) = \frac{1}{1+\exp(-1.5 \times (-1.0-0.0))} = \frac{1}{1+\exp(1.5)} = \frac{1}{1+4.482} \approx 0.182\]</div>
+<p>题目3（<span class="arithmatex">\(\alpha_3 = 2.0, \beta_3 = 1.5\)</span>）：</p>
+<div class="arithmatex">\[P_3(-1.0) = \frac{1}{1+\exp(-2.0 \times (-1.0-1.5))} = \frac{1}{1+\exp(5.0)} = \frac{1}{1+148.4} \approx 0.007\]</div>
+<p>因此：</p>
+<div class="arithmatex">\[L(-1.0|1,1,0) = 0.622 \times 0.182 \times (1-0.007) = 0.622 \times 0.182 \times 0.993 \approx 0.112\]</div>
+<p>图7.1b展示了完整的似然函数：</p>
+<p><img alt="三项测验的似然函数" src="../../assets/images/ch7_fig7.1b.png" /></p>
+<p>从图中可以看出，似然函数在<span class="arithmatex">\(\theta \approx 0.90\)</span>处达到最大值。这意味着，能力水平为0.90的考生最可能产生(1,1,0)这样的反应模式。</p>
+<h2 id="13">1.3 对数似然的使用<a class="headerlink" href="#13" title="Permanent link">&para;</a></h2>
+<h3 id="131">1.3.1 为什么使用对数似然？<a class="headerlink" href="#131" title="Permanent link">&para;</a></h3>
+<p>在实际计算中，我们几乎总是使用对数似然而不是原始似然。这有深刻的计算原因：</p>
+<p>数值计算的挑战</p>
+<p><strong>问题1：数值下溢（Numerical Underflow）</strong></p>
+<ul>
+<li>概率值都在0到1之间</li>
+<li>多个小概率相乘会产生极小的数值</li>
+<li>例子：</li>
+<li>10个0.5相乘：<span class="arithmatex">\(0.5^{10} = 0.00098\)</span></li>
+<li>20个0.5相乘：<span class="arithmatex">\(0.5^{20} = 0.00000095\)</span></li>
+<li>50个0.5相乘：<span class="arithmatex">\(0.5^{50} = 8.88 \times 10^{-16}\)</span></li>
+<li>计算机的浮点数精度有限，可能将极小值当作0</li>
+</ul>
+<p><strong>问题2：优化困难</strong></p>
+<ul>
+<li>求最大值需要计算导数</li>
+<li>乘积的导数计算复杂：<span class="arithmatex">\((f \cdot g)' = f' \cdot g + f \cdot g'\)</span></li>
+<li>多个函数乘积的导数会变得极其复杂</li>
+</ul>
+<h3 id="132">1.3.2 对数变换的优势<a class="headerlink" href="#132" title="Permanent link">&para;</a></h3>
+<p>对数变换利用了对数的计算性质来解决上述问题：</p>
+<p>对数变换的性质</p>
+<p><strong>关键性质</strong>：对数将乘法转换为加法</p>
+<div class="arithmatex">\[\log(a \times b) = \log(a) + \log(b)\]</div>
+<p><strong>应用到似然函数</strong>：</p>
+<p>原始似然：</p>
+<div class="arithmatex">\[L(\mathbf{u}|\theta) = \prod_{i=1}^I P_i(\theta)^{u_i} \cdot Q_i(\theta)^{1-u_i}\]</div>
+<p>取对数：</p>
+<div class="arithmatex">\[\log L(\mathbf{u}|\theta) = \log\left[\prod_{i=1}^I P_i(\theta)^{u_i} \cdot Q_i(\theta)^{1-u_i}\right]\]</div>
+<p>利用对数性质展开：</p>
+<div class="arithmatex">\[\log L(\mathbf{u}|\theta) = \sum_{i=1}^I \log\left[P_i(\theta)^{u_i} \cdot Q_i(\theta)^{1-u_i}\right]\]</div>
+<div class="arithmatex">\[= \sum_{i=1}^I \left[u_i \log P_i(\theta) + (1-u_i)\log Q_i(\theta)\right]\]</div>
+<p><strong>优势总结</strong>：</p>
+<ol>
+<li>乘积变成求和，避免数值下溢</li>
+<li>导数计算大大简化：<span class="arithmatex">\((\sum f_i)' = \sum f_i'\)</span></li>
+<li>最重要的是：最大值位置不变！</li>
+</ol>
+<div class="arithmatex">\[
+\arg\max_\theta L(\theta) = \arg\max_\theta \log L(\theta)
+\]</div>
+<h3 id="133">1.3.3 对数似然的数值特性<a class="headerlink" href="#133" title="Permanent link">&para;</a></h3>
+<p>理解对数似然的数值范围对解释结果很重要：</p>
+<p>理解对数似然的数值</p>
+<p><strong>数值范围的理解</strong>：</p>
+<ul>
+<li>由于<span class="arithmatex">\(0 &lt; P &lt; 1\)</span>，所以<span class="arithmatex">\(\log P &lt; 0\)</span>（以自然对数为底）</li>
+<li>对数似然总是负数</li>
+<li>越接近0，似然越大（因为是负数）</li>
+</ul>
+<p><strong>具体数值示例</strong>：</p>
+<ul>
+<li><span class="arithmatex">\(P = 0.9\)</span>：<span class="arithmatex">\(\log(0.9) \approx -0.105\)</span>（很高的概率）</li>
+<li><span class="arithmatex">\(P = 0.5\)</span>：<span class="arithmatex">\(\log(0.5) \approx -0.693\)</span>（中等概率）</li>
+<li><span class="arithmatex">\(P = 0.1\)</span>：<span class="arithmatex">\(\log(0.1) \approx -2.303\)</span>（很低的概率）</li>
+</ul>
+<p><strong>解释示例</strong>：</p>
+<ul>
+<li><span class="arithmatex">\(\log L = -10\)</span>：相对较高的似然（平均每题贡献约-1）</li>
+<li><span class="arithmatex">\(\log L = -100\)</span>：相对较低的似然（平均每题贡献约-10）</li>
+<li><span class="arithmatex">\(\log L = -1000\)</span>：极低的似然（几乎不可能）</li>
+</ul>
+<p>图7.1c展示了对数似然函数：</p>
+<p><img alt="三项测验的对数似然函数" src="../../assets/images/ch7_fig7.1c.png" /></p>
+<p>注意它与原始似然函数具有相同的最大值位置，但数值范围和形状有所不同。</p>
+<h2 id="14-newton-raphson">1.4 Newton-Raphson算法<a class="headerlink" href="#14-newton-raphson" title="Permanent link">&para;</a></h2>
+<p>现在我们知道了如何构建似然函数，下一步是找到使其最大的<span class="arithmatex">\(\theta\)</span>值。Newton-Raphson算法是解决这个优化问题的经典方法。</p>
+<h3 id="141">1.4.1 算法的基本思想<a class="headerlink" href="#141" title="Permanent link">&para;</a></h3>
+<p>寻找最大值的策略</p>
+<p><strong>目标</strong>：找到使对数似然函数最大的<span class="arithmatex">\(\theta\)</span>值</p>
+<p><strong>关键洞察</strong>：在最大值处，函数的斜率（一阶导数）为零</p>
+<p>这就像爬山找山顶：</p>
+<ul>
+<li>如果斜率为正，说明还在上坡，继续向前</li>
+<li>如果斜率为负，说明已经过了山顶，需要后退</li>
+<li>当斜率为零时，我们就在山顶</li>
+</ul>
+<p><strong>Newton-Raphson策略</strong>：</p>
+<ol>
+<li>从一个初始猜测<span class="arithmatex">\(\theta_0\)</span>开始</li>
+<li>计算当前位置的斜率（一阶导数）</li>
+<li>计算斜率的变化率（二阶导数）</li>
+<li>基于这两个信息，智能地调整位置</li>
+<li>重复直到斜率接近零</li>
+</ol>
+<h3 id="142">1.4.2 推导过程<a class="headerlink" href="#142" title="Permanent link">&para;</a></h3>
+<p>让我们严格推导Newton-Raphson公式：</p>
+<p>Newton-Raphson迭代公式推导</p>
+<p><strong>目标</strong>：找到<span class="arithmatex">\(\theta^*\)</span>使得<span class="arithmatex">\(L'(\theta^*) = 0\)</span></p>
+<p><strong>泰勒展开</strong>：</p>
+<p>在<span class="arithmatex">\(\theta_0\)</span>附近，对<span class="arithmatex">\(L'(\theta)\)</span>进行一阶泰勒展开：</p>
+<div class="arithmatex">\[L'(\theta) \approx L'(\theta_0) + L''(\theta_0)(\theta - \theta_0)\]</div>
+<p>这个近似告诉我们，在<span class="arithmatex">\(\theta_0\)</span>附近，一阶导数近似是线性的。</p>
+<p><strong>求解零点</strong>：</p>
+<p>令<span class="arithmatex">\(L'(\theta) = 0\)</span>，我们得到：</p>
+<div class="arithmatex">\[0 = L'(\theta_0) + L''(\theta_0)(\theta - \theta_0)\]</div>
+<p><strong>解出<span class="arithmatex">\(\theta\)</span></strong>：</p>
+<div class="arithmatex">\[L''(\theta_0)(\theta - \theta_0) = -L'(\theta_0)\]</div>
+<div class="arithmatex">\[\theta - \theta_0 = -\frac{L'(\theta_0)}{L''(\theta_0)}\]</div>
+<div class="arithmatex">\[\theta = \theta_0 - \frac{L'(\theta_0)}{L''(\theta_0)}\]</div>
+<p><strong>迭代公式</strong>：</p>
+<div class="arithmatex">\[\theta_{new} = \theta_{old} - \frac{L'(\theta_{old})}{L''(\theta_{old})}\]</div>
+<p>这个公式的直觉：</p>
+<ul>
+<li>分子<span class="arithmatex">\(L'(\theta)\)</span>告诉我们离零点还有多远</li>
+<li>分母<span class="arithmatex">\(L''(\theta)\)</span>告诉我们函数变化的快慢</li>
+<li>比值告诉我们应该移动多少</li>
+</ul>
+<h3 id="143-2pl">1.4.3 2PL模型的导数公式<a class="headerlink" href="#143-2pl" title="Permanent link">&para;</a></h3>
+<p>要使用Newton-Raphson算法，我们需要计算对数似然函数的一阶和二阶导数。让我们详细推导这些公式：</p>
+<p>2PL模型的导数推导</p>
+<p><strong>对数似然函数</strong>：</p>
+<div class="arithmatex">\[\log L(\theta) = \sum_{i=1}^I [u_i \log P_i(\theta) + (1-u_i)\log(1-P_i(\theta))]\]</div>
+<p><strong>一阶导数（对<span class="arithmatex">\(\theta\)</span>求导）</strong>：</p>
+<p>先求单项的导数：</p>
+<div class="arithmatex">\[\frac{\partial}{\partial\theta}[u_i \log P_i + (1-u_i)\log(1-P_i)]\]</div>
+<p>使用链式法则：</p>
+<div class="arithmatex">\[= u_i \cdot \frac{1}{P_i} \cdot \frac{\partial P_i}{\partial\theta} + (1-u_i) \cdot \frac{1}{1-P_i} \cdot \frac{\partial(1-P_i)}{\partial\theta}\]</div>
+<div class="arithmatex">\[= u_i \cdot \frac{1}{P_i} \cdot \frac{\partial P_i}{\partial\theta} - (1-u_i) \cdot \frac{1}{1-P_i} \cdot \frac{\partial P_i}{\partial\theta}\]</div>
+<p>现在需要计算<span class="arithmatex">\(\frac{\partial P_i}{\partial\theta}\)</span>。对于2PL模型：</p>
+<div class="arithmatex">\[P_i(\theta) = \frac{1}{1 + \exp(-\alpha_i(\theta - \beta_i))}\]</div>
+<p>使用链式法则：</p>
+<div class="arithmatex">\[\frac{\partial P_i}{\partial\theta} = \frac{\exp(-\alpha_i(\theta - \beta_i))}{[1 + \exp(-\alpha_i(\theta - \beta_i))]^2} \cdot \alpha_i\]</div>
+<p>注意到：</p>
+<div class="arithmatex">\[\frac{\exp(-\alpha_i(\theta - \beta_i))}{[1 + \exp(-\alpha_i(\theta - \beta_i))]^2} = P_i(1-P_i)\]</div>
+<p>因此：</p>
+<div class="arithmatex">\[\frac{\partial P_i}{\partial\theta} = \alpha_i P_i(1-P_i)\]</div>
+<p>代入原式：</p>
+<div class="arithmatex">\[\frac{\partial}{\partial\theta}[u_i \log P_i + (1-u_i)\log(1-P_i)] = \left[\frac{u_i}{P_i} - \frac{1-u_i}{1-P_i}\right] \cdot \alpha_i P_i(1-P_i)\]</div>
+<p>简化：</p>
+<div class="arithmatex">\[= \alpha_i(1-P_i)u_i - \alpha_i P_i(1-u_i) = \alpha_i[u_i - u_i P_i - P_i + u_i P_i] = \alpha_i(u_i - P_i)\]</div>
+<p><strong>因此，一阶导数为</strong>：</p>
+<div class="arithmatex">\[L'(\theta) = \sum_{i=1}^I \alpha_i(u_i - P_i(\theta))\]</div>
+<p><strong>二阶导数（继续对<span class="arithmatex">\(\theta\)</span>求导）</strong>：</p>
+<div class="arithmatex">\[L''(\theta) = \frac{\partial}{\partial\theta}\left[\sum_{i=1}^I \alpha_i(u_i - P_i(\theta))\right]\]</div>
+<div class="arithmatex">\[= \sum_{i=1}^I \alpha_i \cdot \frac{\partial}{\partial\theta}(u_i - P_i(\theta))\]</div>
+<div class="arithmatex">\[= -\sum_{i=1}^I \alpha_i \cdot \frac{\partial P_i}{\partial\theta}\]</div>
+<div class="arithmatex">\[= -\sum_{i=1}^I \alpha_i \cdot \alpha_i P_i(1-P_i)\]</div>
+<p><strong>因此，二阶导数为</strong>：</p>
+<div class="arithmatex">\[L''(\theta) = -\sum_{i=1}^I \alpha_i^2 P_i(\theta)(1 - P_i(\theta))\]</div>
+<p><strong>关键观察：</strong></p>
+<ul>
+<li>一阶导数 <span class="arithmatex">\(L'(\theta)\)</span> 的符号可以为正或负，取决于观察到的反应 <span class="arithmatex">\(u_i\)</span> 与预测概率 <span class="arithmatex">\(P_i(\theta)\)</span> 之间的差异：若 <span class="arithmatex">\(u_i &gt; P_i(\theta)\)</span>，导数为正，表示需提高 <span class="arithmatex">\(\theta\)</span>；反之则为负。</li>
+<li>二阶导数 <span class="arithmatex">\(L''(\theta)\)</span> 始终为负值，原因如下：</li>
+</ul>
+<div class="arithmatex">\[
+L''(\theta) = -\sum_{i=1}^I \alpha_i^2 P_i(\theta)(1 - P_i(\theta)) &lt; 0
+\]</div>
+<p>因为 <span class="arithmatex">\(\alpha_i^2 &gt; 0\)</span> 且 <span class="arithmatex">\(P_i(\theta)(1 - P_i(\theta)) &gt; 0\)</span>（概率在 <span class="arithmatex">\((0,1)\)</span> 内）。</p>
+<ul>
+<li>负的二阶导数意味着对数似然函数是 <strong>严格凹函数</strong>，从而在定义域内保证具有唯一的最大值。</li>
+<li>二阶导数的绝对值：</li>
+</ul>
+<div class="arithmatex">\[
+\left| L''(\theta) \right| = \sum_{i=1}^I \alpha_i^2 P_i(\theta)(1 - P_i(\theta))
+\]</div>
+<p>等于该点的 <strong>测验信息函数</strong>，也称为 <strong>Fisher 信息量</strong>，衡量当前能力点的估计精度。</p>
+<h3 id="fisher">补充：Fisher信息量的严谨定义<a class="headerlink" href="#fisher" title="Permanent link">&para;</a></h3>
+<p>在项目反应理论中，Fisher信息量定义为：</p>
+<div class="arithmatex">\[
+I(\theta) = \mathbb{E}_{\mathbf{u}|\theta} \left[ -\frac{d^2}{d\theta^2} \log L(\theta) \right]
+\]</div>
+<p>对2PL模型，每一项的对数似然二阶导数恰好为一个常数表达式（不依赖 <span class="arithmatex">\( u_i \)</span>）：</p>
+<div class="arithmatex">\[
+-\frac{d^2}{d\theta^2} \log L_i(\theta) = \alpha_i^2 P_i(\theta)(1 - P_i(\theta))
+\]</div>
+<p>因此，总信息量为：</p>
+<div class="arithmatex">\[
+I(\theta) = \sum_{i=1}^I \alpha_i^2 P_i(\theta)(1 - P_i(\theta))
+\]</div>
+<p>这个表达式本身就是<strong>条件期望形式</strong>，代表测验在给定能力水平下的测量精度。</p>
+<h3 id="144">1.4.4 算法步骤详解<a class="headerlink" href="#144" title="Permanent link">&para;</a></h3>
+<p>现在我们可以给出Newton-Raphson算法的完整实现步骤：</p>
+<p>Newton-Raphson 算法的具体步骤</p>
+<p><strong>输入：</strong></p>
+<ul>
+<li>反应向量：<span class="arithmatex">\(\mathbf{u} = (u_1, u_2, \dots, u_I)\)</span></li>
+<li>题目参数：区分度 <span class="arithmatex">\(\alpha_i\)</span>，难度 <span class="arithmatex">\(\beta_i\)</span>，<span class="arithmatex">\(i = 1, 2, \dots, I\)</span></li>
+<li>初始值：<span class="arithmatex">\(\theta_0\)</span>（通常设为 0）</li>
+<li>容差阈值：<span class="arithmatex">\(\epsilon = 0.001\)</span></li>
+<li>最大迭代次数：<span class="arithmatex">\(N_{\mathrm{iter}} = 50\)</span>（用于防止不收敛）</li>
+</ul>
+<p>步骤 1：初始化</p>
+<ul>
+<li>设置 <span class="arithmatex">\(\theta = \theta_0\)</span></li>
+<li>设置迭代计数 <span class="arithmatex">\(k = 0\)</span></li>
+</ul>
+<p>步骤 2：迭代过程</p>
+<p>重复以下步骤直到满足收敛条件：</p>
+<p><strong>a. 计算每题的答对概率：</strong></p>
+<div class="arithmatex">\[
+P_i(\theta) = \frac{1}{1 + \exp(-\alpha_i(\theta - \beta_i))}
+\]</div>
+<p><strong>b. 计算一阶导数（梯度）：</strong></p>
+<div class="arithmatex">\[
+L'(\theta) = \sum_{i=1}^I \alpha_i (u_i - P_i(\theta))
+\]</div>
+<p><strong>c. 计算二阶导数（曲率）：</strong></p>
+<div class="arithmatex">\[
+L''(\theta) = -\sum_{i=1}^I \alpha_i^2 P_i(\theta)(1 - P_i(\theta))
+\]</div>
+<p><strong>d. 计算更新量：</strong></p>
+<div class="arithmatex">\[
+\varepsilon = \frac{L'(\theta)}{L''(\theta)}
+\]</div>
+<p><strong>e. 更新能力估计：</strong></p>
+<div class="arithmatex">\[
+\theta_{\text{new}} = \theta - \varepsilon
+\]</div>
+<p><strong>f. 检查收敛条件：</strong></p>
+<ul>
+<li>若 <span class="arithmatex">\(|\varepsilon| &lt; \epsilon\)</span>，则认为收敛，退出循环</li>
+<li>若 <span class="arithmatex">\(k \geq N_{\mathrm{iter}}\)</span>，强制停止迭代（可能未收敛）</li>
+</ul>
+<p><strong>g. 更新状态：</strong></p>
+<ul>
+<li>设 <span class="arithmatex">\(\theta = \theta_{\text{new}}\)</span></li>
+<li>迭代计数 <span class="arithmatex">\(k = k + 1\)</span></li>
+</ul>
+<p>步骤 3：输出结果</p>
+<ul>
+<li>最终能力估计 <span class="arithmatex">\(\hat{\theta}\)</span></li>
+<li>收敛状态（是否成功收敛）</li>
+<li>总迭代次数 <span class="arithmatex">\(k\)</span></li>
+</ul>
+<h3 id="145">1.4.5 具体计算示例<a class="headerlink" href="#145" title="Permanent link">&para;</a></h3>
+<p>让我们通过一个详细的例子来理解这个过程。考虑测验A中的一个典型反应模式：</p>
+<p>Newton-Raphson迭代过程详细示例</p>
+<p><strong>设置</strong>：</p>
+<ul>
+<li>测验A：10个题目，所有题目区分度<span class="arithmatex">\(\alpha_i = 1.5\)</span></li>
+<li>难度参数：<span class="arithmatex">\(\beta = [-2.0, -1.5, -1.0, -0.5, 0.0, 0.0, 0.5, 1.0, 1.5, 2.0]\)</span></li>
+<li>反应模式：<span class="arithmatex">\((1,1,1,1,1,0,0,0,0,0)\)</span>（前5题答对，后5题答错）</li>
+<li>初始猜测：<span class="arithmatex">\(\theta_0 = -1.0\)</span></li>
+</ul>
+<p><strong>迭代1</strong>（<span class="arithmatex">\(\theta = -1.0\)</span>）：</p>
+<p>计算每题的<span class="arithmatex">\(P_i(-1.0)\)</span>：</p>
+<ul>
+<li>项目 1：</li>
+</ul>
+<div class="arithmatex">\[
+P_1(-1.0)=\frac{1}{1+\exp[-1.5(-1.0-(-2.0))]}=0.818
+\]</div>
+<ul>
+<li>项目 2：</li>
+</ul>
+<div class="arithmatex">\[
+P_2(-1.0)=\frac{1}{1+\exp[-1.5(-1.0-(-1.5))]}=0.679
+\]</div>
+<ul>
+<li>项目 3：</li>
+</ul>
+<div class="arithmatex">\[
+P_3(-1.0)=\frac{1}{1+\exp[-1.5(-1.0-(-1.0))]}=0.500
+\]</div>
+<ul>
+<li>项目 4：</li>
+</ul>
+<div class="arithmatex">\[
+P_4(-1.0)=\frac{1}{1+\exp[-1.5(-1.0-(-0.5))]}=0.321
+\]</div>
+<ul>
+<li>项目 5：</li>
+</ul>
+<div class="arithmatex">\[
+P_5(-1.0)=\frac{1}{1+\exp[-1.5(-1.0-0.0)]}=0.182
+\]</div>
+<ul>
+<li><span class="arithmatex">\(P_6(-1.0) = 0.182\)</span>（与<span class="arithmatex">\(P_5\)</span>相同，因为<span class="arithmatex">\(\beta_6 = \beta_5 = 0.0\)</span>）</li>
+<li>项目 7：</li>
+</ul>
+<div class="arithmatex">\[
+P_7(-1.0)=\frac{1}{1+\exp[-1.5(-1.0-0.5)]}=0.095
+\]</div>
+<ul>
+<li>项目 8：</li>
+</ul>
+<div class="arithmatex">\[
+P_8(-1.0)=\frac{1}{1+\exp[-1.5(-1.0-1.0)]}=0.047
+\]</div>
+<ul>
+<li>项目 9：</li>
+</ul>
+<div class="arithmatex">\[
+P_9(-1.0)=\frac{1}{1+\exp[-1.5(-1.0-1.5)]}=0.023
+\]</div>
+<ul>
+<li>项目 10：</li>
+</ul>
+<div class="arithmatex">\[
+P_{10}(-1.0)=\frac{1}{1+\exp[-1.5(-1.0-2.0)]}=0.011
+\]</div>
+<p>计算一阶导数：</p>
+<div class="arithmatex">\[L'(-1.0) = 1.5 \times [(1-0.818) + (1-0.679) + (1-0.500) + (1-0.321) + (1-0.182)\]</div>
+<div class="arithmatex">\[+ (0-0.182) + (0-0.095) + (0-0.047) + (0-0.023) + (0-0.011)]\]</div>
+<div class="arithmatex">\[= 1.5 \times [0.182 + 0.321 + 0.500 + 0.679 + 0.818 - 0.182 - 0.095 - 0.047 - 0.023 - 0.011]\]</div>
+<div class="arithmatex">\[= 1.5 \times 2.142 = 3.213\]</div>
+<p>计算二阶导数：</p>
+<div class="arithmatex">\[L''(-1.0) = -1.5^2 \times \sum_{i=1}^{10} P_i(1-P_i)\]</div>
+<div class="arithmatex">\[= -2.25 \times [0.818(0.182) + 0.679(0.321) + ... + 0.011(0.989)]\]</div>
+<div class="arithmatex">\[= -2.25 \times 1.298 = -2.920\]</div>
+<p>更新量：</p>
+<div class="arithmatex">\[\varepsilon = \frac{3.213}{-2.920} = -1.100\]</div>
+<p>新估计：</p>
+<div class="arithmatex">\[\theta_{new} = -1.0 - (-1.100) = 0.100\]</div>
+<table>
+<thead>
+<tr>
+<th>迭代</th>
+<th><span class="arithmatex">\(\theta\)</span></th>
+<th>一阶导数<span class="arithmatex">\(L'(\theta)\)</span></th>
+<th>二阶导数<span class="arithmatex">\(L''(\theta)\)</span></th>
+<th>更新量<span class="arithmatex">\(\varepsilon\)</span></th>
+<th>新<span class="arithmatex">\(\theta\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(-1.000\)</span></td>
+<td><span class="arithmatex">\(3.213\)</span></td>
+<td><span class="arithmatex">\(-2.920\)</span></td>
+<td><span class="arithmatex">\(-1.100\)</span></td>
+<td><span class="arithmatex">\(0.100\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(0.100\)</span></td>
+<td><span class="arithmatex">\(-0.303\)</span></td>
+<td><span class="arithmatex">\(-3.364\)</span></td>
+<td><span class="arithmatex">\(0.090\)</span></td>
+<td><span class="arithmatex">\(0.010\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(0.010\)</span></td>
+<td><span class="arithmatex">\(-0.034\)</span></td>
+<td><span class="arithmatex">\(-3.368\)</span></td>
+<td><span class="arithmatex">\(0.010\)</span></td>
+<td><span class="arithmatex">\(0.000\)</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td><span class="arithmatex">\(0.000\)</span></td>
+<td><span class="arithmatex">\(0.000\)</span></td>
+<td><span class="arithmatex">\(-3.368\)</span></td>
+<td><span class="arithmatex">\(0.000\)</span></td>
+<td>停止</td>
+</tr>
+</tbody>
+</table>
+<p><strong>收敛过程的理解</strong>：</p>
+<ul>
+<li>初始位置<span class="arithmatex">\(\theta = -1.0\)</span>低估了真实能力</li>
+<li>正的一阶导数（3.213）表明我们在最大值的左侧，需要向右移动</li>
+<li>第一次迭代大幅调整（移动1.100），略微过调</li>
+<li>后续迭代逐渐精细调整</li>
+<li>经过4次迭代达到收敛（<span class="arithmatex">\(|\varepsilon| &lt; 0.001\)</span>）</li>
+</ul>
+<p>图7.2直观地展示了这个过程：</p>
+<p><img alt="对数似然函数及其一阶和二阶导数的说明" src="../../assets/images/ch7_fig7.2.png" /></p>
+<h3 id="146">1.4.6 从不同起点的收敛<a class="headerlink" href="#146" title="Permanent link">&para;</a></h3>
+<p>Newton-Raphson算法的一个重要特性是其稳健性——从不同的起始点通常都能收敛到同一个解：</p>
+<p>算法的稳健性验证</p>
+<p>让我们测试同一个反应模式<span class="arithmatex">\((1,1,1,1,1,0,0,0,0,0)\)</span>从不同起点的收敛情况：</p>
+<p><strong>起点1：低估能力（<span class="arithmatex">\(\theta_0 = -2.0\)</span>）</strong></p>
+<table>
+<thead>
+<tr>
+<th>迭代</th>
+<th><span class="arithmatex">\(\theta\)</span></th>
+<th><span class="arithmatex">\(L'(\theta)\)</span></th>
+<th><span class="arithmatex">\(L''(\theta)\)</span></th>
+<th><span class="arithmatex">\(\varepsilon\)</span></th>
+<th>新<span class="arithmatex">\(\theta\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(-2.000\)</span></td>
+<td><span class="arithmatex">\(4.875\)</span></td>
+<td><span class="arithmatex">\(-2.055\)</span></td>
+<td><span class="arithmatex">\(-2.373\)</span></td>
+<td><span class="arithmatex">\(0.373\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(0.373\)</span></td>
+<td><span class="arithmatex">\(-1.224\)</span></td>
+<td><span class="arithmatex">\(-3.237\)</span></td>
+<td><span class="arithmatex">\(0.378\)</span></td>
+<td><span class="arithmatex">\(-0.005\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(-0.005\)</span></td>
+<td><span class="arithmatex">\(0.025\)</span></td>
+<td><span class="arithmatex">\(-3.368\)</span></td>
+<td><span class="arithmatex">\(-0.007\)</span></td>
+<td><span class="arithmatex">\(0.002\)</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td><span class="arithmatex">\(0.002\)</span></td>
+<td><span class="arithmatex">\(-0.007\)</span></td>
+<td><span class="arithmatex">\(-3.368\)</span></td>
+<td><span class="arithmatex">\(0.002\)</span></td>
+<td><span class="arithmatex">\(0.000\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>起点2：高估能力（<span class="arithmatex">\(\theta_0 = 1.5\)</span>）</strong></p>
+<table>
+<thead>
+<tr>
+<th>迭代</th>
+<th><span class="arithmatex">\(\theta\)</span></th>
+<th><span class="arithmatex">\(L'(\theta)\)</span></th>
+<th><span class="arithmatex">\(L''(\theta)\)</span></th>
+<th><span class="arithmatex">\(\varepsilon\)</span></th>
+<th>新<span class="arithmatex">\(\theta\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(1.500\)</span></td>
+<td><span class="arithmatex">\(-4.572\)</span></td>
+<td><span class="arithmatex">\(-2.445\)</span></td>
+<td><span class="arithmatex">\(1.870\)</span></td>
+<td><span class="arithmatex">\(-0.370\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(-0.370\)</span></td>
+<td><span class="arithmatex">\(1.200\)</span></td>
+<td><span class="arithmatex">\(-3.254\)</span></td>
+<td><span class="arithmatex">\(-0.369\)</span></td>
+<td><span class="arithmatex">\(-0.001\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(-0.001\)</span></td>
+<td><span class="arithmatex">\(0.003\)</span></td>
+<td><span class="arithmatex">\(-3.368\)</span></td>
+<td><span class="arithmatex">\(-0.001\)</span></td>
+<td><span class="arithmatex">\(0.000\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>起点3：极端高估（<span class="arithmatex">\(\theta_0 = 3.0\)</span>）</strong></p>
+<table>
+<thead>
+<tr>
+<th>迭代</th>
+<th><span class="arithmatex">\(\theta\)</span></th>
+<th><span class="arithmatex">\(L'(\theta)\)</span></th>
+<th><span class="arithmatex">\(L''(\theta)\)</span></th>
+<th><span class="arithmatex">\(\varepsilon\)</span></th>
+<th>新<span class="arithmatex">\(\theta\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(3.000\)</span></td>
+<td><span class="arithmatex">\(-6.867\)</span></td>
+<td><span class="arithmatex">\(-0.922\)</span></td>
+<td><span class="arithmatex">\(7.451\)</span></td>
+<td><span class="arithmatex">\(-4.451\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(-4.451\)</span></td>
+<td><span class="arithmatex">\(5.565\)</span></td>
+<td><span class="arithmatex">\(-0.691\)</span></td>
+<td><span class="arithmatex">\(-8.054\)</span></td>
+<td><span class="arithmatex">\(3.603\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(3.603\)</span></td>
+<td><span class="arithmatex">\(-7.160\)</span></td>
+<td><span class="arithmatex">\(-0.628\)</span></td>
+<td><span class="arithmatex">\(11.401\)</span></td>
+<td><span class="arithmatex">\(-7.798\)</span></td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+<p><strong>观察结果</strong>：</p>
+<ul>
+<li>从合理的起点（-2.0到1.5），算法快速收敛（3-4次迭代）</li>
+<li>从极端起点（3.0），可能出现振荡，需要更多迭代</li>
+<li>但最终都收敛到同一个值：<span class="arithmatex">\(\theta = 0.0\)</span></li>
+</ul>
+<p><strong>实践建议</strong>：</p>
+<ul>
+<li>通常使用<span class="arithmatex">\(\theta_0 = 0\)</span>作为起始值（总体均值）</li>
+<li>或使用原始分数的线性变换作为起始值</li>
+<li>设置最大迭代次数，防止极端情况下的无限循环</li>
+</ul>
+<h2 id="15-ml">1.5 ML估计的统计性质<a class="headerlink" href="#15-ml" title="Permanent link">&para;</a></h2>
+<p>理解ML估计的统计性质对于正确使用和解释结果至关重要。</p>
+<h3 id="151">1.5.1 渐近性质<a class="headerlink" href="#151" title="Permanent link">&para;</a></h3>
+<p>ML估计具有一些优良的大样本性质，这些性质使其成为统计推断的黄金标准：</p>
+<p>ML估计的三大渐近性质</p>
+<p><strong>1. 渐近无偏性（Asymptotic Unbiasedness）</strong></p>
+<p>当题目数量<span class="arithmatex">\(I \to \infty\)</span>时：</p>
+<div class="arithmatex">\[E[\hat{\theta}_{ML}] = \theta_{true}\]</div>
+<p>这意味着：</p>
+<ul>
+<li>ML估计的期望值等于真实参数值</li>
+<li>平均而言，ML不会系统性地高估或低估能力</li>
+<li>但注意：这是渐近性质，小样本可能有偏</li>
+</ul>
+<p><strong>2. 渐近有效性（Asymptotic Efficiency）</strong></p>
+<p>ML估计达到Cramér-Rao下界：</p>
+<div class="arithmatex">\[Var(\hat{\theta}_{ML}) = \frac{1}{I(\theta)}\]</div>
+<p>其中<span class="arithmatex">\(I(\theta)\)</span>是Fisher信息量。这意味着：</p>
+<ul>
+<li>在所有渐近无偏估计中，ML估计的方差最小</li>
+<li>没有其他估计方法能做得更好（在渐近意义下）</li>
+<li>ML估计充分利用了数据中的信息</li>
+</ul>
+<p><strong>3. 渐近正态性（Asymptotic Normality）</strong></p>
+<p>当<span class="arithmatex">\(I \to \infty\)</span>时：</p>
+<div class="arithmatex">\[\hat{\theta}_{ML} \sim N\left(\theta_{true}, \frac{1}{I(\theta)}\right)\]</div>
+<p>更精确地说：</p>
+<div class="arithmatex">\[\sqrt{I(\theta)}(\hat{\theta}_{ML} - \theta_{true}) \xrightarrow{d} N(0, 1)\]</div>
+<p>这意味着：</p>
+<ul>
+<li>ML估计的分布接近正态分布</li>
+<li>可以构建置信区间和假设检验</li>
+<li>标准误可以从信息量直接计算</li>
+</ul>
+<h3 id="152">1.5.2 标准误的计算<a class="headerlink" href="#152" title="Permanent link">&para;</a></h3>
+<p>标准误（Standard Error, SE）量化了估计的不确定性：</p>
+<p>标准误的理论与计算</p>
+<p><strong>理论公式（基于Fisher信息）</strong>：</p>
+<div class="arithmatex">\[SE(\hat{\theta}) = \frac{1}{\sqrt{I(\theta)}}\]</div>
+<p>其中Fisher信息定义为：</p>
+<div class="arithmatex">\[I(\theta) = -E\left[\frac{\partial^2 \log L}{\partial \theta^2}\right]\]</div>
+<p><strong>实际计算（基于观察信息）</strong>：</p>
+<p>在实践中，我们使用观察到的信息：</p>
+<div class="arithmatex">\[SE(\hat{\theta}) = \frac{1}{\sqrt{-L''(\hat{\theta})}}\]</div>
+<p>对于2PL模型：</p>
+<div class="arithmatex">\[SE(\hat{\theta}) = \frac{1}{\sqrt{\sum_{i=1}^I \alpha_i^2 P_i(\hat{\theta})[1 - P_i(\hat{\theta})]}}\]</div>
+<p><strong>解释</strong>：</p>
+<ul>
+<li>二阶导数的绝对值越大，估计越精确</li>
+<li>这反映了似然函数在最大值附近的"尖锐"程度</li>
+<li>尖锐的峰意味着我们对最大值位置更有信心</li>
+</ul>
+<p><strong>示例计算</strong>：</p>
+<p>对于前面的例子，在<span class="arithmatex">\(\hat{\theta} = 0.0\)</span>处：</p>
+<div class="arithmatex">\[-L''(0.0) = 3.368\]</div>
+<p>因此：</p>
+<div class="arithmatex">\[SE(\hat{\theta}) = \frac{1}{\sqrt{3.368}} = \frac{1}{1.835} = 0.545\]</div>
+<h3 id="153-ml">1.5.3 ML估计的局限性<a class="headerlink" href="#153-ml" title="Permanent link">&para;</a></h3>
+<p>尽管ML估计有许多优良性质，但也存在一些重要的局限：</p>
+<p>ML方法的主要问题</p>
+<p><strong>1. 极端反应模式的问题</strong></p>
+<p>对于某些反应模式，ML估计不存在有限值：</p>
+<ul>
+<li>
+<p><strong>全部答对</strong>：<span class="arithmatex">\(\mathbf{u} = (1,1,1,...,1)\)</span></p>
+</li>
+<li>
+<p>似然函数单调递增</p>
+</li>
+<li><span class="arithmatex">\(\hat{\theta} = +\infty\)</span></li>
+<li>无法得到有限估计</li>
+<li>
+<p><strong>全部答错</strong>：<span class="arithmatex">\(\mathbf{u} = (0,0,0,...,0)\)</span></p>
+</li>
+<li>
+<p>似然函数单调递减</p>
+</li>
+<li><span class="arithmatex">\(\hat{\theta} = -\infty\)</span></li>
+<li>无法得到有限估计</li>
+</ul>
+<p>解释：</p>
+<div class="arithmatex">\[L'(\theta) = \sum_{i=1}^I \alpha_i(u_i - P_i(\theta))\]</div>
+<p>当全部答对时，<span class="arithmatex">\(u_i = 1\)</span>，而<span class="arithmatex">\(P_i(\theta) &lt; 1\)</span>，所以<span class="arithmatex">\(L'(\theta) &gt; 0\)</span>恒成立。</p>
+<p><strong>2. 小样本偏差</strong></p>
+<p>渐近性质需要大量题目才能实现：</p>
+<ul>
+<li>题目数<span class="arithmatex">\(&lt; 20\)</span>：可能有明显偏差</li>
+<li>题目数<span class="arithmatex">\(20-50\)</span>：偏差减小但仍存在</li>
+<li>题目数<span class="arithmatex">\(&gt; 50\)</span>：接近渐近性质</li>
+</ul>
+<p>偏差的方向：</p>
+<ul>
+<li>通常向中心收缩（向0偏）</li>
+<li>极端能力的偏差更大</li>
+</ul>
+<p><strong>3. 3PL模型的特殊问题</strong></p>
+<p>当模型包含猜测参数时：</p>
+<ul>
+<li>似然函数可能有多个局部最大值</li>
+<li>Newton-Raphson可能收敛到局部而非全局最大值</li>
+<li>需要更谨慎的起始值选择</li>
+</ul>
+<p><strong>4. 模型误设的影响</strong></p>
+<p>如果真实模型不是2PL：</p>
+<ul>
+<li>ML估计可能有偏</li>
+<li>标准误可能被低估</li>
+<li>渐近性质可能不成立</li>
+</ul>
+<h2 id="16-ml">1.6 ML评分的实例分析<a class="headerlink" href="#16-ml" title="Permanent link">&para;</a></h2>
+<p>让我们通过具体的例子来深入理解ML评分的特性。</p>
+<h3 id="161-rascha">1.6.1 Rasch型测验（测验A）的结果<a class="headerlink" href="#161-rascha" title="Permanent link">&para;</a></h3>
+<p>首先看看当所有题目具有相同区分度时的情况：</p>
+<p>测验A的ML评分结果</p>
+<p><strong>测验设置</strong>：</p>
+<ul>
+<li>10个题目，所有题目区分度<span class="arithmatex">\(\alpha_i = 1.5\)</span></li>
+<li>难度对称分布：<span class="arithmatex">\(\beta = [-2.0, -1.5, -1.0, -0.5, 0.0, 0.0, 0.5, 1.0, 1.5, 2.0]\)</span></li>
+</ul>
+<p><strong>不同得分为5分的反应模式</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>考生</th>
+<th>反应模式</th>
+<th>原始分数</th>
+<th><span class="arithmatex">\(\hat{\theta}\)</span></th>
+<th><span class="arithmatex">\(SE\)</span></th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(1111100000\)</span></td>
+<td>5</td>
+<td><span class="arithmatex">\(0.00\)</span></td>
+<td><span class="arithmatex">\(0.54\)</span></td>
+<td>完美Guttman模式</td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(0111110000\)</span></td>
+<td>5</td>
+<td><span class="arithmatex">\(0.00\)</span></td>
+<td><span class="arithmatex">\(0.54\)</span></td>
+<td>错过最易题</td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(0011111000\)</span></td>
+<td>5</td>
+<td><span class="arithmatex">\(0.00\)</span></td>
+<td><span class="arithmatex">\(0.54\)</span></td>
+<td>中间5题</td>
+</tr>
+<tr>
+<td>4</td>
+<td><span class="arithmatex">\(0001111100\)</span></td>
+<td>5</td>
+<td><span class="arithmatex">\(0.00\)</span></td>
+<td><span class="arithmatex">\(0.54\)</span></td>
+<td>中间5题</td>
+</tr>
+<tr>
+<td>5</td>
+<td><span class="arithmatex">\(0000111110\)</span></td>
+<td>5</td>
+<td><span class="arithmatex">\(0.00\)</span></td>
+<td><span class="arithmatex">\(0.54\)</span></td>
+<td>中间5题</td>
+</tr>
+<tr>
+<td>6</td>
+<td><span class="arithmatex">\(0000011111\)</span></td>
+<td>5</td>
+<td><span class="arithmatex">\(0.00\)</span></td>
+<td><span class="arithmatex">\(0.54\)</span></td>
+<td>答对最难5题</td>
+</tr>
+</tbody>
+</table>
+<p>什么是完美 Guttman 模式？</p>
+<p>Guttman 模式是指一种理想的反应结构：如果一个受试者在某道题上作答正确，则他也应该答对所有比它更容易的题；反之，如果一道题作答错误，则应错掉所有比它更难的题。</p>
+<ul>
+<li>假设测验中的题目按难度从易到难编号为题1至题10</li>
+<li>完美 Guttman 模式的例子是：<code>1111100000</code></li>
+<li>表示考生答对了前5道易题，答错了后5道难题</li>
+</ul>
+<p><strong>在 IRT Rasch 模型下：</strong></p>
+<ul>
+<li>所有总分为5分的考生，其能力估计 <span class="arithmatex">\(\hat{\theta}\)</span> 是相同的</li>
+<li>但 Guttman 模式具有逻辑一致性，完全符合难度排序</li>
+<li>所以该模式被视为“理想反应模式”</li>
+</ul>
+<p><strong>比较示例：</strong></p>
+<table>
+<thead>
+<tr>
+<th>考生</th>
+<th>反应模式</th>
+<th>总分</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td><code>1111100000</code></td>
+<td>5</td>
+<td>完美 Guttman 模式 ✅</td>
+</tr>
+<tr>
+<td>B</td>
+<td><code>0000011111</code></td>
+<td>5</td>
+<td>答对最难5题 ❗</td>
+</tr>
+</tbody>
+</table>
+<p>尽管两位考生得分相同，但 A 的反应模式更符合“能力递增 → 答题成功”的逻辑。B 的反应结构则可能提示异常或误判。</p>
+<p>Rasch模型的核心特性：充分统计量</p>
+<p><strong>观察结果</strong>：</p>
+<ul>
+<li>所有得5分的考生获得完全相同的能力估计（<span class="arithmatex">\(\hat{\theta} = 0.00\)</span>）</li>
+<li>标准误也完全相同（<span class="arithmatex">\(SE = 0.54\)</span>）</li>
+<li>具体答对哪些题目完全不影响估计</li>
+</ul>
+<p><strong>解释</strong>：</p>
+<p>在Rasch模型（等区分度模型）中，似然函数可以因子分解：</p>
+<div class="arithmatex">\[L(\theta|\mathbf{u}) = \frac{\exp(\theta \sum_{i=1}^I u_i) \prod_{i=1}^I \exp(-u_i\beta_i)}{\prod_{i=1}^I [1 + \exp(\theta - \beta_i)]}\]</div>
+<p>取对数：</p>
+<div class="arithmatex">\[\log L(\theta|\mathbf{u}) = \theta \sum_{i=1}^I u_i - \sum_{i=1}^I u_i\beta_i - \sum_{i=1}^I \log[1 + \exp(\theta - \beta_i)]\]</div>
+<p>注意：</p>
+<ul>
+<li>第一项只依赖于总分<span class="arithmatex">\(\sum u_i\)</span></li>
+<li>第二项不含<span class="arithmatex">\(\theta\)</span>，对最大化无影响</li>
+<li>第三项不依赖于具体的反应模式</li>
+</ul>
+<p>因此，<span class="arithmatex">\(\sum u_i\)</span>（原始总分）是<span class="arithmatex">\(\theta\)</span>的充分统计量！</p>
+<p><strong>实际意义</strong>：</p>
+<ul>
+<li>简化了评分过程（只需要总分）</li>
+<li>支持了"题目可交换性"</li>
+<li>使得适应性测验更容易实施</li>
+</ul>
+<h3 id="162-b">1.6.2 变区分度测验（测验B）的结果<a class="headerlink" href="#162-b" title="Permanent link">&para;</a></h3>
+<p>在本节中，我们探讨当题目具有不同的区分度参数时，最大似然估计（MLE）如何区分能力水平。与之前区分度相同的测验A相比，测验B中各题目的区分度不同。</p>
+<p>测验B的ML评分结果对比</p>
+<p><strong>测验设置：</strong></p>
+<ul>
+<li>10道题，题目难度均为 <span class="arithmatex">\(β_i = 0.0\)</span></li>
+<li>区分度递增排列：<span class="arithmatex">\(α = [1.0, 1.0, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9]\)</span></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>考生</th>
+<th>反应模式</th>
+<th>原始分数</th>
+<th>测验A</th>
+<th></th>
+<th>测验B</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td><span class="arithmatex">\(\hat{\theta}\)</span></td>
+<td><span class="arithmatex">\(SE\)</span></td>
+<td><span class="arithmatex">\(\hat{\theta}\)</span></td>
+<td><span class="arithmatex">\(SE\)</span></td>
+</tr>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(1111100000\)</span></td>
+<td>5</td>
+<td><span class="arithmatex">\(0.00\)</span></td>
+<td><span class="arithmatex">\(0.54\)</span></td>
+<td><span class="arithmatex">\(-0.23\)</span></td>
+<td><span class="arithmatex">\(0.43\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(0111110000\)</span></td>
+<td>5</td>
+<td><span class="arithmatex">\(0.00\)</span></td>
+<td><span class="arithmatex">\(0.54\)</span></td>
+<td><span class="arithmatex">\(-0.13\)</span></td>
+<td><span class="arithmatex">\(0.43\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(0011111000\)</span></td>
+<td>5</td>
+<td><span class="arithmatex">\(0.00\)</span></td>
+<td><span class="arithmatex">\(0.54\)</span></td>
+<td><span class="arithmatex">\(-0.04\)</span></td>
+<td><span class="arithmatex">\(0.42\)</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td><span class="arithmatex">\(0001111100\)</span></td>
+<td>5</td>
+<td><span class="arithmatex">\(0.00\)</span></td>
+<td><span class="arithmatex">\(0.54\)</span></td>
+<td><span class="arithmatex">\(-0.04\)</span></td>
+<td><span class="arithmatex">\(0.42\)</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td><span class="arithmatex">\(0000111110\)</span></td>
+<td>5</td>
+<td><span class="arithmatex">\(0.00\)</span></td>
+<td><span class="arithmatex">\(0.54\)</span></td>
+<td><span class="arithmatex">\(0.13\)</span></td>
+<td><span class="arithmatex">\(0.43\)</span></td>
+</tr>
+<tr>
+<td>6</td>
+<td><span class="arithmatex">\(0000011111\)</span></td>
+<td>5</td>
+<td><span class="arithmatex">\(0.00\)</span></td>
+<td><span class="arithmatex">\(0.54\)</span></td>
+<td><span class="arithmatex">\(0.23\)</span></td>
+<td><span class="arithmatex">\(0.43\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>为什么在 2PL 模型下原始分数相同，能力估计却不同？</p>
+<p><strong>从一阶导数出发：</strong></p>
+<p>在 2PL 模型中，对数似然的导数为：</p>
+<div class="arithmatex">\[
+L'(\theta) = \sum_{i=1}^I \alpha_i \bigl(u_i - P_i(\theta)\bigr)
+\]</div>
+<p>最优的能力估计 <span class="arithmatex">\(\hat{\theta}\)</span> 满足 <span class="arithmatex">\(L'(\hat{\theta}) = 0\)</span>，即</p>
+<div class="arithmatex">\[
+\sum_{i=1}^I \alpha_i u_i \;=\;\sum_{i=1}^I \alpha_i P_i(\hat{\theta})
+\]</div>
+<p>左边是“实际加权得分”，右边是“模型预测加权得分”。</p>
+<p><strong>数值示例：</strong></p>
+<p>假设 10 道题的区分度参数为</p>
+<p>α = [1.0, 1.0, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9]</p>
+<p>它们的总和 <span class="arithmatex">\(\sum α_i = 14.4\)</span>。我们先看模型在不同 <span class="arithmatex">\(\theta\)</span> 下的预测加权得分：</p>
+<table>
+<thead>
+<tr>
+<th>θ</th>
+<th>定义</th>
+<th>Σα·P_i(θ) ≈</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>−1.0</td>
+<td><span class="arithmatex">\(P_i(-1)=1/(1+e^{α_i})\)</span>（非常低）</td>
+<td>2.74</td>
+<td>预测得分偏低</td>
+</tr>
+<tr>
+<td>−0.5</td>
+<td><span class="arithmatex">\(P_i(-0.5)=1/(1+e^{0.5α_i})\)</span>（中等偏低）</td>
+<td>4.71</td>
+<td>预测得分中等</td>
+</tr>
+<tr>
+<td>0.0</td>
+<td><span class="arithmatex">\(P_i(0)=1/2\)</span>（相同基准）</td>
+<td>7.20</td>
+<td>预测得分最高</td>
+</tr>
+</tbody>
+</table>
+<p>再看两位学生的实际加权得分（均答对 3 题）：</p>
+<ul>
+<li><strong>学生 A</strong> 答对 <span class="arithmatex">\(\alpha=[1.0,1.0,1.2]\)</span>，实际加权总分</li>
+</ul>
+<div class="arithmatex">\[
+T_A = 1.0 + 1.0 + 1.2 = 3.2
+\]</div>
+<ul>
+<li><strong>学生 B</strong> 答对 <span class="arithmatex">\(\alpha=[1.7,1.8,1.9]\)</span>，实际加权总分</li>
+</ul>
+<div class="arithmatex">\[
+T_B = 1.7 + 1.8 + 1.9 = 5.4
+\]</div>
+<p>由于 MLE 要解的方程是</p>
+<div class="arithmatex">\[
+T = \sum \alpha_i P_i(\hat{\theta}),
+\]</div>
+<p>因此：</p>
+<ul>
+<li>对于 A，需要 <span class="arithmatex">\(\sum \alpha_i P_i(\theta) = 3.2\)</span>，这落在 [2.74, 4.71] 之间 ⇒ <span class="arithmatex">\(\hat{\theta}_A\in(-1.0,\,-0.5)\)</span></li>
+<li>对于 B，需要 <span class="arithmatex">\(\sum \alpha_i P_i(\theta) = 5.4\)</span>，这落在 [4.71, 7.20] 之间 ⇒ <span class="arithmatex">\(\hat{\theta}_B\in(-0.5,\,0.0)\)</span></li>
+</ul>
+<p><strong>结论：</strong> <span class="arithmatex">\(\hat{\theta}_B &gt; \hat{\theta}_A\)</span>，即便两人只答对了 3 题，但答对高区分度题的 B 得到了更高的能力估计。</p>
+<p><strong>要点回顾：</strong></p>
+<ul>
+<li><strong>左边</strong> <span class="arithmatex">\(\sum \alpha_i u_i\)</span> 是已知的“观察加权得分”</li>
+<li><strong>右边</strong> <span class="arithmatex">\(\sum \alpha_i P_i(\theta)\)</span> 是关于 <span class="arithmatex">\(\theta\)</span> 的单调递增函数</li>
+<li>实际加权分越高，模型必须提高 <span class="arithmatex">\(\theta\)</span> 才能平衡两边</li>
+<li>这正说明了<strong>答对高区分度题的价值更大</strong>，所以能力估计也会更高</li>
+</ul>
+<p>关于预测加权得分函数 <span class="arithmatex">\(f(\theta)\)</span> 的统一性，在 2PL 模型的最大似然方程中：</p>
+<ul>
+<li><strong>预测加权得分函数</strong></li>
+</ul>
+<div class="arithmatex">\[
+f(\theta) \;=\; \sum_{i=1}^I \alpha_i\,P_i(\theta)
+\]</div>
+<p>仅取决于该测试的 <strong>全部 <span class="arithmatex">\(I\)</span> 道题目的参数</strong> <span class="arithmatex">\(\{\alpha_i,\beta_i\}\)</span>，与具体哪位考生无关。</p>
+<ul>
+<li><strong>观察加权得分</strong></li>
+</ul>
+<div class="arithmatex">\[
+T_{\text{person}} \;=\; \sum_{i=1}^I \alpha_i\,u_i
+\]</div>
+<p>反映某位考生在同一套题上的实际作答模式 <span class="arithmatex">\(\{u_i\}\)</span>，因人而异。</p>
+<p>最大似然估计 <span class="arithmatex">\(\hat\theta\)</span> 由方程</p>
+<div class="arithmatex">\[
+f(\hat\theta) \;=\; T_{\text{person}}
+\]</div>
+<p>确定：</p>
+<ol>
+<li>同一套测试，所有考生共用相同的曲线 <span class="arithmatex">\(f(\theta)\)</span>。</li>
+<li>各人因 <span class="arithmatex">\(T\)</span> 不同，解出的 <span class="arithmatex">\(\hat\theta\)</span> 也不同。</li>
+</ol>
+<p><strong>索引 <span class="arithmatex">\(i\)</span> 的范围</strong></p>
+<ul>
+<li><span class="arithmatex">\(i=1,2,\dots,I\)</span> 表示测试中的第 <span class="arithmatex">\(1\)</span> 至第 <span class="arithmatex">\(I\)</span> 道题目。</li>
+<li>例如测试 B 中 <span class="arithmatex">\(I=10\)</span>，则 <span class="arithmatex">\(i\)</span> 从 1 到 10。</li>
+</ul>
+<p><strong>补充说明</strong></p>
+<ul>
+<li>测验 A 与测验 B 的 <span class="arithmatex">\(f_A(\theta)\)</span> 与 <span class="arithmatex">\(f_B(\theta)\)</span> 曲线不同，因为它们的 <span class="arithmatex">\(\alpha_i\)</span>（和/或 <span class="arithmatex">\(\beta_i\)</span>）不一样。</li>
+<li>但在同一个测验内部，这条曲线对所有考生都是一致的。</li>
+</ul>
+<p>原始分数的悖论</p>
+<p>在2PL模型中可能出现如下现象：原始分数更高的考生，估计能力反而更低。</p>
+<table>
+<thead>
+<tr>
+<th>考生</th>
+<th>反应模式</th>
+<th>原始分数</th>
+<th><span class="arithmatex">\(\hat{\theta}\)</span></th>
+<th><span class="arithmatex">\(SE\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>14</td>
+<td><span class="arithmatex">\(0000000111\)</span></td>
+<td>3</td>
+<td><span class="arithmatex">\(-0.34\)</span></td>
+<td><span class="arithmatex">\(0.44\)</span></td>
+</tr>
+<tr>
+<td>18</td>
+<td><span class="arithmatex">\(1111000000\)</span></td>
+<td>4</td>
+<td><span class="arithmatex">\(-0.51\)</span></td>
+<td><span class="arithmatex">\(0.46\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么会这样？</strong></p>
+<ul>
+<li>考生14答对的是 <span class="arithmatex">\(\alpha = 1.7, 1.8, 1.9\)</span>，加权得分 <span class="arithmatex">\(T = 5.4\)</span></li>
+<li>考生18答对的是 <span class="arithmatex">\(\alpha = 1.0, 1.0, 1.2, 1.3\)</span>，加权得分 <span class="arithmatex">\(T = 4.5\)</span></li>
+</ul>
+<p>虽然考生18答对题数更多，但因为这些题对能力区分力较弱，其总体能力估计反而更低。</p>
+<p><strong>总结：</strong></p>
+<ul>
+<li>2PL评分不会只看“你做对几道题”，而是看“你做对了哪些题”</li>
+<li>区分度越高，题目越能有效判断能力差异</li>
+<li>最大似然估计会根据这些信息调整 <span class="arithmatex">\(\hat{\theta}\)</span>，体现了 IRT 的优势</li>
+</ul>
+<h3 id="163">1.6.3 测验信息的作用<a class="headerlink" href="#163" title="Permanent link">&para;</a></h3>
+<p>测验信息函数告诉我们在不同能力水平上测量的精确度：</p>
+<p><img alt="示例测验A和B的测验信息曲线" src="../../assets/images/ch7_fig7.3.png" /></p>
+<p>信息函数的解读</p>
+<p><strong>测验A（等区分度）</strong></p>
+<ul>
+<li>所有题目区分度相同，信息函数呈较为宽平的钟形</li>
+<li>最大信息约为 3.5 左右</li>
+<li>信息在 <span class="arithmatex">\(\theta = 0\)</span> 附近略有集中，但两侧衰减平缓</li>
+<li>适合对不同能力水平均衡测量</li>
+</ul>
+<p><strong>测验B（变区分度）</strong></p>
+<ul>
+<li>题目区分度递增，信息函数峰更尖、更高</li>
+<li>最大信息约为 5.5 左右</li>
+<li>信息高度集中在 <span class="arithmatex">\(\theta = 0\)</span> 附近，极端区域信息稀少</li>
+<li>最适合对中等能力考生进行精细区分</li>
+</ul>
+<p><strong>实际含义</strong></p>
+<ul>
+<li>等区分度设计（测验A）：对广泛能力水平保持稳定精度</li>
+<li>变区分度设计（测验B）：在平均能力区段提供更高测量精度</li>
+<li>选择哪种取决于测试目标：要么均衡覆盖，要么聚焦中段</li>
+</ul>
+<p>标准误曲线是信息曲线的"镜像"：</p>
+<p><img alt="示例测验A和B的标准误曲线" src="../../assets/images/ch7_fig7.4.png" /></p>
+<p>标准误的解释</p>
+<p><strong>基本关系</strong>：</p>
+<div class="arithmatex">\[SE(\theta) = \frac{1}{\sqrt{I(\theta)}}\]</div>
+<p><strong>观察结果</strong>：</p>
+<ul>
+<li>信息高的地方，标准误低</li>
+<li>两个测验在极端能力水平的标准误都很大</li>
+<li>测验B在<span class="arithmatex">\(\theta = 0\)</span>附近的标准误略小</li>
+</ul>
+<p><strong>实际应用</strong>：</p>
+<ul>
+<li>如果主要关心区分平均能力附近的考生，选择测验B</li>
+<li>如果需要在更广范围内精确测量，选择测验A</li>
+</ul>
+<h3 id="164">1.6.4 区分度参数的系统影响<a class="headerlink" href="#164" title="Permanent link">&para;</a></h3>
+<p>为了更深入理解区分度的作用，让我们系统地改变测验A的区分度参数：</p>
+<p>区分度参数的系统效应</p>
+<p>保持测验A的难度参数不变，但改变所有题目的区分度：</p>
+<table>
+<thead>
+<tr>
+<th>考生</th>
+<th>反应模式</th>
+<th>原始分数</th>
+<th><span class="arithmatex">\(\alpha = 1.0\)</span></th>
+<th></th>
+<th><span class="arithmatex">\(\alpha = 2.0\)</span></th>
+<th></th>
+<th><span class="arithmatex">\(\alpha = 2.5\)</span></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td><span class="arithmatex">\(\hat{\theta}\)</span></td>
+<td><span class="arithmatex">\(SE\)</span></td>
+<td><span class="arithmatex">\(\hat{\theta}\)</span></td>
+<td><span class="arithmatex">\(SE\)</span></td>
+<td><span class="arithmatex">\(\hat{\theta}\)</span></td>
+<td><span class="arithmatex">\(SE\)</span></td>
+</tr>
+<tr>
+<td>19</td>
+<td><span class="arithmatex">\(1111100000\)</span></td>
+<td>5</td>
+<td><span class="arithmatex">\(0.00\)</span></td>
+<td><span class="arithmatex">\(0.73\)</span></td>
+<td><span class="arithmatex">\(0.00\)</span></td>
+<td><span class="arithmatex">\(0.45\)</span></td>
+<td><span class="arithmatex">\(0.00\)</span></td>
+<td><span class="arithmatex">\(0.39\)</span></td>
+</tr>
+<tr>
+<td>15</td>
+<td><span class="arithmatex">\(0000000000\)</span></td>
+<td>0</td>
+<td><span class="arithmatex">\(-2.73\)</span></td>
+<td><span class="arithmatex">\(1.11\)</span></td>
+<td><span class="arithmatex">\(-1.98\)</span></td>
+<td><span class="arithmatex">\(0.62\)</span></td>
+<td><span class="arithmatex">\(-1.88\)</span></td>
+<td><span class="arithmatex">\(0.52\)</span></td>
+</tr>
+<tr>
+<td>23</td>
+<td><span class="arithmatex">\(1111111110\)</span></td>
+<td>9</td>
+<td><span class="arithmatex">\(2.73\)</span></td>
+<td><span class="arithmatex">\(1.11\)</span></td>
+<td><span class="arithmatex">\(1.98\)</span></td>
+<td><span class="arithmatex">\(0.62\)</span></td>
+<td><span class="arithmatex">\(1.88\)</span></td>
+<td><span class="arithmatex">\(0.52\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>区分度影响的规律总结</p>
+<p>随着区分度增加：</p>
+<ol>
+<li>
+<p><strong>能力估计向中心收缩</strong></p>
+</li>
+<li>
+<p>当 <span class="arithmatex">\(\alpha = 1.0\)</span> 时：范围是 <span class="arithmatex">\([-2.73, 2.73]\)</span></p>
+</li>
+<li>当 <span class="arithmatex">\(\alpha = 2.5\)</span> 时：范围是 <span class="arithmatex">\([-1.88, 1.88]\)</span></li>
+<li>原因：高区分度使题目在中等能力区域更敏感</li>
+<li>
+<p><strong>标准误普遍减小</strong></p>
+</li>
+<li>
+<p>原始分 5 分：SE 从 0.73 降到 0.39</p>
+</li>
+<li>原始分 0 分：SE 从 1.11 降到 0.52</li>
+<li>原因：更多的测验信息</li>
+<li>
+<p><strong>似然函数变得更“尖锐”</strong></p>
+</li>
+<li>
+<p>图 7.5 展示了这种变化</p>
+</li>
+<li>更尖锐意味着对能力位置更确定</li>
+</ol>
+<p><img alt="项目区分度变化时对数似然函数的示例" src="../../assets/images/ch7_fig7.5.png" /></p>
+<p>区分度的深层含义</p>
+<p><strong>测量学视角</strong>：</p>
+<ul>
+<li>区分度反映了题目区分不同能力考生的能力</li>
+<li>高区分度题目是"好"题目</li>
+<li>但过高的区分度可能使测量范围变窄</li>
+</ul>
+<p><strong>统计学视角</strong>：</p>
+<ul>
+<li>区分度影响Fisher信息量</li>
+<li>信息量与区分度的平方成正比</li>
+<li>这解释了为什么高区分度降低标准误</li>
+</ul>
+<p><strong>实践视角</strong>：</p>
+<ul>
+<li>需要在测量精度和测量范围间权衡</li>
+<li>混合不同区分度的题目可能是最优策略</li>
+<li>这正是计算机自适应测验的设计理念</li>
+</ul>
+<h2 id="17-ml">1.7 ML评分的总结与展望<a class="headerlink" href="#17-ml" title="Permanent link">&para;</a></h2>
+<p>ML评分方法的核心要点</p>
+<p><strong>优势</strong>：</p>
+<ol>
+<li><strong>理论基础坚实</strong>：基于似然原理，有深厚的统计理论支撑</li>
+<li><strong>渐近最优</strong>：大样本下无偏、有效、正态</li>
+<li><strong>计算成熟</strong>：Newton-Raphson算法快速可靠</li>
+<li><strong>广泛接受</strong>：统计学界的"黄金标准"</li>
+</ol>
+<p><strong>局限</strong>：</p>
+<ol>
+<li><strong>极端反应问题</strong>：无法处理全对或全错</li>
+<li><strong>小样本偏差</strong>：需要足够多的题目</li>
+<li><strong>模型依赖</strong>：假设模型正确</li>
+<li><strong>单点估计</strong>：不反映估计的不确定性分布</li>
+</ol>
+<p><strong>应用建议</strong>：</p>
+<ul>
+<li>题目数≥30时优先考虑ML</li>
+<li>注意检查极端反应模式</li>
+<li>始终报告标准误</li>
+<li>考虑模型拟合检验</li>
+</ul>
+<p>在下一节中，我们将介绍如何通过贝叶斯方法（MAP和EAP）来克服ML的一些局限性。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.indexes", "navigation.sections", "navigation.top", "search.highlight", "search.suggest", "toc.follow"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
