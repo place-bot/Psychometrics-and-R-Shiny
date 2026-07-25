@@ -1,6 +1,6 @@
 # Psychometrics and R Shiny Notes
 
-本站整理心理测量、经典测量理论（CTT）、项目反应理论（IRT）、认知诊断模型（CDM）与 R Shiny 入门实践笔记。
+本站整理心理测量、经典测量理论（CTT）、项目反应理论（IRT）、计算机化自适应测验（CAT）、认知诊断模型（CDM）与 R Shiny 入门实践笔记。
 
 内容按主题拆分，适合课堂复习、概念查阅和后续继续校对。站点使用 **MkDocs + Material** 构建，支持数学公式、代码块、全文搜索和结构化导航。
 
@@ -11,6 +11,7 @@
 - [IRT 估计与评估](irt-estimation/index.md)
 - [CTT/IRT 应用规则](10_rules_ctt_irt/index.md)
 - [认知诊断模型（CDM）](cdm/index.md)
+- [计算机化自适应测验（CAT）](cat/index.md)
 - [R Shiny](shiny/index.md)
 - [质量与维护](quality/index.md)
 

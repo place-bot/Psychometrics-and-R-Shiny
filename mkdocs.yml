@@ -1,5 +1,5 @@
 site_name: Psychometrics and R Shiny Notes
-site_description: Psychometrics, CTT, IRT, CDM, and R Shiny learning notes.
+site_description: Psychometrics, CTT, IRT, CAT, CDM, and R Shiny learning notes.
 site_author: Jingyi Guo
 site_url: https://place-bot.github.io/Psychometrics-and-R-Shiny/
 repo_url: https://github.com/place-bot/Psychometrics-and-R-Shiny
@@ -163,6 +163,19 @@ nav:
       - 论文索引: cdm/paper-index.md
       - 单篇论文精读:
           - Allman et al. (2009): cdm/papers/allman-matias-rhodes-2009-latent-structure-identifiability.md
+  - CAT:
+      - 总览: cat/index.md
+      - BOBCAT:
+          - 阅读导引: cat/bobcat/index.md
+          - 基础准备: cat/bobcat/01-foundations.md
+          - 双层优化: cat/bobcat/02-bilevel.md
+          - Framework 与算法: cat/bobcat/03-framework.md
+          - 手算示例: cat/bobcat/04-worked-example.md
+          - 实验、结论与未来工作: cat/bobcat/05-experiments.md
+          - 符号与推导: cat/bobcat/06-symbols-and-derivations.md
+          - 官方代码精读: cat/bobcat/07-implementation.md
+          - 总结: cat/bobcat/08-summary.md
+          - 参考文献: cat/bobcat/references.md
   - R Shiny:
       - 总览: shiny/index.md
       - 学习路径: shiny/intro.md
