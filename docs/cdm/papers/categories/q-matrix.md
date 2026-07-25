@@ -1,6 +1,6 @@
 # Q 矩阵验证与学习：14 篇
 
-1. de la Torre (2008)：DINA 的经验 Q 矩阵验证。
+1. [de la Torre (2008)：DINA 的经验 Q 矩阵验证](../de-la-torre-2008/index.md)。已完成 21 个页面，覆盖 \(\delta\) 指标、顺序 EM 搜索、全部模拟与真实数据、代码实现和可运行复现。
 2. de la Torre & Chiu (2016)：一般经验 Q 矩阵验证。
 3. Liu, Xu & Ying (2012)：数据驱动 Q 矩阵学习。
 4. Liu, Xu & Ying (2013)：自学习 Q 矩阵理论。
@@ -17,3 +17,4 @@
 
 每篇都会区分 Q 验证、Q 估计、Q 识别和属性数量选择。完整元数据见[论文总索引](../../paper-index.md)。
 
+当前完成：**1/14**。下一篇为 de la Torre and Chiu (2016)。

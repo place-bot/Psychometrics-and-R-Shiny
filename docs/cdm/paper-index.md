@@ -83,7 +83,7 @@ BOBCAT 级别的多页面精读专题；反引号中的路径表示尚未建成�
 
 | 级别 | 文献 | 主专题 | 未来路径 |
 | --- | --- | --- | --- |
-| 精读 | de la Torre (2008). An empirically based method of Q-matrix validation for the DINA model. | Q 矩阵 | `cdm/papers/de-la-torre-2008-q-validation.md` |
+| 精读 | de la Torre (2008). An empirically based method of Q-matrix validation for the DINA model. | Q 矩阵 | [完整专题](papers/de-la-torre-2008/index.md) |
 | 精读 | de la Torre & Chiu (2016). A general method of empirical Q-matrix validation. | Q 矩阵 | `cdm/papers/de-la-torre-chiu-2016-general-q-validation.md` |
 | 精读 | Liu, Xu & Ying (2012). Data-driven learning of Q-matrix. | Q 矩阵 | `cdm/papers/liu-xu-ying-2012-data-driven-q.md` |
 | 精读 | Liu, Xu & Ying (2013). Theory of self-learning Q-matrix. | Q 矩阵 | `cdm/papers/liu-xu-ying-2013-self-learning-q.md` |

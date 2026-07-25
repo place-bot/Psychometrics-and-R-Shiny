@@ -129,4 +129,4 @@ Xu (2017) 没有解决这个动态问题；它提供的是让底层认知状态�
 5. **Lin & Xu (2024)**：多项反应 DINA。
 6. **Liu & Culpepper (2024)**：名义反应 RLCM。
 
-按照本站制作顺序，下一组进入 Q 矩阵验证、学习与识别论文，先读 de la Torre (2008) 的 DINA Q-matrix validation。
+按照本站制作顺序，下一组进入 Q 矩阵验证、学习与识别论文，先读 [de la Torre (2008) 的 DINA Q-matrix validation](../de-la-torre-2008/index.md)。

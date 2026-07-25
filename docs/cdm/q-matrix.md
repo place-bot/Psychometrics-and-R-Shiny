@@ -13,7 +13,7 @@ Q 矩阵（Q-matrix）定义项目和属性之间的依赖关系，是 CDM 里�
 
 | 阅读级别 | 论文 | 后续单篇笔记位置 | 读法 |
 | --- | --- | --- | --- |
-| 精读 | de la Torre (2008). An empirically based method of Q-matrix validation for the DINA model: Development and applications. | `cdm/papers/de-la-torre-2008-q-validation.md` | DINA 下经验 Q 矩阵验证的经典入口。 |
+| 精读 | de la Torre (2008). An empirically based method of Q-matrix validation for the DINA model: Development and applications. | [完整专题](papers/de-la-torre-2008/index.md) | DINA 下经验 Q 矩阵验证的经典入口。 |
 | 精读 | de la Torre & Chiu (2016). A general method of empirical Q-matrix validation. | `cdm/papers/de-la-torre-chiu-2016-general-q-validation.md` | 把 Q 矩阵验证推广到更一般的模型框架。 |
 | 精读 | Chen, Liu, Xu & Ying (2015). Statistical analysis of Q-matrix based diagnostic classification models. | `cdm/papers/chen-liu-xu-ying-2015-q-matrix-dcm.md` | 同时属于 Q 矩阵、可识别性和正则化估计。必须精读。 |
 

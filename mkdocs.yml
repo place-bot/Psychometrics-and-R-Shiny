@@ -238,6 +238,28 @@ nav:
                   - 参考文献: cdm/papers/de-la-torre-2011/references.md
           - Q 矩阵验证与学习:
               - 类别清单: cdm/papers/categories/q-matrix.md
+              - de la Torre (2008):
+                  - 阅读导引: cdm/papers/de-la-torre-2008/index.md
+                  - 问题、贡献与证据边界: cdm/papers/de-la-torre-2008/01-question-and-contribution.md
+                  - DINA、Q 矩阵与理想反应: cdm/papers/de-la-torre-2008/02-dina-q-foundation.md
+                  - 区分度指标与验证目标: cdm/papers/de-la-torre-2008/03-delta-index.md
+                  - 假想题与穷举搜索: cdm/papers/de-la-torre-2008/04-hypothetical-exhaustive.md
+                  - 顺序搜索算法: cdm/papers/de-la-torre-2008/05-sequential-search.md
+                  - EM 后验期望计数: cdm/papers/de-la-torre-2008/06-em-expected-counts.md
+                  - 完整验证流程: cdm/papers/de-la-torre-2008/07-complete-algorithm.md
+                  - 阈值与最终决策: cdm/papers/de-la-torre-2008/08-epsilon-and-decision.md
+                  - 模拟实验设计: cdm/papers/de-la-torre-2008/09-simulation-design.md
+                  - 模拟结果与解释: cdm/papers/de-la-torre-2008/10-simulation-results.md
+                  - 分数减法数据与设计: cdm/papers/de-la-torre-2008/11-fraction-data.md
+                  - 分数减法结果与反例: cdm/papers/de-la-torre-2008/12-fraction-results.md
+                  - NAEP 数据与设计: cdm/papers/de-la-torre-2008/13-naep-data.md
+                  - NAEP 结果与题目案例: cdm/papers/de-la-torre-2008/14-naep-results.md
+                  - 代码库实现精读: cdm/papers/de-la-torre-2008/15-code-implementation.md
+                  - 可计算复现: cdm/papers/de-la-torre-2008/16-computational-reproduction.md
+                  - 局限、结论与未来工作: cdm/papers/de-la-torre-2008/17-limitations-future.md
+                  - 符号表: cdm/papers/de-la-torre-2008/18-symbols.md
+                  - 总结与后续阅读: cdm/papers/de-la-torre-2008/19-summary.md
+                  - 参考文献: cdm/papers/de-la-torre-2008/references.md
           - 可识别性理论:
               - 类别清单: cdm/papers/categories/identifiability.md
               - Xu (2017):
