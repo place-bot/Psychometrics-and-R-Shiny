@@ -260,6 +260,30 @@ nav:
                   - 符号表: cdm/papers/de-la-torre-2008/18-symbols.md
                   - 总结与后续阅读: cdm/papers/de-la-torre-2008/19-summary.md
                   - 参考文献: cdm/papers/de-la-torre-2008/references.md
+              - de la Torre & Chiu (2016):
+                  - 阅读导引: cdm/papers/de-la-torre-chiu-2016/index.md
+                  - 研究问题、贡献与边界: cdm/papers/de-la-torre-chiu-2016/01-question-and-contribution.md
+                  - G-DINA 基础与约化属性模式: cdm/papers/de-la-torre-chiu-2016/02-gdina-foundation.md
+                  - 五种成功概率剖面: cdm/papers/de-la-torre-chiu-2016/03-response-profiles.md
+                  - 后验权重、折叠分组与条件均值: cdm/papers/de-la-torre-chiu-2016/04-weights-and-collapsing.md
+                  - GDI 的定义与统计解释: cdm/papers/de-la-torre-chiu-2016/05-gdi-definition.md
+                  - Table 1 手算与排版错误: cdm/papers/de-la-torre-chiu-2016/06-table1-worked-example.md
+                  - appropriate 与 correct q-vector: cdm/papers/de-la-torre-chiu-2016/07-appropriate-correct-q.md
+                  - 两个引理、主定理与证明: cdm/papers/de-la-torre-chiu-2016/08-lemmas-and-theorem.md
+                  - PVAF 穷举搜索与阈值: cdm/papers/de-la-torre-chiu-2016/09-pvaf-search.md
+                  - 完整估计与验证算法: cdm/papers/de-la-torre-chiu-2016/10-complete-algorithm.md
+                  - 模拟实验的共同设计: cdm/papers/de-la-torre-chiu-2016/11-simulation-design.md
+                  - Study 1 五种约化模型: cdm/papers/de-la-torre-chiu-2016/12-study1-results.md
+                  - Study 2 无约束 G-DINA: cdm/papers/de-la-torre-chiu-2016/13-study2-results.md
+                  - 分数减法真实数据: cdm/papers/de-la-torre-chiu-2016/14-fraction-data.md
+                  - 真实数据结果与逐题解释: cdm/papers/de-la-torre-chiu-2016/15-fraction-results.md
+                  - Ox 与 GDINA 代码精读: cdm/papers/de-la-torre-chiu-2016/16-code-implementation.md
+                  - 可计算复现: cdm/papers/de-la-torre-chiu-2016/17-computational-reproduction.md
+                  - 一致性评论与回应: cdm/papers/de-la-torre-chiu-2016/18-consistency-debate.md
+                  - 局限、结论与未来工作: cdm/papers/de-la-torre-chiu-2016/19-limitations-future.md
+                  - 符号表: cdm/papers/de-la-torre-chiu-2016/20-symbols.md
+                  - 总结与后续阅读: cdm/papers/de-la-torre-chiu-2016/21-summary.md
+                  - 参考文献: cdm/papers/de-la-torre-chiu-2016/references.md
           - 可识别性理论:
               - 类别清单: cdm/papers/categories/identifiability.md
               - Xu (2017):

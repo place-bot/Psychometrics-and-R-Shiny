@@ -100,7 +100,7 @@
 
 下一篇建议读：
 
-[de la Torre & Chiu (2016)：一般经验 Q 矩阵验证](../categories/q-matrix.md)
+[de la Torre & Chiu (2016)：一般经验 Q 矩阵验证](../de-la-torre-chiu-2016/index.md)
 
 重点比较：
 

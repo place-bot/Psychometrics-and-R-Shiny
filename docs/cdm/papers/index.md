@@ -33,11 +33,11 @@ CDM
 | [数学工具](categories/mathematical-tools.md) | 3 | 1 | Kruskal (1977) 已完成首版 |
 | [HMM、网络与机器学习](categories/hmm-network-ml.md) | 15 | 0 | 待逐篇制作 |
 | [CDM 核心模型](categories/core-models.md) | 10 | 2 | de la Torre (2009, 2011) 已完成首版 |
-| [Q 矩阵验证与学习](categories/q-matrix.md) | 14 | 1 | de la Torre (2008) 已完成首版 |
+| [Q 矩阵验证与学习](categories/q-matrix.md) | 14 | 2 | de la Torre (2008)、de la Torre & Chiu (2016) 已完成首版 |
 | [可识别性理论](categories/identifiability.md) | 9 | 1 | Xu (2017) 已完成首版 |
 | [估计、正则化与计算](categories/estimation-computation.md) | 5 | 0 | 待逐篇制作 |
 | [连续化与扩展模型](categories/continuous-extensions.md) | 8 | 0 | 待逐篇制作 |
-| **合计** | **86** | **6** | 持续更新 |
+| **合计** | **86** | **7** | 持续更新 |
 
 ## 制作顺序
 
@@ -49,11 +49,12 @@ CDM
 4. de la Torre (2011)：G-DINA 框架；
 5. Xu (2017)：二分 RLCM 可识别性（已完成）；
 6. de la Torre (2008)：DINA 的经验 Q 矩阵验证（已完成）；
-7. de la Torre and Chiu (2016)：一般经验 Q 矩阵验证（下一篇）；
-8. 高维估计、正则化和结构学习；
-9. partial mastery、continuous-Q 和 general-response 扩展；
-10. HMM、随机图与机器学习背景；
-11. 其余混合模型和识别理论来源。
+7. de la Torre and Chiu (2016)：一般经验 Q 矩阵验证（已完成）；
+8. Liu, Xu and Ying (2012)：数据驱动 Q 矩阵学习（下一篇）；
+9. 高维估计、正则化和结构学习；
+10. partial mastery、continuous-Q 和 general-response 扩展；
+11. HMM、随机图与机器学习背景；
+12. 其余混合模型和识别理论来源。
 
 同一类别中的详细清单保留原索引顺序。完整书目信息见[论文总索引](../paper-index.md)。
 
