@@ -122,6 +122,8 @@ I=2000,\ J=30,\ K=5
 
 > de la Torre, J. (2011). The Generalized DINA Model Framework.
 
+[进入 de la Torre (2011) 完整专题](../de-la-torre-2011/index.md)。
+
 重点将从两状态 DINA 反应函数扩展到：
 
 - 属性主效应；

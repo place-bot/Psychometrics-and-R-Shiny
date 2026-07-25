@@ -214,6 +214,28 @@ nav:
                   - 符号表: cdm/papers/de-la-torre-2009/13-symbols.md
                   - 总结与后续阅读: cdm/papers/de-la-torre-2009/14-summary.md
                   - 参考文献: cdm/papers/de-la-torre-2009/references.md
+              - de la Torre (2011):
+                  - 阅读导引: cdm/papers/de-la-torre-2011/index.md
+                  - 问题与框架全貌: cdm/papers/de-la-torre-2011/01-question-and-framework.md
+                  - 约化属性模式与偏序: cdm/papers/de-la-torre-2011/02-reduced-patterns.md
+                  - 三个 link function: cdm/papers/de-la-torre-2011/03-link-functions.md
+                  - identity-link G-DINA: cdm/papers/de-la-torre-2011/04-identity-gdina.md
+                  - DINA、DINO 与 A-CDM: cdm/papers/de-la-torre-2011/05-special-cases.md
+                  - LLM、G-NIDA 与 R-RUM: cdm/papers/de-la-torre-2011/06-logit-log-families.md
+                  - MMLE 与 EM: cdm/papers/de-la-torre-2011/07-mmle.md
+                  - design matrix: cdm/papers/de-la-torre-2011/08-design-matrix.md
+                  - 约化模型与权重矩阵: cdm/papers/de-la-torre-2011/09-reduced-model-estimation.md
+                  - MLE、不变性与标准误: cdm/papers/de-la-torre-2011/10-standard-errors.md
+                  - 逐题 Wald 检验: cdm/papers/de-la-torre-2011/11-wald-test.md
+                  - 模拟实验: cdm/papers/de-la-torre-2011/12-simulation.md
+                  - 分数减法数据: cdm/papers/de-la-torre-2011/13-fraction-subtraction.md
+                  - 临床数据与勘误: cdm/papers/de-la-torre-2011/14-clinical-data-and-erratum.md
+                  - 代码实现精读: cdm/papers/de-la-torre-2011/15-code-implementation.md
+                  - 两属性项目数值拆解: cdm/papers/de-la-torre-2011/16-numerical-walkthrough.md
+                  - 局限与未来工作: cdm/papers/de-la-torre-2011/17-limitations-and-future.md
+                  - 符号表: cdm/papers/de-la-torre-2011/18-symbols.md
+                  - 总结与后续阅读: cdm/papers/de-la-torre-2011/19-summary.md
+                  - 参考文献: cdm/papers/de-la-torre-2011/references.md
           - Q 矩阵验证与学习:
               - 类别清单: cdm/papers/categories/q-matrix.md
           - 可识别性理论:

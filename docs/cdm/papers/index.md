@@ -32,12 +32,12 @@ CDM
 | [潜在结构与混合模型](categories/latent-structure-mixtures.md) | 18 | 1 | Allman et al. (2009) 已完成首版 |
 | [数学工具](categories/mathematical-tools.md) | 3 | 1 | Kruskal (1977) 已完成首版 |
 | [HMM、网络与机器学习](categories/hmm-network-ml.md) | 15 | 0 | 待逐篇制作 |
-| [CDM 核心模型](categories/core-models.md) | 10 | 1 | de la Torre (2009) 已完成首版 |
+| [CDM 核心模型](categories/core-models.md) | 10 | 2 | de la Torre (2009, 2011) 已完成首版 |
 | [Q 矩阵验证与学习](categories/q-matrix.md) | 14 | 0 | 待逐篇制作 |
 | [可识别性理论](categories/identifiability.md) | 9 | 0 | 待逐篇制作 |
 | [估计、正则化与计算](categories/estimation-computation.md) | 5 | 0 | 待逐篇制作 |
 | [连续化与扩展模型](categories/continuous-extensions.md) | 8 | 0 | 待逐篇制作 |
-| **合计** | **86** | **3** | 持续更新 |
+| **合计** | **86** | **4** | 持续更新 |
 
 ## 制作顺序
 

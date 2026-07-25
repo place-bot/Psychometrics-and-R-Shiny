@@ -21,7 +21,7 @@
 
 | 阅读级别 | 论文 | 后续单篇笔记位置 | 读法 |
 | --- | --- | --- | --- |
-| 精读 | de la Torre (2011). The generalized DINA model framework. | `cdm/papers/de-la-torre-2011-gdina.md` | G-DINA 是后续很多模型比较的中心。重点读 saturated item response function 和子模型约束。 |
+| 精读 | de la Torre (2011). The generalized DINA model framework. | [完整专题](papers/de-la-torre-2011/index.md) | 已覆盖 saturated item response function、三种 link、约束子模型、MMLE、Wald、实验与代码实现。 |
 | 主读 | Henson, Templin & Willse (2009). Defining a Family of Cognitive Diagnosis Models Using Log-Linear Models with Latent Variables. | `cdm/papers/henson-templin-willse-2009-lcdm.md` | LCDM 用 log-linear 语言统一一组 CDM，和 G-DINA、GDM 对照。 |
 | 主读 | von Davier (2005/2008). A general diagnostic model applied to language testing data. | `cdm/papers/von-davier-2008-general-diagnostic-model.md` | 一般诊断模型（general diagnostic model, GDM）路线。重点看离散潜变量与项目参数化方式。 |
 | 主读 | Roussos, DiBello, Stout, Hartz, Henson & Templin (2007). The Fusion Model Skills Diagnosis System. | `cdm/papers/roussos-dibello-stout-hartz-henson-templin-2007-fusion.md` | Fusion Model 的系统化诊断框架，适合理解技能诊断系统设计。 |
