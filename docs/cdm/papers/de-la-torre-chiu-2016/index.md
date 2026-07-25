@@ -70,7 +70,7 @@ p_j(\boldsymbol\alpha_{\boldsymbol q})-\bar p_j
 17. [本站可计算复现](17-computational-reproduction.md)
 18. [一致性评论、回应与方法定位](18-consistency-debate.md)
 19. [局限、结论与未来工作](19-limitations-future.md)
-20. [符号表](20-symbols.md)
+20. [符号表](20-symbol-table.md)
 21. [总结与后续阅读](21-summary.md)
 22. [参考文献与来源边界](references.md)
 
