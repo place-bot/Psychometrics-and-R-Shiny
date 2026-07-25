@@ -93,13 +93,13 @@ J\ge2K+1
 
 的底层混合模型充分上界。它提供理论直觉，不替代 Q 矩阵完整性、属性重复测量和模型专门的识别条件。
 
-## 下一篇为什么读 Kruskal (1977)
+## Kruskal (1977) 专题已经补齐
 
-Allman 等人的证明把 Kruskal 定理当作核心工具。下一篇数学工具主线会精读：
+Allman 等人的证明把 Kruskal 定理当作核心工具。对应的数学工具专题已经完成：
 
 > Kruskal, J. B. (1977). Three-way arrays: Rank and uniqueness of trilinear decompositions, with application to arithmetic complexity and statistics.
 
-需要进一步回答：
+[进入 Kruskal (1977) 完整专题](../kruskal-1977/index.md)，可继续查看：
 
 - Kruskal rank 与普通 rank 的本质差别；
 - \(I_1+I_2+I_3\ge2r+2\) 从哪里来；
@@ -110,7 +110,7 @@ Allman 等人的证明把 Kruskal 定理当作核心工具。下一篇数学工�
 
 ## CDM 主线的后续顺序
 
-完成 Kruskal 工具后，再依次进入：
+完成 Kruskal 工具后，CDM 主线依次进入：
 
 1. de la Torre (2009)：DINA 模型与参数估计；
 2. de la Torre (2011)：G-DINA 框架；
@@ -119,4 +119,3 @@ Allman 等人的证明把 Kruskal 定理当作核心工具。下一篇数学工�
 5. Gu and Xu (2021)：Q 矩阵的必要充分识别条件。
 
 这样读可以把“模型是什么”“为什么能识别”“怎样估计”三条线连起来。
-

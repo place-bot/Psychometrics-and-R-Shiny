@@ -40,7 +40,7 @@ BOBCAT 级别的多页面精读专题；反引号中的路径表示尚未建成�
 
 | 级别 | 文献 | 主专题 | 未来路径 |
 | --- | --- | --- | --- |
-| 精读 | Kruskal (1977). Three-way arrays: Rank and uniqueness of trilinear decompositions. | 数学工具；可识别性 | `cdm/papers/kruskal-1977-three-way-arrays.md` |
+| 精读 | Kruskal (1977). Three-way arrays: Rank and uniqueness of trilinear decompositions. | 数学工具；可识别性 | [完整专题](papers/kruskal-1977/index.md) |
 | 背景 | Kruskal (1976). More factors than subjects, tests and treatments. | 数学工具 | `cdm/papers/kruskal-1976-indeterminacy.md` |
 | 主读 | Lauritzen (1996). Graphical Models. | 数学工具 | `cdm/papers/lauritzen-1996-graphical-models.md` |
 

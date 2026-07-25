@@ -6,7 +6,7 @@
 
 | 阅读级别 | 文献 | 后续单篇笔记位置 | 读法 |
 | --- | --- | --- | --- |
-| 精读 | Kruskal (1977). Three-way arrays: Rank and uniqueness of trilinear decompositions, with application to arithmetic complexity and statistics. | `cdm/papers/kruskal-1977-three-way-arrays.md` | Allman, Matias & Rhodes (2009) 的底层唯一性工具。重点读 Kruskal rank 和三路张量分解唯一性。 |
+| 精读 | Kruskal (1977). Three-way arrays: Rank and uniqueness of trilinear decompositions, with application to arithmetic complexity and statistics. | [完整专题](papers/kruskal-1977/index.md) | Allman, Matias & Rhodes (2009) 的底层唯一性工具。已覆盖 Kruskal rank、Theorem 4a、证明、反例与 CDM 接口。 |
 | 背景 | Kruskal (1976). More factors than subjects, tests and treatments. | `cdm/papers/kruskal-1976-indeterminacy.md` | 可选。帮助理解分解不唯一和不可识别现象。 |
 | 主读 | Lauritzen (1996). Graphical Models. | `cdm/papers/lauritzen-1996-graphical-models.md` | 图模型（graphical models）、条件独立（conditional independence）和潜变量结构的通用语言。 |
 

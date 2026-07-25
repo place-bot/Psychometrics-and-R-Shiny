@@ -180,6 +180,21 @@ nav:
                   - 参考文献: cdm/papers/allman-2009/references.md
           - 数学工具:
               - 类别清单: cdm/papers/categories/mathematical-tools.md
+              - Kruskal (1977):
+                  - 阅读导引: cdm/papers/kruskal-1977/index.md
+                  - 问题与历史位置: cdm/papers/kruskal-1977/01-question-and-history.md
+                  - 三路数组、triad 与秩: cdm/papers/kruskal-1977/02-array-rank-and-slabs.md
+                  - 三重积与固有歧义: cdm/papers/kruskal-1977/03-triple-product.md
+                  - Kruskal rank: cdm/papers/kruskal-1977/04-kruskal-rank.md
+                  - 核心唯一性定理: cdm/papers/kruskal-1977/05-uniqueness-theorem.md
+                  - 证明思路: cdm/papers/kruskal-1977/06-proof-roadmap.md
+                  - 理论结果与应用: cdm/papers/kruskal-1977/07-results-and-applications.md
+                  - 完整手算例子: cdm/papers/kruskal-1977/08-worked-examples.md
+                  - 可计算检查: cdm/papers/kruskal-1977/09-computational-check.md
+                  - 与 CDM 的接口: cdm/papers/kruskal-1977/10-cdm-connection.md
+                  - 符号表: cdm/papers/kruskal-1977/11-symbols.md
+                  - 总结与后续问题: cdm/papers/kruskal-1977/12-summary.md
+                  - 参考文献: cdm/papers/kruskal-1977/references.md
           - CDM 核心模型:
               - 类别清单: cdm/papers/categories/core-models.md
           - Q 矩阵验证与学习:
