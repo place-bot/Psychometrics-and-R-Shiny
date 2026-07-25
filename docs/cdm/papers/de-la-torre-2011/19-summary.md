@@ -115,4 +115,4 @@ G-DINA framework 提供了一种层次清晰的建模方式：
 4. **von Davier (2005/2008)**：GDM 与更一般诊断模型。
 5. **de la Torre & Chiu (2016)**：G-DINA 的 Q 矩阵验证。
 
-模型主线的直接后续是 Ma & de la Torre (2020) 的 `GDINA` R package 论文，它将转向用户接口、软件对象、模型拟合与可复现工作流。按照本站跨类别制作顺序，下一篇先进入 Xu (2017) 的二分 restricted latent class model 可识别性。
+模型主线的直接后续是 Ma & de la Torre (2020) 的 `GDINA` R package 论文，它将转向用户接口、软件对象、模型拟合与可复现工作流。按照本站跨类别制作顺序，下一篇进入 [Xu (2017) 的二分 restricted latent class model 可识别性](../xu-2017/index.md)。

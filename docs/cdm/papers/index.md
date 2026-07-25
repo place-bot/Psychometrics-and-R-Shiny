@@ -34,10 +34,10 @@ CDM
 | [HMM、网络与机器学习](categories/hmm-network-ml.md) | 15 | 0 | 待逐篇制作 |
 | [CDM 核心模型](categories/core-models.md) | 10 | 2 | de la Torre (2009, 2011) 已完成首版 |
 | [Q 矩阵验证与学习](categories/q-matrix.md) | 14 | 0 | 待逐篇制作 |
-| [可识别性理论](categories/identifiability.md) | 9 | 0 | 待逐篇制作 |
+| [可识别性理论](categories/identifiability.md) | 9 | 1 | Xu (2017) 已完成首版 |
 | [估计、正则化与计算](categories/estimation-computation.md) | 5 | 0 | 待逐篇制作 |
 | [连续化与扩展模型](categories/continuous-extensions.md) | 8 | 0 | 待逐篇制作 |
-| **合计** | **86** | **4** | 持续更新 |
+| **合计** | **86** | **5** | 持续更新 |
 
 ## 制作顺序
 
@@ -47,8 +47,8 @@ CDM
 2. Kruskal (1977)：三路分解唯一性的数学核心；
 3. de la Torre (2009)：DINA 模型与估计；
 4. de la Torre (2011)：G-DINA 框架；
-5. Xu (2017)：二分 RLCM 可识别性；
-6. Q 矩阵验证、学习与识别论文；
+5. Xu (2017)：二分 RLCM 可识别性（已完成）；
+6. Q 矩阵验证、学习与识别论文（下一篇从 de la Torre, 2008 开始）；
 7. 高维估计、正则化和结构学习；
 8. partial mastery、continuous-Q 和 general-response 扩展；
 9. HMM、随机图与机器学习背景；

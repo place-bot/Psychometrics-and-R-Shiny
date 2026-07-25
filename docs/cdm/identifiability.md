@@ -20,7 +20,7 @@
 
 | 阅读级别 | 论文 | 后续单篇笔记位置 | 读法 |
 | --- | --- | --- | --- |
-| 精读 | Xu (2017). Identifiability of restricted latent class models with binary responses. | `cdm/papers/xu-2017-rlcm-binary-identifiability.md` | CDM 作为 RLCM 的核心识别理论。 |
+| 精读 | Xu (2017). Identifiability of restricted latent class models with binary responses. | [完整专题](papers/xu-2017/index.md) | CDM 作为 RLCM 的核心识别理论。 |
 | 精读 | Xu & Shang (2018). Identifying latent structures in restricted latent class models. | `cdm/papers/xu-shang-2018-latent-structures-rlcm.md` | 从给定 restriction 到学习 latent structure 的桥梁。 |
 | 精读 | Fang, Liu & Ying (2019). On the identifiability of diagnostic classification models. | `cdm/papers/fang-liu-ying-2019-dcm-identifiability.md` | 更一般 DCM 可识别性口径。 |
 | 精读 | Culpepper (2023). A note on weaker conditions for identifying restricted latent class models for binary responses. | `cdm/papers/culpepper-2023-weaker-rlcm-identification.md` | 弱化条件，重点读 dyad-completeness 和 Kruskal 的使用。 |

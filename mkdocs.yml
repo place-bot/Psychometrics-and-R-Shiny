@@ -240,6 +240,29 @@ nav:
               - 类别清单: cdm/papers/categories/q-matrix.md
           - 可识别性理论:
               - 类别清单: cdm/papers/categories/identifiability.md
+              - Xu (2017):
+                  - 阅读导引: cdm/papers/xu-2017/index.md
+                  - 问题、贡献与证据边界: cdm/papers/xu-2017/01-question-and-scope.md
+                  - RLCM 模型与局部独立: cdm/papers/xu-2017/02-model-setup.md
+                  - Q 矩阵限制与单调性: cdm/papers/xu-2017/03-q-restrictions.md
+                  - 六类诊断模型: cdm/papers/xu-2017/04-model-examples.md
+                  - 严格可识别性的定义: cdm/papers/xu-2017/05-identifiability.md
+                  - 边际 T 矩阵: cdm/papers/xu-2017/06-t-matrix.md
+                  - 完整 Q 矩阵: cdm/papers/xu-2017/07-completeness.md
+                  - C1、C2 与三套单位阵: cdm/papers/xu-2017/08-conditions-c1-c2.md
+                  - 主定理与设计含义: cdm/papers/xu-2017/09-main-theorem.md
+                  - 命题 3 可逆平移: cdm/papers/xu-2017/10-transform.md
+                  - 证明步骤 1--2: cdm/papers/xu-2017/11-proof-steps-one-two.md
+                  - 证明步骤 3--5: cdm/papers/xu-2017/12-proof-steps-three-five.md
+                  - 两个技术引理: cdm/papers/xu-2017/13-lemmas.md
+                  - C1 单独不够的反例: cdm/papers/xu-2017/14-counterexample.md
+                  - 从可识别性到一致性: cdm/papers/xu-2017/15-consistency.md
+                  - 原文证据与 Experiment: cdm/papers/xu-2017/16-experiment-and-evidence.md
+                  - 代码实现与可计算核验: cdm/papers/xu-2017/17-computational-check.md
+                  - 局限与未来工作: cdm/papers/xu-2017/18-limitations-and-future.md
+                  - 符号表: cdm/papers/xu-2017/19-symbols.md
+                  - 总结与后续阅读: cdm/papers/xu-2017/20-summary.md
+                  - 参考文献: cdm/papers/xu-2017/references.md
           - 估计、正则化与计算:
               - 类别清单: cdm/papers/categories/estimation-computation.md
           - 连续化与扩展模型:

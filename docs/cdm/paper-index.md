@@ -102,7 +102,7 @@ BOBCAT 级别的多页面精读专题；反引号中的路径表示尚未建成�
 
 | 级别 | 文献 | 主专题 | 未来路径 |
 | --- | --- | --- | --- |
-| 精读 | Xu (2017). Identifiability of restricted latent class models with binary responses. | 可识别性 | `cdm/papers/xu-2017-rlcm-binary-identifiability.md` |
+| 精读 | Xu (2017). Identifiability of restricted latent class models with binary responses. | 可识别性 | [完整专题](papers/xu-2017/index.md) |
 | 精读 | Gu & Xu. Sufficient and necessary conditions for the identifiability and estimability of the DINA model. | 可识别性 | `cdm/papers/gu-xu-dina-identifiability-estimability.md` |
 | 精读 | Gu (2022/2023). Generic identifiability of the DINA model and blessing of latent dependence. | 可识别性 | `cdm/papers/gu-2023-generic-identifiability-dina.md` |
 | 精读 | Fang, Liu & Ying (2019). On the identifiability of diagnostic classification models. | 可识别性 | `cdm/papers/fang-liu-ying-2019-dcm-identifiability.md` |
