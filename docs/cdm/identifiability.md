@@ -14,7 +14,7 @@
 | 阅读级别 | 论文 | 后续单篇笔记位置 | 读法 |
 | --- | --- | --- | --- |
 | 精读 | Kruskal (1977). Three-way arrays: Rank and uniqueness of trilinear decompositions. | `cdm/papers/kruskal-1977-three-way-arrays.md` | 证明工具，不必读应用外细节，但要掌握唯一性定理的使用方式。 |
-| 精读 | Allman, Matias & Rhodes (2009). Identifiability of parameters in latent structure models with many observed variables. | `cdm/papers/allman-matias-rhodes-2009-latent-structure-identifiability.md` | 从观测分布识别 latent class response profiles 的关键理论来源。 |
+| 精读 | Allman, Matias & Rhodes (2009). Identifiability of parameters in latent structure models with many observed variables. | [完整专题](papers/allman-2009/index.md) | 从观测分布识别 latent class response profiles 的关键理论来源。 |
 
 ## RLCM 与 CDM 参数识别
 

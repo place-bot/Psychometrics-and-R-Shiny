@@ -160,9 +160,38 @@ nav:
           - 可识别性理论: cdm/identifiability.md
           - 估计、正则化与计算: cdm/estimation-computation.md
           - 连续化与扩展模型: cdm/continuous-extensions.md
-      - 论文索引: cdm/paper-index.md
+      - 论文总索引: cdm/paper-index.md
       - 单篇论文精读:
-          - Allman et al. (2009): cdm/papers/allman-matias-rhodes-2009-latent-structure-identifiability.md
+          - 制作总进度: cdm/papers/index.md
+          - 潜在结构与混合模型:
+              - 类别清单: cdm/papers/categories/latent-structure-mixtures.md
+              - Allman et al. (2009):
+                  - 阅读导引: cdm/papers/allman-2009/index.md
+                  - 问题与理论背景: cdm/papers/allman-2009/01-question-and-background.md
+                  - 潜在类模型与张量: cdm/papers/allman-2009/02-model-and-tensor.md
+                  - Kruskal 与三变量结果: cdm/papers/allman-2009/03-kruskal-and-three-variables.md
+                  - 分块与 Bernoulli 混合: cdm/papers/allman-2009/04-grouping-and-bernoulli.md
+                  - 全文结果与证据: cdm/papers/allman-2009/05-results-and-evidence.md
+                  - 证明与手算示例: cdm/papers/allman-2009/06-proofs-and-worked-example.md
+                  - CDM 可识别性接口: cdm/papers/allman-2009/07-cdm-connection.md
+                  - 可计算复现: cdm/papers/allman-2009/08-computational-check.md
+                  - 符号表: cdm/papers/allman-2009/09-symbols.md
+                  - 总结与后续阅读: cdm/papers/allman-2009/10-summary.md
+                  - 参考文献: cdm/papers/allman-2009/references.md
+          - 数学工具:
+              - 类别清单: cdm/papers/categories/mathematical-tools.md
+          - CDM 核心模型:
+              - 类别清单: cdm/papers/categories/core-models.md
+          - Q 矩阵验证与学习:
+              - 类别清单: cdm/papers/categories/q-matrix.md
+          - 可识别性理论:
+              - 类别清单: cdm/papers/categories/identifiability.md
+          - 估计、正则化与计算:
+              - 类别清单: cdm/papers/categories/estimation-computation.md
+          - 连续化与扩展模型:
+              - 类别清单: cdm/papers/categories/continuous-extensions.md
+          - HMM、网络与机器学习:
+              - 类别清单: cdm/papers/categories/hmm-network-ml.md
   - CAT:
       - 总览: cat/index.md
       - BOBCAT:

@@ -1,21 +1,23 @@
 # CDM 论文索引
 
-这个索引把当前纳入 CDM 阅读计划的论文统一列出来。专题页里可能重复出现同一篇论文；这里按主用途归档，后续每篇单独成页时从“未来路径”列开始补。
+这个索引收录当前 CDM 阅读计划中的 86 篇论文，并按主用途归入八类。每篇都会制作成
+BOBCAT 级别的多页面精读专题；反引号中的路径表示尚未建成，链接表示已经可以阅读。整体完成
+情况见[单篇论文精读总进度](papers/index.md)。
 
 ## 阅读级别
 
 | 标记 | 含义 |
 | --- | --- |
-| 精读 | 需要逐定理、逐模型、逐算法读，后续适合写完整单篇笔记。 |
-| 主读 | 需要认真读方法和论证，但不一定逐页证明。 |
-| 背景 | 为主线提供术语、例子或比较对象。 |
-| 暂缓 | 先保留在索引里，当前不进入主读路线。 |
+| 精读 | 优先制作，逐定理、逐模型、逐算法展开。 |
+| 主读 | 在精读条目之后制作，页面深度与精读条目相同。 |
+| 背景 | 制作顺序较后，但仍建立完整多页面专题。 |
+| 暂缓 | 元数据或原文尚待确认；确认后仍按完整专题制作。 |
 
 ## 理论背景：潜在结构与混合模型
 
 | 级别 | 文献 | 主专题 | 未来路径 |
 | --- | --- | --- | --- |
-| 精读 | Allman, Matias & Rhodes (2009). Identifiability of parameters in latent structure models with many observed variables. | 理论背景；可识别性 | [单篇笔记](papers/allman-matias-rhodes-2009-latent-structure-identifiability.md) |
+| 精读 | Allman, Matias & Rhodes (2009). Identifiability of parameters in latent structure models with many observed variables. | 理论背景；可识别性 | [完整专题](papers/allman-2009/index.md) |
 | 背景 | Allman & Rhodes (2006/2009). Tree topology and covarion identifiability papers. | 理论背景 | `cdm/papers/allman-rhodes-phylogenetic-identifiability.md` |
 | 精读 | Teicher (1967). Identifiability of mixtures of product measures. | 理论背景 | `cdm/papers/teicher-1967-product-mixtures.md` |
 | 精读 | Yakowitz & Spragins (1968). On the identifiability of finite mixtures. | 理论背景 | `cdm/papers/yakowitz-spragins-1968-finite-mixtures.md` |
