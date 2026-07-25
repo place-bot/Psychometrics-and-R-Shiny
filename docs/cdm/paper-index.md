@@ -69,7 +69,7 @@ BOBCAT 级别的多页面精读专题；反引号中的路径表示尚未建成�
 | 级别 | 文献 | 主专题 | 未来路径 |
 | --- | --- | --- | --- |
 | 精读 | Junker & Sijtsma (2001). Cognitive assessment models with few assumptions, and connections with nonparametric item response theory. | 核心模型 | `cdm/papers/junker-sijtsma-2001-few-assumptions.md` |
-| 精读 | de la Torre (2009). DINA model and parameter estimation: A didactic. | 核心模型；估计 | `cdm/papers/de-la-torre-2009-dina-didactic.md` |
+| 精读 | de la Torre (2009). DINA model and parameter estimation: A didactic. | 核心模型；估计 | [完整专题](papers/de-la-torre-2009/index.md) |
 | 精读 | de la Torre (2011). The generalized DINA model framework. | 核心模型 | `cdm/papers/de-la-torre-2011-gdina.md` |
 | 精读 | Ma & de la Torre (2020). GDINA: An R package for cognitive diagnosis modeling. | 核心模型；估计 | `cdm/papers/ma-de-la-torre-2020-gdina-package.md` |
 | 主读 | Templin & Henson (2006). Measurement of psychological disorders using cognitive diagnosis models. | 核心模型 | `cdm/papers/templin-henson-2006-dino.md` |

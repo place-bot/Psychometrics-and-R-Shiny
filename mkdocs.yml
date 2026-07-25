@@ -197,6 +197,23 @@ nav:
                   - 参考文献: cdm/papers/kruskal-1977/references.md
           - CDM 核心模型:
               - 类别清单: cdm/papers/categories/core-models.md
+              - de la Torre (2009):
+                  - 阅读导引: cdm/papers/de-la-torre-2009/index.md
+                  - 问题、对象与模型假设: cdm/papers/de-la-torre-2009/01-problem-and-model.md
+                  - Q 矩阵与理想反应: cdm/papers/de-la-torre-2009/02-q-matrix-and-ideal-response.md
+                  - 反应概率与似然: cdm/papers/de-la-torre-2009/03-response-function-and-likelihood.md
+                  - 三种估计路线: cdm/papers/de-la-torre-2009/04-estimation-overview.md
+                  - EM 完整推导: cdm/papers/de-la-torre-2009/05-em-algorithm.md
+                  - 标准误与分类: cdm/papers/de-la-torre-2009/06-standard-errors-and-classification.md
+                  - HO-DINA 与 MCMC: cdm/papers/de-la-torre-2009/07-ho-dina-and-mcmc.md
+                  - 模拟实验: cdm/papers/de-la-torre-2009/08-simulation.md
+                  - 分数减法真实数据: cdm/papers/de-la-torre-2009/09-fraction-subtraction.md
+                  - 代码实现精读: cdm/papers/de-la-torre-2009/10-code-implementation.md
+                  - 手算 EM 的 E 步: cdm/papers/de-la-torre-2009/11-worked-example.md
+                  - 限制与未来工作: cdm/papers/de-la-torre-2009/12-limitations-and-future.md
+                  - 符号表: cdm/papers/de-la-torre-2009/13-symbols.md
+                  - 总结与后续阅读: cdm/papers/de-la-torre-2009/14-summary.md
+                  - 参考文献: cdm/papers/de-la-torre-2009/references.md
           - Q 矩阵验证与学习:
               - 类别清单: cdm/papers/categories/q-matrix.md
           - 可识别性理论:

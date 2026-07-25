@@ -105,6 +105,8 @@ Rhodes (2010) 处理证明可读性；Allman 等人 (2009) 把定理系统化地
 
 > de la Torre, J. (2009). DINA model and parameter estimation: A didactic.
 
+[进入 de la Torre (2009) 完整专题](../de-la-torre-2009/index.md)。
+
 它会把注意力从“总体分布能否唯一分解”转向：
 
 - DINA 的属性与项目参数；

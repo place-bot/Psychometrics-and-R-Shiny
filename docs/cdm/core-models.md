@@ -14,7 +14,7 @@
 | 阅读级别 | 论文 | 后续单篇笔记位置 | 读法 |
 | --- | --- | --- | --- |
 | 精读 | Junker & Sijtsma (2001). Cognitive assessment models with few assumptions, and connections with nonparametric item response theory. | `cdm/papers/junker-sijtsma-2001-few-assumptions.md` | CDM 与非参数 IRT（nonparametric IRT）的连接。重点读少假设模型和诊断解释。 |
-| 精读 | de la Torre (2009). DINA model and parameter estimation: A didactic. | `cdm/papers/de-la-torre-2009-dina-didactic.md` | DINA 的入门核心文献。重点读 slip、guessing、likelihood 和 EM 估计。 |
+| 精读 | de la Torre (2009). DINA model and parameter estimation: A didactic. | [完整专题](papers/de-la-torre-2009/index.md) | DINA 的入门核心文献。已覆盖 slip、guessing、likelihood、EM、标准误、模拟与真实数据。 |
 | 精读 | Templin & Henson (2006). Measurement of psychological disorders using cognitive diagnosis models. | `cdm/papers/templin-henson-2006-dino.md` | DINO 模型（Deterministic Input, Noisy Or gate）的代表文献，适合和 DINA 对照。 |
 
 ## 一般化模型与统一框架
