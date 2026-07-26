@@ -39,7 +39,7 @@ Q 矩阵（Q-matrix）定义项目和属性之间的依赖关系，是 CDM 里�
 
 | 阅读级别 | 论文 | 后续单篇笔记位置 | 读法 |
 | --- | --- | --- | --- |
-| 主读 | Zhao & Huang (2019). Automated Q-matrix identification using text classification techniques. | `cdm/papers/zhao-huang-2019-text-classification-q.md` | 用文本分类（text classification）辅助 Q 矩阵识别。 |
+| 精读 | Zhao & Huang (2019). Automated Q-matrix identification using text classification techniques. | [完整专题](papers/zhao-huang-2019/index.md) | 中文分词、\(n\)-gram、信息增益与 TF--IDF；完整实验表、类别不平衡与 F1 公式审计、独立代码重构，并说明它与 CDM/CAT 的接口。 |
 | 主读 | Qin & Guo (2024). Using machine learning to improve Q-matrix validation. | `cdm/papers/qin-guo-2024-ml-q-validation.md` | 机器学习用于 Q 矩阵验证。 |
 | 主读 | Fan, Bialo & Li (2026). The use of AI tools to develop and validate Q-matrices. | `cdm/papers/fan-bialo-li-2026-ai-q-matrices.md` | AI 工具辅助 Q 矩阵开发与验证。当前先作为新近方向，后续需要补完整版本信息。 |
 

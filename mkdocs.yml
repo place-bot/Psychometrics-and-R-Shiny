@@ -406,6 +406,37 @@ nav:
                   - 局限、结论与未来工作: cdm/papers/gu-xu-2021/31-limitations-conclusion-future.md
                   - 符号表: cdm/papers/gu-xu-2021/32-symbol-table.md
                   - 参考文献: cdm/papers/gu-xu-2021/references.md
+              - Zhao & Huang (2019):
+                  - 阅读导引: cdm/papers/zhao-huang-2019/index.md
+                  - 研究问题、贡献与证据边界: cdm/papers/zhao-huang-2019/01-question-contribution.md
+                  - CDM、Q 矩阵与文本分类接口: cdm/papers/zhao-huang-2019/02-cdm-q-context.md
+                  - 原始数据 1,069 题与九属性: cdm/papers/zhao-huang-2019/03-data-1069.md
+                  - 实验裁剪 805 题二分类: cdm/papers/zhao-huang-2019/04-binary-reduction.md
+                  - 监督学习任务表述: cdm/papers/zhao-huang-2019/05-problem-formulation.md
+                  - 三阶段框架总览: cdm/papers/zhao-huang-2019/06-three-stage-framework.md
+                  - 中文分词与 n-gram: cdm/papers/zhao-huang-2019/07-tokenization-ngrams.md
+                  - 信息增益特征选择: cdm/papers/zhao-huang-2019/08-information-gain.md
+                  - TF--IDF 题目向量: cdm/papers/zhao-huang-2019/09-tfidf.md
+                  - C-SVM 与实现歧义: cdm/papers/zhao-huang-2019/10-svm.md
+                  - Gaussian Naive Bayes: cdm/papers/zhao-huang-2019/11-naive-bayes.md
+                  - L2 Logistic Regression: cdm/papers/zhao-huang-2019/12-logistic-regression.md
+                  - Experiment 数据划分与调参: cdm/papers/zhao-huang-2019/13-experiment-design.md
+                  - Experiment 性能指标: cdm/papers/zhao-huang-2019/14-performance-measures.md
+                  - Experiment unigram 结果: cdm/papers/zhao-huang-2019/15-results-unigram.md
+                  - Experiment bigram 结果: cdm/papers/zhao-huang-2019/16-results-bigram.md
+                  - Experiment trigram 结果: cdm/papers/zhao-huang-2019/17-results-trigram.md
+                  - 关键词与教育语义: cdm/papers/zhao-huang-2019/18-feature-interpretation.md
+                  - 多数类基线与不平衡: cdm/papers/zhao-huang-2019/19-imbalance-baselines.md
+                  - 小测试集与不确定性: cdm/papers/zhao-huang-2019/20-finite-sample-uncertainty.md
+                  - Equation 9 的 F1 审计: cdm/papers/zhao-huang-2019/21-f1-equation-audit.md
+                  - 复现性审计: cdm/papers/zhao-huang-2019/22-reproducibility-audit.md
+                  - 独立代码重构: cdm/papers/zhao-huang-2019/23-independent-reimplementation.md
+                  - 本站数值核验: cdm/papers/zhao-huang-2019/24-computational-audit.md
+                  - 文本分类与完整 Q 生成: cdm/papers/zhao-huang-2019/25-classification-vs-q-generation.md
+                  - 与 CDM、CAT 和 RecCAT 的接口: cdm/papers/zhao-huang-2019/26-cdm-cat-interface.md
+                  - 局限、结论与未来工作: cdm/papers/zhao-huang-2019/27-limitations-conclusion-future.md
+                  - 符号表: cdm/papers/zhao-huang-2019/28-symbol-table.md
+                  - 参考文献: cdm/papers/zhao-huang-2019/references.md
           - 可识别性理论:
               - 类别清单: cdm/papers/categories/identifiability.md
               - Xu (2017):

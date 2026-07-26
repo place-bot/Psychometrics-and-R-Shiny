@@ -89,7 +89,7 @@ BOBCAT 级别的多页面精读专题；反引号中的路径表示尚未建成�
 | 精读 | Liu, Xu & Ying (2013). Theory of self-learning Q-matrix. | Q 矩阵 | [完整专题](papers/liu-xu-ying-2013/index.md) |
 | 精读 | Chen, Culpepper, Chen & Douglas (2018). Bayesian estimation of the DINA Q-matrix. | Q 矩阵；估计 | [完整专题](papers/chen-culpepper-chen-douglas-2018/index.md) |
 | 精读 | Gu & Xu (2021). Sufficient and necessary conditions for the identifiability of the Q-matrix. | Q 矩阵；可识别性 | [完整专题](papers/gu-xu-2021/index.md) |
-| 主读 | Zhao & Huang (2019). Automated Q-matrix identification using text classification techniques. | Q 矩阵；机器学习 | `cdm/papers/zhao-huang-2019-text-classification-q.md` |
+| 精读 | Zhao & Huang (2019). Automated Q-matrix identification using text classification techniques. | Q 矩阵；机器学习 | [完整专题](papers/zhao-huang-2019/index.md) |
 | 主读 | Qin & Guo (2024). Using machine learning to improve Q-matrix validation. | Q 矩阵；机器学习 | `cdm/papers/qin-guo-2024-ml-q-validation.md` |
 | 主读 | Fan, Bialo & Li (2026). The use of AI tools to develop and validate Q-matrices. | Q 矩阵；AI | `cdm/papers/fan-bialo-li-2026-ai-q-matrices.md` |
 | 主读 | Li, Ma & Xu (2022). Learning large Q-matrix by restricted Boltzmann machines. | Q 矩阵；估计 | `cdm/papers/li-ma-xu-2022-rbm-q-matrix.md` |

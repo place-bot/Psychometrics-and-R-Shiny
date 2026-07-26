@@ -33,11 +33,11 @@ CDM
 | [数学工具](categories/mathematical-tools.md) | 3 | 1 | Kruskal (1977) 已完成首版 |
 | [HMM、网络与机器学习](categories/hmm-network-ml.md) | 15 | 0 | 待逐篇制作 |
 | [CDM 核心模型](categories/core-models.md) | 10 | 2 | de la Torre (2009, 2011) 已完成首版 |
-| [Q 矩阵验证与学习](categories/q-matrix.md) | 14 | 6 | de la Torre (2008)、de la Torre & Chiu (2016)、Liu et al. (2012, 2013)、Chen et al. (2018)、Gu & Xu (2021) 已完成首版 |
+| [Q 矩阵验证与学习](categories/q-matrix.md) | 14 | 7 | de la Torre (2008)、de la Torre & Chiu (2016)、Liu et al. (2012, 2013)、Chen et al. (2018)、Gu & Xu (2021)、Zhao & Huang (2019) 已完成首版 |
 | [可识别性理论](categories/identifiability.md) | 9 | 1 | Xu (2017) 已完成首版 |
 | [估计、正则化与计算](categories/estimation-computation.md) | 5 | 0 | 待逐篇制作 |
 | [连续化与扩展模型](categories/continuous-extensions.md) | 8 | 0 | 待逐篇制作 |
-| **合计** | **86** | **11** | 持续更新 |
+| **合计** | **86** | **12** | 持续更新 |
 
 ## 制作顺序
 
@@ -54,11 +54,12 @@ CDM
 9. Liu, Xu and Ying (2013)：自学习 Q 矩阵理论（已完成）；
 10. Chen, Culpepper, Chen and Douglas (2018)：Bayesian DINA Q 矩阵估计（已完成）；
 11. Gu and Xu (2021)：Q 矩阵可识别的必要充分条件（已完成）；
-12. Zhao and Huang (2019)：文本分类自动识别 Q 矩阵（下一篇）；
-13. 高维估计、正则化和结构学习；
-14. partial mastery、continuous-Q 和 general-response 扩展；
-15. HMM、随机图与机器学习背景；
-16. 其余混合模型和识别理论来源。
+12. Zhao and Huang (2019)：文本分类自动识别 Q 矩阵（已完成）；
+13. Qin and Guo (2024)：机器学习改进 Q 矩阵验证（下一篇）；
+14. 高维估计、正则化和结构学习；
+15. partial mastery、continuous-Q 和 general-response 扩展；
+16. HMM、随机图与机器学习背景；
+17. 其余混合模型和识别理论来源。
 
 同一类别中的详细清单保留原索引顺序。完整书目信息见[论文总索引](../paper-index.md)。
 
