@@ -41,6 +41,6 @@ BOBCAT 可以压缩成
 
 ### 如果只记一句话
 
-!!! note "要点：colback=navy!5,colframe=navy,boxrule=1pt,arc=2mm"
+!!! note "要点"
     BOBCAT 用 held-out 作答来监督“哪些少量题最值得问”：选题决定内层学生适应，内层适应
     决定外层预测，外层梯度再反过来训练响应模型和选题策略。

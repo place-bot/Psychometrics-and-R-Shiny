@@ -264,7 +264,7 @@ for _ in range(params.inner_loop):
 `BCEWithLogitsLoss` 直接接收 logits，把 sigmoid 和交叉熵合并计算。`train_loss` 对所有已选题
 求和；`output_loss` 对 batch 的 meta 题求和后除以学生数。
 
-## 6. 外层怎样更新 \(\gamma\) 和学生初始化
+## 6. 外层怎样更新 γ 和学生初始化
 
 以 [`run_biased`](https://github.com/arghosh/BOBCAT/blob/e6b6245e23c1065ba8b8c56de5f051dfbcdd89ec/train.py#L124-L144)
 为例：
