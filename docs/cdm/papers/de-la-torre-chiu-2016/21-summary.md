@@ -114,7 +114,7 @@ w(\boldsymbol\alpha)p_j(\boldsymbol\alpha)}
 
 ## 下一篇
 
-[Liu, Xu & Ying (2012)：Data-driven Learning of Q-matrix](../categories/q-matrix.md)
+[Liu, Xu & Ying (2012)：Data-driven Learning of Q-matrix](../liu-xu-ying-2012/index.md)
 
 阅读重点：
 

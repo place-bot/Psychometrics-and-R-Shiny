@@ -284,6 +284,31 @@ nav:
                   - 符号表: cdm/papers/de-la-torre-chiu-2016/20-symbol-table.md
                   - 总结与后续阅读: cdm/papers/de-la-torre-chiu-2016/21-summary.md
                   - 参考文献: cdm/papers/de-la-torre-chiu-2016/references.md
+              - Liu、Xu & Ying (2012):
+                  - 阅读导引: cdm/papers/liu-xu-ying-2012/index.md
+                  - 研究问题、贡献与证据边界: cdm/papers/liu-xu-ying-2012/01-question-and-contribution.md
+                  - DINA 模型与全部基础符号: cdm/papers/liu-xu-ying-2012/02-dina-setup.md
+                  - 从完整反应分布到可观测矩: cdm/papers/liu-xu-ying-2012/03-observable-moments.md
+                  - B-vector 与 T-matrix: cdm/papers/liu-xu-ying-2012/04-t-matrix.md
+                  - 三题两属性完整手算: cdm/papers/liu-xu-ying-2012/05-t-matrix-example.md
+                  - 目标函数与三种估计量: cdm/papers/liu-xu-ying-2012/06-objective-functions.md
+                  - 未知参数与 DINA EM: cdm/papers/liu-xu-ying-2012/07-nuisance-estimation.md
+                  - Algorithm 1 逐行爬山搜索: cdm/papers/liu-xu-ying-2012/08-algorithm-one.md
+                  - T-matrix 截断与计算量: cdm/papers/liu-xu-ying-2012/09-truncation-computation.md
+                  - 部分已知 Q 与新题校准: cdm/papers/liu-xu-ying-2012/10-partial-information.md
+                  - 可识别性、标签交换与反例: cdm/papers/liu-xu-ying-2012/11-identifiability.md
+                  - 模拟实验共同设计与三个 Q: cdm/papers/liu-xu-ying-2012/12-simulation-design.md
+                  - Table 1 样本量、属性数与恢复率: cdm/papers/liu-xu-ying-2012/13-main-simulation-results.md
+                  - Figures 1--2 与 4.5% 早停: cdm/papers/liu-xu-ying-2012/14-early-stopping.md
+                  - Table 3 相关且不均衡的属性: cdm/papers/liu-xu-ying-2012/15-correlated-attributes.md
+                  - Table 4 单道新题校准: cdm/papers/liu-xu-ying-2012/16-partial-information-results.md
+                  - 模型验证、样本量与证据边界: cdm/papers/liu-xu-ying-2012/17-model-validation.md
+                  - 公开代码状态与实现精读: cdm/papers/liu-xu-ying-2012/18-code-implementation.md
+                  - 本站可计算复现: cdm/papers/liu-xu-ying-2012/19-computational-reproduction.md
+                  - 局限、结论与未来工作: cdm/papers/liu-xu-ying-2012/20-limitations-conclusion-future.md
+                  - 符号表: cdm/papers/liu-xu-ying-2012/21-symbol-table.md
+                  - 总结与后续阅读: cdm/papers/liu-xu-ying-2012/22-summary.md
+                  - 参考文献: cdm/papers/liu-xu-ying-2012/references.md
           - 可识别性理论:
               - 类别清单: cdm/papers/categories/identifiability.md
               - Xu (2017):

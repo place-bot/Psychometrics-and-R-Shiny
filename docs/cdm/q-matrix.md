@@ -21,7 +21,7 @@ Q 矩阵（Q-matrix）定义项目和属性之间的依赖关系，是 CDM 里�
 
 | 阅读级别 | 论文 | 后续单篇笔记位置 | 读法 |
 | --- | --- | --- | --- |
-| 精读 | Liu, Xu & Ying (2012). Data-driven learning of Q-matrix. | `cdm/papers/liu-xu-ying-2012-data-driven-q.md` | 早期从 response data 学 Q 矩阵的核心文献。 |
+| 精读 | Liu, Xu & Ying (2012). Data-driven learning of Q-matrix. | [完整专题](papers/liu-xu-ying-2012/index.md) | 用 \(T\)-matrix 和联合反应矩从 response data 学习 Q。 |
 | 精读 | Liu, Xu & Ying (2013). Theory of self-learning Q-matrix. | `cdm/papers/liu-xu-ying-2013-self-learning-q.md` | self-learning Q-matrix 的理论版本，和 2012 年文章一起读。 |
 | 主读 | Li, Ma & Xu (2022). Learning large Q-matrix by restricted Boltzmann machines. | `cdm/papers/li-ma-xu-2022-rbm-q-matrix.md` | 大规模 Q 矩阵学习，连接受限玻尔兹曼机（restricted Boltzmann machines, RBM）。 |
 | 主读 | Chen, Liu, Culpepper & Chen (2021). Inferring the number of attributes for the exploratory DINA model. | `cdm/papers/chen-liu-culpepper-chen-2021-number-attributes.md` | exploratory DINA 中属性数量（number of attributes）的推断。 |
