@@ -21,8 +21,9 @@
 当前已收录：
 
 - [BOBCAT](bobcat/index.md)：用双层优化从历史作答数据中学习自适应选题策略。
+- [NCAT](ncat/index.md)：把逐题选题写成强化学习问题，用双通道 attention 和 Q-learning 学习长期选题价值。
 
-## BOBCAT 在 CAT 中的位置
+## 两种数据驱动方法在 CAT 中的位置
 
 传统 IRT-CAT 通常先估计能力，再按 Fisher 信息或后验不确定性选择下一题。BOBCAT 保留逐题交互的 CAT 流程，同时把选题准则改造成可由数据训练的策略：
 
@@ -33,3 +34,17 @@ j_i^{(t)}.
 \]
 
 其中 \(x_i^{(t)}\) 汇总学生 \(i\) 截至第 \(t\) 步的作答历史，\(\Pi_\phi\) 输出下一题的分布或题号。新作答会立刻写回状态，随后重新运行策略，所以 BOBCAT 学到的是闭环选题规则。
+
+NCAT 使用同样的逐题反馈结构，并把长期选题价值写成 Q 函数：
+
+\[
+Q_\phi(s_t,\cdot)
+\longrightarrow
+q_t
+\longrightarrow
+a_t
+\longrightarrow
+s_{t+1}.
+\]
+
+它以 held-out query 题上的预测损失构造 reward，通过 Q-learning 训练策略；答对题和答错题由双通道 attention 编码。BOBCAT 与 NCAT 都会在每个真实答案到达后重新选择下一题，差别主要在训练目标的求解方法和状态表示。

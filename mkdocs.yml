@@ -481,6 +481,19 @@ nav:
           - 官方代码精读: cat/bobcat/07-implementation.md
           - 总结: cat/bobcat/08-summary.md
           - 参考文献: cat/bobcat/references.md
+      - NCAT:
+          - 阅读导引: cat/ncat/index.md
+          - 问题、CAT 与离线数据: cat/ncat/01-cat-and-data.md
+          - 双层目标、MDP 与奖励: cat/ncat/02-objective-and-mdp.md
+          - Q-learning 与经验回放: cat/ncat/03-q-learning.md
+          - 状态编码与双通道 attention: cat/ncat/04-neural-encoder.md
+          - 训练与真实学生部署: cat/ncat/05-training-and-deployment.md
+          - 完整手算示例: cat/ncat/06-worked-example.md
+          - 实验设计、完整结果与分析: cat/ncat/07-experiments.md
+          - 官方代码精读与最小实现: cat/ncat/08-implementation.md
+          - 局限、方法比较与未来工作: cat/ncat/09-limitations-comparison-future.md
+          - 符号表与 FAQ: cat/ncat/10-symbols-faq.md
+          - 参考文献: cat/ncat/references.md
   - R Shiny:
       - 总览: shiny/index.md
       - 学习路径: shiny/intro.md
