@@ -340,6 +340,37 @@ nav:
                   - 符号表: cdm/papers/liu-xu-ying-2013/27-symbol-table.md
                   - 总结与后续阅读: cdm/papers/liu-xu-ying-2013/28-summary.md
                   - 参考文献: cdm/papers/liu-xu-ying-2013/references.md
+              - Chen et al. (2018):
+                  - 阅读导引: cdm/papers/chen-culpepper-chen-douglas-2018/index.md
+                  - 研究问题、贡献与证据边界: cdm/papers/chen-culpepper-chen-douglas-2018/01-question-and-contribution.md
+                  - 与已有 Q 学习方法的关系: cdm/papers/chen-culpepper-chen-douglas-2018/02-relation-to-prior-work.md
+                  - DINA 模型、数据与全部符号: cdm/papers/chen-culpepper-chen-douglas-2018/03-model-and-notation.md
+                  - 理想反应、题目反应函数与似然: cdm/papers/chen-culpepper-chen-douglas-2018/04-dina-likelihood.md
+                  - 完整贝叶斯层级模型: cdm/papers/chen-culpepper-chen-douglas-2018/05-bayesian-hierarchy.md
+                  - 各层先验与完整条件分布: cdm/papers/chen-culpepper-chen-douglas-2018/06-priors-and-conditionals.md
+                  - Q 的三条可识别条件: cdm/papers/chen-culpepper-chen-douglas-2018/07-identifiability-conditions.md
+                  - 为什么限制在可识别空间: cdm/papers/chen-culpepper-chen-douglas-2018/08-identified-space.md
+                  - Q 的条件后验与均匀先验: cdm/papers/chen-culpepper-chen-douglas-2018/09-q-posterior.md
+                  - 三类候选生成器总览: cdm/papers/chen-culpepper-chen-douglas-2018/10-proposal-overview.md
+                  - 独立提议与 DS1: cdm/papers/chen-culpepper-chen-douglas-2018/11-independence-and-ds1.md
+                  - DS2 分块依赖提议: cdm/papers/chen-culpepper-chen-douglas-2018/12-ds2.md
+                  - Theorem 1 不可约性: cdm/papers/chen-culpepper-chen-douglas-2018/13-irreducibility.md
+                  - Theorem 2 对称性与接受率: cdm/papers/chen-culpepper-chen-douglas-2018/14-symmetry-and-acceptance.md
+                  - Metropolis-within-Gibbs: cdm/papers/chen-culpepper-chen-douglas-2018/15-metropolis-within-gibbs.md
+                  - 受限 Gibbs 完整算法: cdm/papers/chen-culpepper-chen-douglas-2018/16-constrained-gibbs.md
+                  - 单个 q 的条件概率推导: cdm/papers/chen-culpepper-chen-douglas-2018/17-q-full-conditional.md
+                  - Q 后验众数与列置换: cdm/papers/chen-culpepper-chen-douglas-2018/18-posterior-summary.md
+                  - Experiment 模拟设计: cdm/papers/chen-culpepper-chen-douglas-2018/19-simulation-design.md
+                  - Experiment Table 1 全部结果: cdm/papers/chen-culpepper-chen-douglas-2018/20-table1-results.md
+                  - Experiment 题目参数与收敛: cdm/papers/chen-culpepper-chen-douglas-2018/21-item-parameter-results.md
+                  - Experiment 分数减法设计: cdm/papers/chen-culpepper-chen-douglas-2018/22-fraction-data.md
+                  - Experiment K=3 逐题结果: cdm/papers/chen-culpepper-chen-douglas-2018/23-fraction-k3.md
+                  - Experiment K=4 逐题结果: cdm/papers/chen-culpepper-chen-douglas-2018/24-fraction-k4.md
+                  - 原始补充材料代码精读: cdm/papers/chen-culpepper-chen-douglas-2018/25-original-code.md
+                  - 当前 edina 包代码精读: cdm/papers/chen-culpepper-chen-douglas-2018/26-edina-package.md
+                  - 本站可计算核验: cdm/papers/chen-culpepper-chen-douglas-2018/27-computational-check.md
+                  - 局限、结论与未来工作: cdm/papers/chen-culpepper-chen-douglas-2018/28-limitations-conclusion-future.md
+                  - 参考文献: cdm/papers/chen-culpepper-chen-douglas-2018/references.md
           - 可识别性理论:
               - 类别清单: cdm/papers/categories/identifiability.md
               - Xu (2017):

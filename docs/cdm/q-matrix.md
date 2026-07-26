@@ -30,7 +30,7 @@ Q 矩阵（Q-matrix）定义项目和属性之间的依赖关系，是 CDM 里�
 
 | 阅读级别 | 论文 | 后续单篇笔记位置 | 读法 |
 | --- | --- | --- | --- |
-| 精读 | Chen, Culpepper, Chen & Douglas (2018). Bayesian estimation of the DINA Q-matrix. | `cdm/papers/chen-culpepper-chen-douglas-2018-bayesian-q.md` | 贝叶斯 Q 矩阵估计的核心比较对象。 |
+| 精读 | Chen, Culpepper, Chen & Douglas (2018). Bayesian estimation of the DINA Q-matrix. | [完整专题](papers/chen-culpepper-chen-douglas-2018/index.md) | 受限 MH 与 Gibbs 在可识别 Q 空间中进行探索性贝叶斯估计。 |
 | 主读 | Liu, Andersson & Skrondal (2020). A constrained Metropolis-Hastings Robbins-Monro algorithm for Q matrix estimation in DINA models. | `cdm/papers/liu-andersson-skrondal-2020-mhrm-q.md` | 带识别约束的 MCMC/Robbins-Monro Q 矩阵估计。 |
 | 主读 | Oka & Okada (2023). Scalable Bayesian approach for the DINA Q-matrix estimation combining stochastic optimization and variational inference. | `cdm/papers/oka-okada-2023-scalable-bayesian-q.md` | 大规模 Bayesian Q estimation，重点读 stochastic optimization 和 variational inference。 |
 | 主读 | Yamaguchi (2025). Bayesian diagnostic classification models for a partially known Q-matrix. | `cdm/papers/yamaguchi-2025-partially-known-q.md` | 介于 confirmatory 和 exploratory 之间的 partially known Q-matrix。 |

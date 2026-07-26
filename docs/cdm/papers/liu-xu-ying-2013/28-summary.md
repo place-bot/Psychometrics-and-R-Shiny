@@ -100,7 +100,7 @@ D\widetilde T_{c,g}(Q)
 
 ## 下一篇
 
-Q 矩阵验证与学习类别的下一篇是 Chen、Culpepper、Chen 与 Douglas（2018）的 Bayesian DINA Q 矩阵估计。它把结构学习放进 Bayesian 框架，适合继续比较：
+[Chen、Culpepper、Chen 与 Douglas（2018）的 Bayesian DINA Q 矩阵估计](../chen-culpepper-chen-douglas-2018/index.md)已经完成。它把结构学习放进 Bayesian 框架，适合继续比较：
 
 - 离散 Q 搜索怎样由后验分布处理；
 - 专家先验怎样进入模型；
