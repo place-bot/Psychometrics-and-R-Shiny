@@ -31,7 +31,7 @@
 | 阅读级别 | 论文 | 后续单篇笔记位置 | 读法 |
 | --- | --- | --- | --- |
 | 精读 | Gu & Xu. Sufficient and necessary conditions for the identifiability and estimability of the DINA model. | `cdm/papers/gu-xu-dina-identifiability-estimability.md` | DINA 模型必要充分条件的核心写法。后续需要补完整年份和发表信息。 |
-| 精读 | Gu & Xu (2021). The sufficient and necessary condition for the identifiability of the Q-matrix. | `cdm/papers/gu-xu-2021-q-matrix-identifiability.md` | Q 矩阵自身识别的核心文献。 |
+| 精读 | Gu & Xu (2021). Sufficient and necessary conditions for the identifiability of the Q-matrix. | [完整专题](papers/gu-xu-2021/index.md) | 未知 Q、题目参数与潜类比例联合识别的核心文献。 |
 | 精读 | Chen, Liu, Xu & Ying (2015). Statistical analysis of Q-matrix based diagnostic classification models. | `cdm/papers/chen-liu-xu-ying-2015-q-matrix-dcm.md` | Q 矩阵、估计和可识别性的交叉核心文献。 |
 | 精读 | Gu (2022/2023). Generic identifiability of the DINA model and blessing of latent dependence. | `cdm/papers/gu-2023-generic-identifiability-dina.md` | anchor-free/generic 语言的重要参考。年份在文献页中用发表版本核对。 |
 

@@ -371,6 +371,41 @@ nav:
                   - 本站可计算核验: cdm/papers/chen-culpepper-chen-douglas-2018/27-computational-check.md
                   - 局限、结论与未来工作: cdm/papers/chen-culpepper-chen-douglas-2018/28-limitations-conclusion-future.md
                   - 参考文献: cdm/papers/chen-culpepper-chen-douglas-2018/references.md
+              - Gu & Xu (2021):
+                  - 阅读导引: cdm/papers/gu-xu-2021/index.md
+                  - 研究问题、贡献与证据边界: cdm/papers/gu-xu-2021/01-question-contribution.md
+                  - 与已有识别结果的关系: cdm/papers/gu-xu-2021/02-prior-work.md
+                  - RLCM 数据生成过程与全部对象: cdm/papers/gu-xu-2021/03-rlcm-setup.md
+                  - DINA、G-DINA 与一般 RLCM: cdm/papers/gu-xu-2021/04-dina-gdina.md
+                  - 严格识别、泛识别与列标签交换: cdm/papers/gu-xu-2021/05-identifiability-definitions.md
+                  - 四题两属性的泛识别例子: cdm/papers/gu-xu-2021/06-q42-generic-example.md
+                  - T-matrix 与识别等价式: cdm/papers/gu-xu-2021/07-t-matrix.md
+                  - 零行、单调性和等价关系: cdm/papers/gu-xu-2021/08-preliminaries.md
+                  - Theorem 1 A/B/C 必要且充分: cdm/papers/gu-xu-2021/09-theorem1-overview.md
+                  - Condition A 完整性: cdm/papers/gu-xu-2021/10-condition-a.md
+                  - Condition B 列互异: cdm/papers/gu-xu-2021/11-condition-b.md
+                  - Condition C 三次测量: cdm/papers/gu-xu-2021/12-condition-c.md
+                  - 最少题数与 K=8 构造: cdm/papers/gu-xu-2021/13-minimum-items.md
+                  - Theorem 1 证明路线: cdm/papers/gu-xu-2021/14-theorem1-proof.md
+                  - Theorem 2 两次测量的三种结构: cdm/papers/gu-xu-2021/15-theorem2.md
+                  - K=2 的完整泛识别刻画: cdm/papers/gu-xu-2021/16-k2-characterization.md
+                  - 一般 RLCM 重复性必要条件: cdm/papers/gu-xu-2021/17-general-rlcm-theorem3.md
+                  - 泛完整性与二分图匹配: cdm/papers/gu-xu-2021/18-generic-completeness.md
+                  - Theorem 4 D/E 泛识别条件: cdm/papers/gu-xu-2021/19-theorem4.md
+                  - Theorem 5 与 K=2 必要充分条件: cdm/papers/gu-xu-2021/20-theorem5.md
+                  - 有限样本误差界: cdm/papers/gu-xu-2021/21-finite-sample.md
+                  - Experiment 主文泛识别模拟: cdm/papers/gu-xu-2021/22-main-simulation.md
+                  - Experiment 补充材料共同设计: cdm/papers/gu-xu-2021/23-supplement-design.md
+                  - Experiment DINA Studies I--II: cdm/papers/gu-xu-2021/24-studies1-2.md
+                  - Experiment DINA Studies III--IV: cdm/papers/gu-xu-2021/25-studies3-4.md
+                  - Experiment G-DINA Study V: cdm/papers/gu-xu-2021/26-study5.md
+                  - Experiment G-DINA Studies VI--VII: cdm/papers/gu-xu-2021/27-studies6-7.md
+                  - 官方条件检查代码精读: cdm/papers/gu-xu-2021/28-code-condition-checkers.md
+                  - 官方模拟代码精读: cdm/papers/gu-xu-2021/29-code-simulations.md
+                  - 本站可计算核验与代码审查: cdm/papers/gu-xu-2021/30-computational-check.md
+                  - 局限、结论与未来工作: cdm/papers/gu-xu-2021/31-limitations-conclusion-future.md
+                  - 符号表: cdm/papers/gu-xu-2021/32-symbol-table.md
+                  - 参考文献: cdm/papers/gu-xu-2021/references.md
           - 可识别性理论:
               - 类别清单: cdm/papers/categories/identifiability.md
               - Xu (2017):

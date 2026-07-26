@@ -47,7 +47,7 @@ Q 矩阵（Q-matrix）定义项目和属性之间的依赖关系，是 CDM 里�
 
 | 阅读级别 | 论文 | 后续单篇笔记位置 | 读法 |
 | --- | --- | --- | --- |
-| 精读 | Gu & Xu (2021). The sufficient and necessary condition for the identifiability of the Q-matrix. | `cdm/papers/gu-xu-2021-q-matrix-identifiability.md` | Q 矩阵可识别性的必要充分条件，和 Q-matrix validation 必须一起读。 |
+| 精读 | Gu & Xu (2021). Sufficient and necessary conditions for the identifiability of the Q-matrix. | [完整专题](papers/gu-xu-2021/index.md) | Q、题目参数与潜类比例联合识别的必要充分条件，覆盖严格与泛识别。 |
 
 ## 推荐顺序
 
