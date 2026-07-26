@@ -309,6 +309,37 @@ nav:
                   - 符号表: cdm/papers/liu-xu-ying-2012/21-symbol-table.md
                   - 总结与后续阅读: cdm/papers/liu-xu-ying-2012/22-summary.md
                   - 参考文献: cdm/papers/liu-xu-ying-2012/references.md
+              - Liu、Xu & Ying (2013):
+                  - 阅读导引: cdm/papers/liu-xu-ying-2013/index.md
+                  - 问题、创新与 2012 论文的关系: cdm/papers/liu-xu-ying-2013/01-question-contribution-and-2012.md
+                  - 基础模型、样本与全部对象: cdm/papers/liu-xu-ying-2013/02-model-setup.md
+                  - 理想反应、B-vector 与 T-matrix: cdm/papers/liu-xu-ying-2013/03-ideal-response-and-tmatrix.md
+                  - 经验矩 alpha 与总体映射: cdm/papers/liu-xu-ying-2013/04-alpha-and-moment-map.md
+                  - 目标函数、Q 估计量与计算: cdm/papers/liu-xu-ying-2013/05-objective-and-estimator.md
+                  - 三题两属性完整手算: cdm/papers/liu-xu-ying-2013/06-worked-example.md
+                  - 列置换等价、完整性与饱和性: cdm/papers/liu-xu-ying-2013/07-equivalence-completeness-saturation.md
+                  - C1--C5 的逐项解释: cdm/papers/liu-xu-ying-2013/08-conditions-c1-c5.md
+                  - Theorem 2.4 无噪声一致性: cdm/papers/liu-xu-ying-2013/09-theorem-2-4.md
+                  - 已知失误与猜测参数的 DINA: cdm/papers/liu-xu-ying-2013/10-known-cg-dina.md
+                  - 噪声 T-matrix 与目标函数: cdm/papers/liu-xu-ying-2013/11-noisy-tmatrix-objective.md
+                  - Theorem 3.1 已知参数一致性: cdm/papers/liu-xu-ying-2013/12-theorem-3-1.md
+                  - 未知 c 的一般估计与矩估计: cdm/papers/liu-xu-ying-2013/13-unknown-c-estimation.md
+                  - 组合估计量与 Theorem 4.2: cdm/papers/liu-xu-ying-2013/14-combined-estimator-theorem-4-2.md
+                  - 全部证明的总路线: cdm/papers/liu-xu-ying-2013/15-proof-roadmap.md
+                  - Propositions 6.1--6.2 满列秩: cdm/papers/liu-xu-ying-2013/16-full-rank-propositions.md
+                  - Propositions 6.3--6.6 列空间分离: cdm/papers/liu-xu-ying-2013/17-column-space-separation.md
+                  - Lemma 6.7 与消去猜测的矩阵 D: cdm/papers/liu-xu-ying-2013/18-guessing-removal-transform.md
+                  - 三个主定理的证明: cdm/papers/liu-xu-ying-2013/19-main-theorem-proofs.md
+                  - 附录证明与 C5 的关键作用: cdm/papers/liu-xu-ying-2013/20-appendix-and-c5.md
+                  - 反例、必要性与识别边界: cdm/papers/liu-xu-ying-2013/21-counterexamples-and-boundaries.md
+                  - 饱和矩、搜索复杂度与实用截断: cdm/papers/liu-xu-ying-2013/22-computation-and-truncation.md
+                  - Experiment 与原文证据: cdm/papers/liu-xu-ying-2013/23-experiment-and-evidence.md
+                  - 代码状态与实现精读: cdm/papers/liu-xu-ying-2013/24-code-implementation.md
+                  - 本站可计算核验: cdm/papers/liu-xu-ying-2013/25-computational-check.md
+                  - 局限、结论与未来工作: cdm/papers/liu-xu-ying-2013/26-limitations-conclusion-future.md
+                  - 符号表: cdm/papers/liu-xu-ying-2013/27-symbol-table.md
+                  - 总结与后续阅读: cdm/papers/liu-xu-ying-2013/28-summary.md
+                  - 参考文献: cdm/papers/liu-xu-ying-2013/references.md
           - 可识别性理论:
               - 类别清单: cdm/papers/categories/identifiability.md
               - Xu (2017):

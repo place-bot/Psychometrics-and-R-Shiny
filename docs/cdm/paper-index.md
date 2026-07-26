@@ -86,7 +86,7 @@ BOBCAT 级别的多页面精读专题；反引号中的路径表示尚未建成�
 | 精读 | de la Torre (2008). An empirically based method of Q-matrix validation for the DINA model. | Q 矩阵 | [完整专题](papers/de-la-torre-2008/index.md) |
 | 精读 | de la Torre & Chiu (2016). A general method of empirical Q-matrix validation. | Q 矩阵 | [完整专题](papers/de-la-torre-chiu-2016/index.md) |
 | 精读 | Liu, Xu & Ying (2012). Data-driven learning of Q-matrix. | Q 矩阵 | [完整专题](papers/liu-xu-ying-2012/index.md) |
-| 精读 | Liu, Xu & Ying (2013). Theory of self-learning Q-matrix. | Q 矩阵 | `cdm/papers/liu-xu-ying-2013-self-learning-q.md` |
+| 精读 | Liu, Xu & Ying (2013). Theory of self-learning Q-matrix. | Q 矩阵 | [完整专题](papers/liu-xu-ying-2013/index.md) |
 | 精读 | Chen, Culpepper, Chen & Douglas (2018). Bayesian estimation of the DINA Q-matrix. | Q 矩阵；估计 | `cdm/papers/chen-culpepper-chen-douglas-2018-bayesian-q.md` |
 | 精读 | Gu & Xu (2021). The sufficient and necessary condition for the identifiability of the Q-matrix. | Q 矩阵；可识别性 | `cdm/papers/gu-xu-2021-q-matrix-identifiability.md` |
 | 主读 | Zhao & Huang (2019). Automated Q-matrix identification using text classification techniques. | Q 矩阵；机器学习 | `cdm/papers/zhao-huang-2019-text-classification-q.md` |

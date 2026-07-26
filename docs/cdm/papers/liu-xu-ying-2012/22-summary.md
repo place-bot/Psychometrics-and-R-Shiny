@@ -65,4 +65,4 @@
 
 ## 下一篇
 
-[Liu、Xu 与 Ying（2013）：Theory of Self-learning Q-matrix](../categories/q-matrix.md) 将进入完整理论：T-matrix 的区分能力、列置换等价类与估计一致性。
+[Liu、Xu 与 Ying（2013）：Theory of Self-learning Q-matrix](../liu-xu-ying-2013/index.md) 已完成完整理论专题：T-matrix 的区分能力、列置换等价类与估计一致性。
