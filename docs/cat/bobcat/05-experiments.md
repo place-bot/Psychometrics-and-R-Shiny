@@ -554,7 +554,7 @@ IRT 信息规则可解释为在当前能力处最大化信息。神经策略的�
 =\mathcal J_{\mathrm{meta}}
 +\lambda_{\mathrm{content}}
 \sum_c
-\left(#\{j\in S_i:c(j)=c\}-m_c\right)^2.
+\left(\left|\{j\in S_i:c(j)=c\}\right|-m_c\right)^2.
 \]
 
 硬 mask 保证每条试卷可行，软惩罚允许精度与内容偏差权衡。正式测验通常把 shadow
