@@ -3,6 +3,7 @@
 ### 一条公式概括整个框架
 
 BOBCAT 可以压缩成
+
 \[
 \min_{\gamma,\phi}
 \frac1N\sum_{i=1}^{N}
@@ -19,6 +20,7 @@ BOBCAT 可以压缩成
 \right)
 \right].
 \]
+
 从内向外读：
 
 1. 策略 \(\Pi_\phi\) 选出 \(n\) 道题；

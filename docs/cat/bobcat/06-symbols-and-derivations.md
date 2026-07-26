@@ -86,6 +86,7 @@
 \[
 \sigma(z)=\frac{1}{1+e^{-z}}.
 \]
+
 求导：
 
 \[
@@ -102,18 +103,24 @@
 ### 二元交叉熵对 logit 的导数
 
 令 \(p=\sigma(z)\)，
+
 \[
 \ell(y,p)=-y\log p-(1-y)\log(1-p).
 \]
+
 先对 \(p\) 求导：
+
 \[
 \frac{\partial\ell}{\partial p}
 =-\frac{y}{p}+\frac{1-y}{1-p}.
 \]
+
 再乘
+
 \[
 \frac{\partial p}{\partial z}=p(1-p).
 \]
+
 得到
 
 \[
@@ -132,19 +139,25 @@
 ### softmax 与 log-softmax 导数
 
 令
+
 \[
 \pi_a=\frac{e^{z_a}}{\sum_s e^{z_s}}.
 \]
+
 对 \(z_r\) 求导：
+
 \[
 \frac{\partial\pi_a}{\partial z_r}
 =\pi_a\left(\mathbb{I}(a=r)-\pi_r\right).
 \]
+
 再除以 \(\pi_a\)：
+
 \[
 \frac{\partial\log\pi_a}{\partial z_r}
 =\mathbb{I}(a=r)-\pi_r.
 \]
+
 这说明提高被选动作 log 概率的梯度同时压低其他动作概率。
 
 ### score-function 恒等式
@@ -185,16 +198,21 @@ f(x)\\
 ### 隐式函数定理得到影响函数
 
 定义加权内层目标
+
 \[
 F(\theta,w)
 =F_0(\theta)+\sum_jw_j\ell_j(\theta).
 \]
+
 最优点满足
+
 \[
 G(\theta^*(w),w)
 :=\nabla_\theta F(\theta^*(w),w)=0.
 \]
+
 对 \(w_j\) 求导：
+
 \[
 \frac{\partial G}{\partial\theta}
 \frac{\mathrm d\theta^*}{\mathrm dw_j}
@@ -202,7 +220,9 @@ G(\theta^*(w),w)
 \frac{\partial G}{\partial w_j}
 =0.
 \]
+
 其中
+
 \[
 \frac{\partial G}{\partial\theta}
 =\nabla_\theta^2F=H,
@@ -210,12 +230,16 @@ G(\theta^*(w),w)
 \frac{\partial G}{\partial w_j}
 =\nabla_\theta\ell_j.
 \]
+
 所以
+
 \[
 \frac{\mathrm d\theta^*}{\mathrm dw_j}
 =-H^{-1}\nabla_\theta\ell_j.
 \]
+
 若外层损失为 \(L(\theta^*)\)，继续链式法则：
+
 \[
 \frac{\mathrm dL}{\mathrm dw_j}
 =
@@ -230,8 +254,10 @@ H^{-1}
 ### 为什么不应显式求逆 Hessian
 
 式子写 \(H^{-1}g_j\)，数值实现通常解线性方程
+
 \[
 Hv=g_j
 \]
+
 得到 \(v\)，再算 \(-g_{\mathrm{meta}}^\mathsf{T} v\)。显式构造 \(H^{-1}\) 更慢、更耗内存，
 也更不稳定。共轭梯度、LiSSA 或自动微分 Hessian-vector product 都可避免完整逆矩阵。

@@ -27,6 +27,7 @@ bilevel optimization 直译为双层优化。bi 表示 two，level 表示层级�
 
 符号 \(v^*(u)\) 强调内层最优解依赖 \(u\)。星号表示“内层求解后得到的值”，括号中的
 \(u\) 表示它是 \(u\) 的函数。把这个函数代入外层以后，外层实际优化的是复合函数
+
 \[
 \widetilde F(u)=F(u,v^*(u)).
 \]
@@ -34,35 +35,45 @@ bilevel optimization 直译为双层优化。bi 表示 two，level 表示层级�
 ### 为什么不能把两个损失直接相加
 
 一个常见误解是把双层问题改写成
+
 \[
 \min_{u,v} F(u,v)+f(u,v).
 \]
+
 这个相加问题改变了原目标。相加形式允许外层和内层同时妥协；双层形式要求内层对于给定
 的 \(u\) 先遵守自己的最优性条件。外层只能在“内层会怎样反应”的前提下优化。
 
 !!! example "小例子：超参数选择是最容易理解的双层问题"
     令 \(u=\lambda\) 是正则化强度，\(v=w\) 是模型权重。内层在训练集上拟合
+
     \[
     w^*(\lambda)=\operatorname*{arg\,min}_w
     \left\{L_{\mathrm{train}}(w)+\lambda\|w\|_2^2\right\}.
     \]
+
     外层在验证集上选 \(\lambda\)：
+
     \[
     \min_\lambda L_{\mathrm{valid}}(w^*(\lambda)).
     \]
+
     验证损失的好坏必须在“用该 \(\lambda\) 训练出的 \(w^*(\lambda)\)”上评价。若把训练
     损失与验证损失简单相加，就改变了训练和验证的角色。
 
 ### BOBCAT 中谁对应 u，谁对应 v
 
 在 BOBCAT 中，外层变量是一组全局量：
+
 \[
 u=(\gamma,\phi).
 \]
+
 \(\gamma\) 是全局响应模型参数，\(\phi\) 是选题器参数。内层变量是每个学生的局部参数：
+
 \[
 v=\{\theta_1,\ldots,\theta_N\}.
 \]
+
 给定 \(\gamma\) 与 \(\phi\)，选题器先决定每个学生看到哪些训练题，内层再根据这些作答
 得到 \(\theta_i^*(\gamma,\phi)\)。外层用 meta 题判断这些局部参数好不好。
 
@@ -73,6 +84,7 @@ v=\{\theta_1,\ldots,\theta_N\}.
 响应概率 \(g(j;\theta_i)\)，它也通过选中的题号改变内层训练数据。
 
 可把依赖链写成
+
 \[
 \phi
 \longrightarrow
@@ -84,6 +96,7 @@ v=\{\theta_1,\ldots,\theta_N\}.
 \longrightarrow
 \mathcal L_i^{\mathrm{meta}}.
 \]
+
 外层训练 \(\phi\) 的梯度必须沿这条链返回。
 
 ### leader-follower 是理解嵌套结构的比喻
@@ -97,9 +110,11 @@ BOBCAT 没有两个有独立利益的真实行动者。这里的“内层”是�
 ### 真正困难的是 solution map
 
 回到一般形式
+
 \[
 \widetilde F(u)=F(u,v^*(u)).
 \]
+
 对 \(u\) 求导时，链式法则给出
 
 \[
@@ -118,10 +133,12 @@ BOBCAT 没有两个有独立利益的真实行动者。这里的“内层”是�
 ### 路线一：展开有限步优化
 
 若内层采用从 \(v^{(0)}(u)\) 出发的 \(K\) 步截断优化，
+
 \[
 v^{(k+1)}
 =v^{(k)}-\alpha\nabla_v f(u,v^{(k)}),
 \]
+
 就可以把 \(K\) 步全部保留在计算图中，然后反向传播。这叫 unrolling 或
 differentiating through optimization。
 
@@ -131,16 +148,20 @@ differentiating through optimization。
 ### 路线二：用内层最优性条件隐式求导
 
 若 \(v^*(u)\) 真正满足内层一阶条件
+
 \[
 \nabla_v f(u,v^*(u))=0,
 \]
+
 对 \(u\) 求导：
+
 \[
 \nabla^2_{vv} f\,
 \frac{\mathrm dv^*}{\mathrm du}
 +
 \nabla^2_{vu}f=0.
 \]
+
 若 Hessian \(\nabla^2_{vv} f\) 可逆，
 
 \[
@@ -170,18 +191,24 @@ Hessian 的线性系统。实际中通常通过 Hessian-vector product 或线性
 ### first-order approximation 丢掉了什么
 
 设一层适应为
+
 \[
 v'=u-\alpha\nabla f(u).
 \]
+
 精确 Jacobian 是
+
 \[
 \frac{\partial v'}{\partial u}
 =I-\alpha\nabla^2f(u).
 \]
+
 first-order MAML 近似把它当作 \(I\)。于是外层梯度近似为
+
 \[
 \nabla_u F(v')\approx\nabla_{v'}F(v').
 \]
+
 它忽略了“改变初始化会怎样改变内层梯度方向”的曲率信息。近似更便宜，但不等于精确
 双层梯度。
 
@@ -227,14 +254,18 @@ meta 题是每个训练学生内部用于外层学习的 held-out 题。最终 t
 ### 稀疏响应矩阵时的实际集合
 
 理论上题库有 \(Q\) 道题，但学生 \(i\) 可能只作答一个子集，记为
+
 \[
 \mathcal O_i=\{j:Y_{i,j}\text{ 被观测}\}.
 \]
+
 BOBCAT 对该学生的初始候选集 \(\Omega_i^{(1)}\) 和 meta 集 \(\Gamma_i\) 都从
 \(\mathcal O_i\) 中产生，并要求
+
 \[
 \Omega_i^{(1)}\cap\Gamma_i=\varnothing.
 \]
+
 这里 \(\Gamma\) 读作 Gamma。它专门表示 meta 题集合。集合上标 \((1)\) 说明
 \(\Omega_i^{(1)}\) 是选任何题之前的初始可选集合。
 

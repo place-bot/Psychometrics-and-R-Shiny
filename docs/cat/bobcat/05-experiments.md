@@ -357,6 +357,7 @@ BiNN-Approx 更偏向最高 weighted-MI 区间，IRT-Active 的选择分布更�
 ### 与传统 Fisher-information CAT
 
 传统 CAT 的核心循环是
+
 \[
 \widehat\theta_i^{(t-1)}
 \longrightarrow
@@ -366,7 +367,9 @@ j_i^{(t)}
 \longrightarrow
 \widehat\theta_i^{(t)}.
 \]
+
 选题准则由响应模型理论预先定义，解释性强，易加入标准误停止规则。BOBCAT 的循环是
+
 \[
 x_i^{(t)}
 \longrightarrow
@@ -374,6 +377,7 @@ x_i^{(t)}
 \longrightarrow
 j_i^{(t)},
 \]
+
 策略由历史数据训练，部署不必先在线更新 \(\widehat\theta_i\) 才能选题。
 
 两者可以混合。例如把 Fisher 信息、内容类别和当前能力估计作为策略网络输入，或给
@@ -404,6 +408,7 @@ score-function policy gradient，官方实现使用 PPO。不同之处是环境�
 set selector。
 
 可以把它概括成
+
 \[
 \text{learn an initialization}
 \quad+\quad
@@ -461,9 +466,11 @@ BOBCAT 只能从观测集合 \(\mathcal O_i\) 划分候选和 meta 题。如果�
 
 式（11）需要内层 Hessian 可逆或至少能稳定求解相应线性系统。深度网络的 Hessian 常
 奇异或病态。阻尼
+
 \[
 H_\delta=H+\delta I
 \]
+
 可以改善数值稳定性，但改变影响分数。影响函数还是局部小扰动近似；把题权重从 0 变到
 1 是有限变化，非线性强时局部近似可能失真。
 
@@ -541,6 +548,7 @@ IRT 信息规则可解释为在当前能力处最大化信息。神经策略的�
 
 设题目 \(j\) 属于内容类别 \(c(j)\)，短测需要每类题数落在上下限。可在动作 mask 中阻止
 违反硬约束的题，或在外层加入惩罚：
+
 \[
 \mathcal J_{\mathrm{total}}
 =\mathcal J_{\mathrm{meta}}
@@ -548,6 +556,7 @@ IRT 信息规则可解释为在当前能力处最大化信息。神经策略的�
 \sum_c
 \left(#\{j\in S_i:c(j)=c\}-m_c\right)^2.
 \]
+
 硬 mask 保证每条试卷可行，软惩罚允许精度与内容偏差权衡。正式测验通常把 shadow
 test 或组合优化层作为主要可行性机制，简单惩罚可以提供辅助权衡。
 
@@ -555,10 +564,12 @@ test 或组合优化层作为主要可行性机制，简单惩罚可以提供辅
 
 原论文实验固定 \(n\)。可变长度 CAT 需要增加 stop 动作，或者当预测不确定性低于阈值
 时停止。若把 stop 当动作，策略必须权衡少问一题与预测精度损失。外层可以写成
+
 \[
 \mathcal J
 =\mathcal L_{\mathrm{meta}}
 +c\,T,
 \]
+
 其中 \(T\) 是实际题数，\(c>0\) 是每问一道题的成本。这样“缩短测试”从比较不同固定
 \(n\) 变成目标函数内部的显式权衡。

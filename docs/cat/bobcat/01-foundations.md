@@ -66,9 +66,11 @@
 \(j=1,2,\ldots,Q\)，其中 \(Q\) 是题库中的题目总数。
 
 学生 \(i\) 对题目 \(j\) 的二值作答记为
+
 \[
 Y_{i,j}\in\{0,1\}.
 \]
+
 下标的第一个位置是人，第二个位置是题。\(Y_{i,j}=1\) 表示答对，
 \(Y_{i,j}=0\) 表示答错。
 
@@ -82,11 +84,14 @@ Y_{i,j}\in\{0,1\}.
 CAT 需要一个模型，把学生特征和题目特征变成答对概率。这个模型叫
 **响应模型**。BOBCAT 用字母 \(g\) 表示它。先不规定 \(g\) 是 IRT 还是神经网络，
 只写成
+
 \[
 g(j;\theta_i).
 \]
+
 分号左边的 \(j\) 是要预测的题目编号。分号右边的 \(\theta_i\) 是学生 \(i\) 的局部
 参数。输出是一个 \(0\) 到 \(1\) 之间的数，解释为学生答对题 \(j\) 的预测概率：
+
 \[
 g(j;\theta_i)\approx
 \Pr(Y_{i,j}=1\mid \text{模型当前掌握的信息}).
@@ -108,6 +113,7 @@ p_{i,j}
 \]
 
 其中 \(p_{i,j}\) 是为了缩短书写而新定义的概率，\(\sigma\) 是 sigmoid 函数：
+
 \[
 \sigma(z)=\frac{1}{1+\exp(-z)}.
 \]
@@ -119,6 +125,7 @@ p_{i,j}
 
 !!! example "小例子：三个可手算的答对概率"
     固定学生能力 \(\theta_i=0.5\)。
+
     \[
     \begin{array}{c|c|c}
     \text{题目难度} & \theta_i-b_j & \Pr(Y_{i,j}=1)\\ \hline
@@ -127,25 +134,30 @@ p_{i,j}
     b_j=1.5 & -1.0 & \sigma(-1)\approx0.269
     \end{array}
     \]
+
     同一个学生对不同题的答对概率不同，因此响应模型必须同时知道学生和题。
 
 ### 传统 CAT 为什么偏爱答对概率接近一半的题
 
 在 1PL 模型中，题目 \(j\) 对能力 \(\theta_i\) 的 Fisher 信息为
+
 \[
 \mathcal{I}_j(\theta_i)=p_{i,j}(1-p_{i,j}).
 \]
+
 这里新出现的 \(\mathcal{I}\) 表示 information；BOBCAT 后面的影响函数记为
 \(I_i(j)\)。函数 \(p(1-p)\) 在 \(p=0.5\) 时达到最大值 \(0.25\)。所以，当目标是尽快
 减小能力估计的不确定性时，选择当前预测答对概率最接近 \(0.5\) 的题很合理。
 
 若在第 \(t\) 个选题时刻，学生 \(i\) 尚可选择的题集合记为
 \(\Omega_i^{(t)}\)，传统规则可写成
+
 \[
 j_i^{(t)}
 =\operatorname*{arg\,max}_{j\in\Omega_i^{(t)}}
 \mathcal{I}_j\!\left(\widehat{\theta}_i^{(t-1)}\right).
 \]
+
 现在逐个读这个式子。
 
 - 上标 \((t)\) 表示第 \(t\) 步；它是步骤索引。
@@ -192,14 +204,18 @@ j_i^{(t)}
 ### 交叉熵就是负对数似然
 
 二值答案可以看成 Bernoulli 随机变量。给定概率 \(p\)，观察到答案 \(y\) 的概率质量为
+
 \[
 \Pr(Y=y)=p^y(1-p)^{1-y}.
 \]
+
 把它取对数再加负号：
+
 \[
 -\log\Pr(Y=y)
 =-y\log p-(1-y)\log(1-p),
 \]
+
 正好得到二元交叉熵公式。因此，最小化交叉熵等价于最大化观测答案的似然。论文有时说
 “maximize likelihood”，公式却写“minimize cross-entropy”，两种说法没有矛盾。
 
@@ -207,11 +223,13 @@ j_i^{(t)}
 
 若暂时假设给定学生参数以后，各题作答条件独立，那么多道题的联合似然是各题似然的
 乘积。取对数后，乘积变成求和。因此，对题集 \(S\) 的总损失可以写成
+
 \[
 \mathcal{L}(\theta_i,S)
 =\sum_{j\in S}
 \ell\!\left(Y_{i,j},g(j;\theta_i)\right).
 \]
+
 这里第一次使用花体大写 \(\mathcal{L}\)。小写 \(\ell\) 是一道题的损失，大写
 \(\mathcal{L}\) 是一个题集的损失。后面 BOBCAT 的外层损失就采用这种求和。
 
@@ -221,11 +239,13 @@ j_i^{(t)}
 ### 1PL 下交叉熵梯度的一个关键简化
 
 令
+
 \[
 p=\sigma(\theta-b),
 \qquad
 \ell(\theta)=-y\log p-(1-y)\log(1-p).
 \]
+
 对能力 \(\theta\) 求导，结果非常简单：
 
 \[
@@ -242,9 +262,11 @@ p=\sigma(\theta-b),
 \]
 
 一维时，二阶导数描述曲率；多维时，对应的对象叫 Hessian 矩阵。后面影响函数中的
+
 \[
 (\nabla_{\theta_i}^2\mathcal{L}'_i)^{-1}
 \]
+
 就来自这种曲率。
 
 !!! tip "读到这里应当记住"
@@ -258,9 +280,11 @@ p=\sigma(\theta-b),
 
 考虑一个函数 \(f(\theta)\)。\(\theta\) 是我们可以改变的参数，\(f\) 是改变参数后得到
 的损失。优化任务
+
 \[
 \min_{\theta} f(\theta)
 \]
+
 读作：在允许的 \(\theta\) 中寻找让 \(f\) 最小的值。
 
 梯度写作 \(\nabla_\theta f(\theta)\)。下标 \(\theta\) 明确说明“对谁求导”。若
@@ -284,20 +308,24 @@ p=\sigma(\theta-b),
     当前能力 \(\theta=0\)，题目难度 \(b=0\)，所以 \(p=\sigma(0)=0.5\)。学生答对，
     \(y=1\)。由IRT 梯度公式，梯度为 \(p-y=-0.5\)。取学习率
     \(\alpha=0.4\)，一步更新得到
+
     \[
     \theta^{\mathrm{new}}
     =0-0.4(-0.5)=0.2.
     \]
+
     同一学生的能力估计从 0 上升到 0.2。
 
 ### \(K\) 步梯度下降得到截断近似解
 
 从初始值 \(\theta^{(0)}\) 开始，重复梯度下降公式：
+
 \[
 \theta^{(k+1)}
 =\theta^{(k)}-\alpha\nabla_\theta f(\theta^{(k)}),
 \qquad k=0,\ldots,K-1.
 \]
+
 这里 \(k\) 是优化步编号，\(K\) 是总步数。得到的 \(\theta^{(K)}\) 一般只是近似解。
 除非有很强条件并且迭代充分久，否则不能把它等同于真正的
 \(\operatorname*{arg\,min}_\theta f(\theta)\)。
@@ -308,22 +336,28 @@ BOBCAT 论文先用 \(\theta_i^*=\operatorname*{arg\,min}_{\theta_i}\cdots\) 描
 ### 什么叫对梯度再求梯度
 
 设一步更新是
+
 \[
 \theta^{(1)}(\gamma)
 =\gamma-\alpha\nabla_\theta f(\theta)\big|_{\theta=\gamma},
 \]
+
 这里 \(\gamma\) 是初始参数。若外层损失为 \(F(\theta^{(1)}(\gamma))\)，更新
 \(\gamma\) 需要链式法则：
+
 \[
 \frac{\mathrm dF}{\mathrm d\gamma}
 =\frac{\partial F}{\partial\theta^{(1)}}
 \frac{\partial\theta^{(1)}}{\partial\gamma}.
 \]
+
 第二个因子是
+
 \[
 \frac{\partial\theta^{(1)}}{\partial\gamma}
 =I-\alpha\nabla_\theta^2 f(\gamma).
 \]
+
 其中 \(I\) 是单位矩阵，\(\nabla_\theta^2 f\) 是 Hessian。它来自“对内层梯度再求导”，
 所以精确 meta-gradient 会出现二阶导数。
 
@@ -353,9 +387,11 @@ score-function 估计和有偏的 straight-through 近似两条路线。
 
 二分类中最简单的主动学习规则叫 uncertainty sampling。若模型对某候选样本预测类别 1
 的概率为 \(p\)，则 \(p\) 越接近 \(0.5\)，模型越不确定。可以用
+
 \[
 u(p)=\min\{p,1-p\}
 \]
+
 作为不确定性分数。它在 \(p=0.5\) 时最大。
 
 1PL IRT 的题目信息 \(p(1-p)\) 也在 \(0.5\) 最大。因此，1PL 中按 Fisher 信息选题与按
@@ -399,9 +435,11 @@ u(p)=\min\{p,1-p\}
 
 BOBCAT 用 \(\Pi(\cdot;\phi)\) 表示策略。分号后的 \(\phi\) 读作 phi，是选题神经网络的
 全部可训练参数。给定第 \(t\) 步状态 \(x_i^{(t)}\)，选到题 \(j\) 的概率写成
+
 \[
 \Pi\!\left(j\mid x_i^{(t)};\phi\right).
 \]
+
 竖线读作“给定”。
 
 ### BOBCAT 与强化学习的关系
@@ -417,9 +455,11 @@ RL 风格的策略梯度，并在实现中使用 PPO。整个框架不能简单�
 ### 奖励和损失的符号方向
 
 强化学习通常最大化奖励 \(R\)，机器学习通常最小化损失 \(\mathcal{L}\)。可以令
+
 \[
 R=-\mathcal{L}.
 \]
+
 于是最大化奖励等价于最小化损失。论文式（8）直接保留损失，所以策略梯度更新的正负号
 要按“梯度下降最小化损失”解释。
 
@@ -430,9 +470,11 @@ R=-\mathcal{L}.
 它很像有限时域、终点反馈的序贯决策。
 
 传统 MDP 还会写状态转移
+
 \[
 s_{t+1}\sim P(\cdot\mid s_t,a_t).
 \]
+
 在 BOBCAT 的离线模拟里，当前状态和选择的题决定将哪一个历史答案暴露出来，再把该答案
 写进下一状态。论文假定一次测试期间学生真实能力静态，因此顺序本身不进入状态编码。
 
@@ -443,12 +485,14 @@ s_{t+1}\sim P(\cdot\mid s_t,a_t).
 概率；若带来高损失，就降低概率。
 
 这背后的核心恒等式是
+
 \[
 \nabla_\phi \mathbb{E}_{X\sim p_\phi}[f(X)]
 =\mathbb{E}_{X\sim p_\phi}\!\left[
 f(X)\nabla_\phi\log p_\phi(X)
 \right].
 \]
+
 这里 \(X\) 是从分布 \(p_\phi\) 抽到的离散对象，\(f(X)\) 是抽到它以后得到的结果。
 左边原本要求对“含抽样的期望”求导，右边只要求对 log 概率求导。第 16 章会从求和形式
 逐行推导它。
@@ -456,16 +500,20 @@ f(X)\nabla_\phi\log p_\phi(X)
 ### baseline 为什么不引入偏差
 
 可以从 \(f(X)\) 中减去一个不依赖当前动作的基线 \(b\)：
+
 \[
 \mathbb{E}[(f(X)-b)\nabla_\phi\log p_\phi(X)].
 \]
+
 因为
+
 \[
 \mathbb{E}[\nabla_\phi\log p_\phi(X)]
 =\sum_x p_\phi(x)\nabla_\phi\log p_\phi(x)
 =\sum_x\nabla_\phi p_\phi(x)
 =\nabla_\phi 1=0,
 \]
+
 减去 \(b\) 不改变期望，只可能降低方差。BOBCAT 式（8）中的 \(b_i\) 就是学生 \(i\) 的
 控制变量。在 actor-critic 实现中，critic 学习预测结果，充当状态相关 baseline。
 
@@ -473,11 +521,13 @@ f(X)\nabla_\phi\log p_\phi(X)
 
 PPO 是 proximal policy optimization。直接策略梯度可能一次更新太大，使新策略与收集
 轨迹时的旧策略差别过大。PPO 用概率比
+
 \[
 r_t(\phi)
 =\frac{\Pi_\phi(a_t\mid s_t)}
 {\Pi_{\phi_{\mathrm{old}}}(a_t\mid s_t)}
 \]
+
 衡量变化，并把 \(r_t\) 截在 \(1-\epsilon\) 与 \(1+\epsilon\) 附近。BOBCAT 官方代码的
 无偏版本含 actor、critic、entropy bonus 和 clipped surrogate loss。理解论文式（8）
 只需要 REINFORCE 恒等式；PPO 是让实际更新更稳定的工程层。
@@ -497,14 +547,18 @@ query 数据评价。
 
 假设第 \(i\) 个任务有训练损失 \(L_i^{\mathrm{train}}\) 和验证损失
 \(L_i^{\mathrm{meta}}\)。从共同初始化 \(\gamma\) 出发，一步适应：
+
 \[
 \theta_i'=\gamma-\alpha
 \nabla_\theta L_i^{\mathrm{train}}(\theta)\big|_{\theta=\gamma}.
 \]
+
 然后选择 \(\gamma\)，使适应后的参数在各任务 meta 数据上好：
+
 \[
 \min_\gamma \sum_i L_i^{\mathrm{meta}}(\theta_i').
 \]
+
 这就是 model-agnostic meta-learning，简称 MAML，最基本的结构
 [Finn et al. (2017)](references.md#finn2017maml)。
 

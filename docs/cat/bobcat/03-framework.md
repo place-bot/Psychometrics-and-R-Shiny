@@ -5,29 +5,38 @@
 ### 固定长度 n
 
 论文研究固定长度 CAT。对学生 \(i\)，选题器总共选 \(n\) 道题：
+
 \[
 \{j_i^{(1)},j_i^{(2)},\ldots,j_i^{(n)}\}.
 \]
+
 这里 \(n\) 是短测长度，满足
+
 \[
 n\leq |\Omega_i^{(1)}|.
 \]
+
 竖线 \(|S|\) 表示集合 \(S\) 中元素的数量。因此右侧是学生 \(i\) 一开始可用的候选题数。
 
 每选完一道题，就把它从候选集中删除：
+
 \[
 \Omega_i^{(t+1)}
 =\Omega_i^{(t)}\setminus\{j_i^{(t)}\}.
 \]
+
 反斜杠表示集合差。这个更新保证同一学生不会重复收到同一道题。
 
 ### 状态向量第一次正式出现
 
 第 \(t\) 步选题以前，BOBCAT 把学生到目前为止的作答编码成
+
 \[
 x_i^{(t)}\in\{-1,0,1\}^{Q}.
 \]
+
 粗体没有写出，但它是一个长度为 \(Q\) 的向量。第 \(j\) 个分量定义为
+
 \[
 x_{i,j}^{(t)}
 =
@@ -40,9 +49,11 @@ x_{i,j}^{(t)}
 
 !!! example "小例子：五题题库中的状态"
     题库有 \(Q=5\) 道题。学生先答对第 2 题，又答错第 5 题，则下一步状态为
+
     \[
     x_i^{(3)}=(0,1,0,0,-1).
     \]
+
     上标是 3，因为现在要做第 3 次选择。向量不仅保存答案，也通过零元素保存哪些题还没问。
 
 ### 为什么状态没有显式记录时间顺序
@@ -58,6 +69,7 @@ x_{i,j}^{(t)}
 
 选题网络读取 \(x_i^{(t)}\)，对题库中每道题输出一个 logit。logit 是未归一化实数分数。
 对已选题或没有历史答案的题加一个近似负无穷的 mask，然后用 softmax：
+
 \[
 \Pi(j\mid x_i^{(t)},\Omega_i^{(t)};\phi)
 =
@@ -65,23 +77,28 @@ x_{i,j}^{(t)}
 {\sum_{r\in\Omega_i^{(t)}}\exp(z_{i,r}^{(t)})},
 \qquad j\in\Omega_i^{(t)}.
 \]
+
 这里 \(z_{i,j}^{(t)}\) 是网络给题 \(j\) 的 logit，字母 \(r\) 只是分母中遍历候选题的
 临时索引。softmax 后，所有可选题概率非负且总和为 1。
 
 ### 采样与贪心选择
 
 概率策略可以抽样：
+
 \[
 j_i^{(t)}
 \sim
 \Pi(x_i^{(t)},\Omega_i^{(t)};\phi).
 \]
+
 符号 \(\sim\) 表示“从右侧分布中抽取”。也可以在部署时取最大概率题：
+
 \[
 j_i^{(t)}
 =\operatorname*{arg\,max}_{j\in\Omega_i^{(t)}}
 \Pi(j\mid x_i^{(t)};\phi).
 \]
+
 训练时保留随机性有助于探索和策略梯度；Approx 代码前向采用 hard argmax，反向把它近似
 成 softmax。
 
@@ -91,26 +108,32 @@ j_i^{(t)}
 
 论文用 \(\gamma\) 表示 global response model parameters。它可以容纳一组参数，维度
 也可以与 \(\theta_i\) 不同。为了避免抽象混乱，我们把它拆成
+
 \[
 \gamma=(\psi,\mu).
 \]
+
 \(\psi\) 表示跨学生共享且内层固定的部分，例如所有题目难度或神经网络权重；
 \(\mu\) 表示学生特定参数的全局初始化或先验中心。对学生 \(i\) 适应的是
 \(\theta_i\)，初始值设为
+
 \[
 \theta_i^{(0)}=\mu.
 \]
+
 外层同时学习 \(\psi\) 和 \(\mu\) 时，二者都属于 \(\gamma\)。
 
 ### IRT 实例
 
 在 1PL IRT 中，可以写
+
 \[
 g(j;\theta_i,\psi)
 =\sigma(\theta_i-b_j),
 \qquad
 \psi=(b_1,\ldots,b_Q).
 \]
+
 题目难度 \(b_j\) 跨学生共享。内层只根据少量作答更新学生能力 \(\theta_i\)，不更新题目
 难度。全局学生能力均值 \(\mu\) 作为每名新学生的初始能力。
 
@@ -120,28 +143,36 @@ g(j;\theta_i,\psi)
 ### 神经网络实例
 
 神经响应模型可以接受学生嵌入 \(h_i\)，经共享网络产生对所有题的 logits：
+
 \[
 o_i=W_2\,\rho(W_1 h_i+c_1)+c_2.
 \]
+
 这里 \(h_i\) 对应局部参数，\(W_1,W_2,c_1,c_2\) 是全局共享权重与偏置，
 \(\rho\) 是 ReLU 等非线性函数。第 \(j\) 个输出经 sigmoid 后给出
+
 \[
 g(j;h_i)=\sigma(o_{i,j}).
 \]
+
 内层可以只更新 \(h_i\)，共享网络固定。官方实验中的 BiNN 使用 256 维学生特定向量，
 响应网络含一层 256 节点隐藏层、ReLU、dropout 和 sigmoid 输出。
 
 ### 全局与局部参数之间的正则项
 
 少量作答不足以稳定估计高维局部参数，因此理想内层目标加入
+
 \[
 R(\gamma,\theta_i).
 \]
+
 例如一维 IRT 可用
+
 \[
 R(\gamma,\theta_i)
 =\frac{\lambda}{2}(\theta_i-\mu)^2,
 \]
+
 其中 \(\lambda\geq0\) 控制局部能力偏离全局中心 \(\mu\) 的惩罚。若从概率角度看，这对应
 \(\theta_i\sim N(\mu,\lambda^{-1})\) 的高斯先验负对数部分。
 
@@ -202,22 +233,27 @@ BOBCAT 的外层目标是
 ### 全局响应模型和选题器如何进入式（3）
 
 式（3）表面只写了 \(\theta_i^*\)，但应在脑中展开为
+
 \[
 \theta_i^*=\theta_i^*(\gamma,\phi).
 \]
+
 \(\gamma\) 决定全局初始化、共享响应模型与正则中心；\(\phi\) 决定选中哪些训练题。
 所以更完整地写：
+
 \[
 \mathcal J(\gamma,\phi)
 =\frac1N\sum_i
 \mathcal L\!\left(\theta_i^*(\gamma,\phi),\Gamma_i;\gamma\right).
 \]
+
 这里 \(\mathcal J\) 是我们为整套外层目标新取的名字。最后的分号 \(\gamma\) 提醒读者：
 共享题目参数等也可能直接参与 meta 预测。
 
 ### 式（3）优化的是期望还是一次抽样
 
 若选题器是随机策略，严格的外层目标应当对可能的选题轨迹取期望：
+
 \[
 \mathcal J(\gamma,\phi)
 =\frac1N\sum_i
@@ -228,6 +264,7 @@ BOBCAT 的外层目标是
 \right)
 \right].
 \]
+
 论文在式（7）才把这个期望显式写出。式（3）可以看成紧凑的双层目标，随机策略的期望
 依赖被留到梯度推导时展开。
 
@@ -283,6 +320,7 @@ j_i^{(t)}\in\Omega_i^{(t)}.
 \]
 
 论文随后用状态向量 \(x_i^{(t)}\) 实现同样信息，因此也可写成
+
 \[
 j_i^{(t)}
 \sim
@@ -298,6 +336,7 @@ j_i^{(t)}
 - \(S_i^{(t)}=\{j_i^{(1)},\ldots,j_i^{(t)}\}\)：截至第 \(t\) 步已选题。
 
 它们满足
+
 \[
 S_i^{(t)}\subseteq\Omega_i^{(1)},\qquad
 S_i^{(t)}\cap\Omega_i^{(t+1)}=\varnothing,\qquad
@@ -308,6 +347,7 @@ S_i^{(t)}\cap\Omega_i^{(t+1)}=\varnothing,\qquad
 
 式（5）用 \(\phi\) 产生题号；题号进入式（4）决定 \(\theta_i^*\)；\(\theta_i^*\) 进入
 式（3）产生 meta 损失。用函数组合写成
+
 \[
 \phi
 \xrightarrow{\Pi}
@@ -355,26 +395,33 @@ g(j_i^{(\tau)};\theta)
 \[
 \left.\nabla_\theta f(\theta)\right|_{\theta=\theta_i}
 \]
+
 读作：先把 \(f\) 看成关于临时变量 \(\theta\) 的函数并求梯度，再在当前
 \(\theta_i\) 处取值。它不表示条件概率。
 
 ### 初始化和步数
 
 在每个学生的适应开始时，
+
 \[
 \theta_i^{(0)}=\mu,
 \]
+
 其中 \(\mu\) 属于全局参数 \(\gamma\)。连续走 \(K\) 步：
+
 \[
 \theta_i^{(k+1)}
 =U\!\left(\theta_i^{(k)};S_i^{(t)},\alpha\right),
 \qquad k=0,\ldots,K-1,
 \]
+
 其中 \(U\) 只是我们给一次 GD 更新取的函数名。最终
+
 \[
 \theta_i^{(K)}
 =U_K(\mu;S_i^{(t)},\alpha).
 \]
+
 实际实现中，这个 \(\theta_i^{(K)}\) 扮演理想符号 \(\theta_i^*\) 的角色。
 
 ### 为什么少走几步会像正则化
@@ -404,19 +451,25 @@ Rajeswaran 等人的隐式梯度元学习观点，把少步适应作为计算和
 
 取 \(\mu=0\)，题难 \(b=0\)，学生答对 \(y=1\)，学习率 \(\alpha=0.4\)。
 第一步已经算过：
+
 \[
 \theta^{(1)}=0.2.
 \]
+
 第二步先算新概率
+
 \[
 p^{(1)}=\sigma(0.2)\approx0.5498,
 \]
+
 梯度为 \(p^{(1)}-1=-0.4502\)，于是
+
 \[
 \theta^{(2)}
 =0.2-0.4(-0.4502)
 \approx0.3801.
 \]
+
 每一步都重新在当前参数处计算概率和梯度，不能把第一步梯度重复使用两次。
 
 ## 怎样更新全局响应模型
@@ -446,26 +499,33 @@ p^{(1)}=\sigma(0.2)\approx0.5498,
 ### 精确 meta-gradient 穿过 K 步
 
 先只看适应初始化 \(\mu\)。第 \(k\) 步内层 Hessian 记为
+
 \[
 H_i^{(k)}
 =\nabla_\theta^2
 \mathcal L_i^{\mathrm{inner}}(\theta_i^{(k)}).
 \]
+
 对初始化的 Jacobian 递推为
+
 \[
 \frac{\partial\theta_i^{(k+1)}}{\partial\mu}
 =
 \left(I-\alpha H_i^{(k)}\right)
 \frac{\partial\theta_i^{(k)}}{\partial\mu}.
 \]
+
 初始 Jacobian 为 \(I\)，所以
+
 \[
 \frac{\partial\theta_i^{(K)}}{\partial\mu}
 =
 \prod_{k=0}^{K-1}
 \left(I-\alpha H_i^{(k)}\right),
 \]
+
 乘积顺序按计算图从后向前理解。meta-gradient 是
+
 \[
 \nabla_\mu\mathcal L_i^{\mathrm{meta}}
 =
@@ -478,11 +538,13 @@ H_i^{(k)}
 ### 一阶近似
 
 若把每个 \(I-\alpha H_i^{(k)}\) 近似为 \(I\)，就得到
+
 \[
 \nabla_\mu\mathcal L_i^{\mathrm{meta}}
 \approx
 \nabla_{\theta_i^{(K)}}\mathcal L_i^{\mathrm{meta}}.
 \]
+
 直觉上，它让全局初始化朝“适应后参数应当移动的方向”更新，却忽略初始化变化对内层
 梯度路径的二阶影响。
 
@@ -490,6 +552,7 @@ H_i^{(k)}
 
 若 \(\gamma\) 还含共享参数 \(\psi\)，例如题目难度和神经网络权重，meta 预测
 \(g(j;\theta_i,\psi)\) 直接依赖 \(\psi\)。内层适应梯度也可能依赖 \(\psi\)。因此
+
 \[
 \frac{\mathrm d\mathcal L_i}{\mathrm d\psi}
 =
@@ -500,6 +563,7 @@ H_i^{(k)}
 \frac{\partial\theta_i^{(K)}}{\partial\psi}
 }_{\text{改变内层适应结果}}.
 \]
+
 实际实现选择哪些参数允许内层更新、哪些只在外层更新，是模型设计的一部分。
 
 ## 原论文式（7）：选题器梯度为何困难
@@ -507,12 +571,15 @@ H_i^{(k)}
 ### 把整条选题序列当作随机变量
 
 简写
+
 \[
 j_i^{(1:n)}
 =\left(j_i^{(1)},\ldots,j_i^{(n)}\right),
 \]
+
 表示学生 \(i\) 的整条选题序列。由于每一步都从策略中抽样，这个序列是离散随机变量。
 给定它以后，内层适应结果可写成
+
 \[
 \theta_i^*(\gamma,j_i^{(1:n)}).
 \]
@@ -540,9 +607,11 @@ j_i^{(1:n)}
 题号对参数没有普通意义下的局部导数。
 
 因此链条
+
 \[
 \phi\to\text{概率}\to\text{离散题号}\to\theta_i^*\to\mathcal L_i
 \]
+
 在“概率到离散题号”处断开。式（7）的后续工作就是为这处断点构造梯度估计。
 
 ### 两条路线的总览
@@ -567,21 +636,28 @@ j_i^{(1:n)}
 
 暂时只选一道题。令题 \(j\) 被选的概率为 \(\Pi_\phi(j)\)，选后得到的 meta 损失为
 \(L(j)\)。期望损失是
+
 \[
 \mathbb{E}[L]
 =\sum_j \Pi_\phi(j)L(j).
 \]
+
 假设 \(L(j)\) 给定离散动作后不直接含 \(\phi\)，求导：
+
 \[
 \nabla_\phi\mathbb{E}[L]
 =\sum_j \nabla_\phi\Pi_\phi(j)L(j).
 \]
+
 利用
+
 \[
 \nabla_\phi\Pi_\phi(j)
 =\Pi_\phi(j)\nabla_\phi\log\Pi_\phi(j),
 \]
+
 得到
+
 \[
 \nabla_\phi\mathbb{E}[L]
 =
@@ -593,6 +669,7 @@ j_i^{(1:n)}
 ### 多步轨迹的概率为何是连乘
 
 第 \(t\) 步动作概率条件于当前状态。整条轨迹的策略概率为
+
 \[
 p_\phi(j_i^{(1:n)})
 =
@@ -601,7 +678,9 @@ p_\phi(j_i^{(1:n)})
 j_i^{(t)}\mid x_i^{(t)};\phi
 \right).
 \]
+
 取对数，连乘变求和：
+
 \[
 \log p_\phi(j_i^{(1:n)})
 =
@@ -611,7 +690,9 @@ j_i^{(t)}\mid x_i^{(t)};\phi
 j_i^{(t)}\mid x_i^{(t)};\phi
 \right).
 \]
+
 再求梯度：
+
 \[
 \nabla_\phi\log p_\phi(j_i^{(1:n)})
 =
@@ -658,9 +739,11 @@ j_i^{(t)}\mid x_i^{(t)};\phi
 
 设某条轨迹损失小于基线，所以
 \(\mathcal L-b_i<0\)。训练最小化损失，参数更新为
+
 \[
 \phi\leftarrow\phi-\eta_2\widehat{\nabla_\phi\mathcal J}.
 \]
+
 估计梯度含一个负系数乘 \(\nabla_\phi\log\Pi\)。减去该梯度等于沿
 \(+\nabla_\phi\log\Pi\) 移动，因此增加这条轨迹中动作的 log 概率。若损失高于基线，
 方向相反。
@@ -675,9 +758,11 @@ j_i^{(t)}\mid x_i^{(t)};\phi
 
 actor 是策略网络，输出动作概率。critic 读取状态并预测从该状态继续选择后可能得到的
 损失或回报。这个预测可用作 \(b_i\) 或更细的状态相关 baseline。优势量可写为
+
 \[
 A_t=R-V(x_i^{(t)}),
 \]
+
 其中 \(V\) 是 critic 估计的价值。论文官方代码把同一个终点结果复制给多个动作时刻，
 再用 critic 值形成 advantage，并使用 PPO 截断更新。
 
@@ -704,6 +789,7 @@ meta 损失对 \(\phi\) 的影响通过局部参数传递：
 ### 把一次离散选择写成 one-hot 权重
 
 在第 \(t\) 步，对每个当前可用题 \(j\in\Omega_i^{(t)}\) 定义
+
 \[
 w_j=
 \begin{cases}
@@ -711,6 +797,7 @@ w_j=
 0,&j\neq j_i^{(t)}.
 \end{cases}
 \]
+
 于是本步只有被选题进入内层损失。把此前 \(t-1\) 道题与当前选择分开：
 
 \[
@@ -739,10 +826,13 @@ w_j(\phi)\,
 ### 隐式求局部最优参数对题目权重的导数
 
 把式（10）括号内的整体记为 \(\mathcal L_i'(\theta_i,w)\)。最优点满足
+
 \[
 \nabla_{\theta_i}\mathcal L_i'(\theta_i^*,w)=0.
 \]
+
 对 \(w_j\) 求导：
+
 \[
 \nabla_{\theta_i}^2\mathcal L_i'
 \frac{\mathrm d\theta_i^*}{\mathrm dw_j}
@@ -751,6 +841,7 @@ w_j(\phi)\,
 \ell\!\left(Y_{i,j},g(j;\theta_i^*)\right)
 =0.
 \]
+
 若 Hessian 可逆，
 
 \[
@@ -771,11 +862,13 @@ w_j(\phi)\,
 - 候选题梯度 \(\nabla_{\theta_i}\ell_{i,j}\) 是 \(d\) 维列向量。
 
 为了得到标量影响分数，应写成
+
 \[
 -\nabla_{\theta_i}\mathcal L(\theta_i,\Gamma_i)^{\mathsf{T}}
 \left(\nabla_{\theta_i}^2\mathcal L_i'\right)^{-1}
 \nabla_{\theta_i}\ell_{i,j}.
 \]
+
 论文省略了转置符号，按行梯度记号理解。
 
 ### 影响函数分数
@@ -796,6 +889,7 @@ w_j(\phi)\,
 
 新符号 \(\mathcal I_i(j)\) 是题 \(j\) 对学生 \(i\) 的 influence score。它近似表示把题
 \(j\) 在内层中的权重稍微增加，会让 meta 损失怎样变化：
+
 \[
 \mathcal I_i(j)
 \approx
@@ -814,6 +908,7 @@ w_j(\phi)\,
 因此影响函数包含 gradient alignment 与局部曲率两部分信息。
 
 一维时最直观：
+
 \[
 \mathcal I_i(j)
 =-
@@ -822,6 +917,7 @@ g_{\mathrm{meta}}\,
 g_{j}
 }{H},
 \]
+
 其中 \(g_{\mathrm{meta}}\) 是 meta 损失对能力的导数，\(g_j\) 是候选题损失梯度，
 \(H>0\) 是内层曲率。若两梯度同号，增加题 \(j\) 的权重会沿负梯度方向移动参数，从而
 降低 meta 损失，所以影响分数为负。
@@ -829,11 +925,13 @@ g_{j}
 ### 从 one-hot 到概率的近似
 
 \(w_j\) 仍是离散 one-hot。论文用
+
 \[
 w_j(\phi)
 \approx
 \Pi(j\mid x_i^{(t)};\phi)
 \]
+
 替代它。于是近似策略梯度为
 
 \[
@@ -851,19 +949,23 @@ w_j(\phi)
 
 官方代码先算 softmax 概率 \(y_{\mathrm{soft}}\)，再取最大项生成 one-hot
 \(y_{\mathrm{hard}}\)，然后构造
+
 \[
 y
 =y_{\mathrm{hard}}
 -\operatorname{stopgrad}(y_{\mathrm{soft}})
 +y_{\mathrm{soft}}.
 \]
+
 前向计算时，后两项数值抵消，所以 \(y=y_{\mathrm{hard}}\)。反向求导时，
 \(\operatorname{stopgrad}\) 的导数是 0，而最后一项保留 softmax 导数，所以
+
 \[
 \frac{\partial y}{\partial\phi}
 \approx
 \frac{\partial y_{\mathrm{soft}}}{\partial\phi}.
 \]
+
 这就是 straight-through estimator 的典型实现
 [Bengio et al. (2013)](references.md#bengio2013estimating)。
 
@@ -900,18 +1002,23 @@ rate 在 \(2\times10^{-4}\) 或 \(2\times10^{-3}\) 附近。这些数值是论�
 #### 步骤 1：为每个学生建立两个题集
 
 对每个 \(i\in\mathcal B\)，从该学生已观测题中划分
+
 \[
 \Omega_i^{(1)}\quad\text{和}\quad\Gamma_i,
 \]
+
 前者是 training 候选集，后者是 meta 集。二者不相交。
 
 #### 步骤 2：清空短测状态
 
 令
+
 \[
 x_i^{(1)}=\bm 0,\qquad S_i^{(0)}=\varnothing.
 \]
+
 局部适应参数初始化为全局适应块：
+
 \[
 \theta_i^{(0)}=\mu.
 \]
@@ -940,7 +1047,9 @@ x_i^{(1)}=\bm 0,\qquad S_i^{(0)}=\varnothing.
 \nabla_\phi\log
 \Pi(j_i^{(\tau)}\mid x_i^{(\tau)};\phi),
 \]
+
 或者
+
 \[
 \widehat g_{\phi,i}^{\mathrm{approx}}
 \approx
@@ -948,7 +1057,9 @@ x_i^{(1)}=\bm 0,\qquad S_i^{(0)}=\varnothing.
 \mathcal I_i(j)\nabla_\phi
 \Pi(j\mid x_i^{(t)};\phi).
 \]
+
 再对批次平均：
+
 \[
 \phi
 \leftarrow
@@ -962,6 +1073,7 @@ x_i^{(1)}=\bm 0,\qquad S_i^{(0)}=\varnothing.
 #### 步骤 5：更新全局响应模型
 
 完成 \(n\) 个选题步以后，计算
+
 \[
 \gamma
 \leftarrow
@@ -971,6 +1083,7 @@ x_i^{(1)}=\bm 0,\qquad S_i^{(0)}=\varnothing.
 \nabla_\gamma
 \mathcal L(\theta_i^{(K)}(\gamma,\phi),\Gamma_i).
 \]
+
 然后进入下一批学生，直到验证指标不再改善或达到训练预算。
 
 ### 伪代码
@@ -1015,6 +1128,7 @@ while not converged:
 ### 张量级数据流
 
 若批次大小为 \(B=|\mathcal B|\)，题数为 \(Q\)，局部参数维度为 \(d\)，常见张量形状是
+
 \[
 \begin{array}{c|c}
 \text{对象} & \text{形状}\\ \hline
@@ -1027,6 +1141,7 @@ while not converged:
 \text{meta mask} & B\times Q
 \end{array}
 \]
+
 官方代码用 mask 把不同学生拥有的 training/meta 题压进统一 \(B\times Q\) 矩阵，再用
 逐元素 binary cross-entropy 和 mask 求和。
 
