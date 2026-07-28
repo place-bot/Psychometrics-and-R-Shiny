@@ -13,9 +13,9 @@
 
 > Li, X., Xu, H., Zhang, J., & Chang, H.-H. (2023). Deep reinforcement learning for adaptive learning systems. *Journal of Educational and Behavioral Statistics, 48*(2), 220–243.
 
-## 2. TeX 节选与完整论文的关系
+## 2. 公式版本与全文结构
 
-用户提供的 TeX 以初稿的 “Markov Decision Process Formulation” 为中心，逐式解释：
+本专题沿用 2020 年 arXiv 初稿中 “Markov Decision Process Formulation” 部分的公式编号：
 
 - 式 (3)：一步状态转移概率；
 - 式 (4)：马尔可夫性；
@@ -24,14 +24,14 @@
 - 式 (7)：Bellman 最优方程；
 - 式 (8)：到达目标前每步 \(-1\) 的奖励。
 
-完整论文还包含四块必须补上的内容：
+论文的完整方法与证据链还包括四个部分：
 
 1. IRT/MIRT 能力测量；
 2. DQN 函数逼近与深度 Q-learning；
 3. 神经网络转移模型估计器；
 4. 两组数值模拟及其结果。
 
-本站以正式论文的研究主线组织页面，同时在公式对照中使用初稿编号，方便与 TeX 和 PDF 对读。
+后续页面按照测量模型、MDP、DQN、转移模型和实验验证的顺序展开；公式编号采用 arXiv 初稿版本，文献信息采用正式发表版本。
 
 ## 3. 论文要解决的实际问题
 

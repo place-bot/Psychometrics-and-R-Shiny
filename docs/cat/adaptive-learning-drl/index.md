@@ -23,7 +23,7 @@
 | 正式卷期 | 2023 年 4 月，48(2), 220–243 |
 | DOI | [10.3102/10769986221129847](https://doi.org/10.3102/10769986221129847) |
 
-用户提供的 TeX 所解释的式 (3)–(8) 与 2020 年 arXiv 初稿完全对应。初稿首页标有 “Psychometrika Submission”，但最终发表期刊是 *Journal of Educational and Behavioral Statistics*。本站在讲公式时保留初稿编号，引用文献信息时使用正式发表版本。
+本文涉及的式 (3)–(8) 沿用 2020 年 arXiv 初稿的编号。初稿首页标有 “Psychometrika Submission”，最终发表期刊为 *Journal of Educational and Behavioral Statistics*。文献信息以正式发表版本为准。
 
 ## 一张图看论文
 
