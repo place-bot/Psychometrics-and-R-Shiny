@@ -494,6 +494,22 @@ nav:
           - 局限、方法比较与未来工作: cat/ncat/09-limitations-comparison-future.md
           - 符号表与 FAQ: cat/ncat/10-symbols-faq.md
           - 参考文献: cat/ncat/references.md
+      - Deep RL 自适应学习:
+          - 阅读导引: cat/adaptive-learning-drl/index.md
+          - 论文问题、贡献与发表版本: cat/adaptive-learning-drl/01-publication-and-problem.md
+          - 测量模型、能力状态与假设: cat/adaptive-learning-drl/02-measurement-and-assumptions.md
+          - MDP、Q 函数与 Bellman 方程: cat/adaptive-learning-drl/03-mdp-foundations.md
+          - 把自适应学习写成 MDP: cat/adaptive-learning-drl/04-adaptive-learning-mdp.md
+          - 从 Bellman 方程到 DQN: cat/adaptive-learning-drl/05-bellman-and-dqn.md
+          - 深度 Q-learning 完整算法: cat/adaptive-learning-drl/06-deep-q-learning-algorithm.md
+          - 转移模型估计器与虚拟学生: cat/adaptive-learning-drl/07-transition-model-estimator.md
+          - 完整手算与逐步反馈: cat/adaptive-learning-drl/08-worked-example.md
+          - 模拟环境与实验设计: cat/adaptive-learning-drl/09-simulation-design.md
+          - 实验结果与证据边界: cat/adaptive-learning-drl/10-results-and-analysis.md
+          - 实现蓝图与检查清单: cat/adaptive-learning-drl/11-implementation-blueprint.md
+          - 局限、CAT 接口与未来工作: cat/adaptive-learning-drl/12-limitations-cat-comparison-future.md
+          - 符号表、结论与阅读地图: cat/adaptive-learning-drl/13-symbols-summary.md
+          - 参考文献: cat/adaptive-learning-drl/references.md
   - R Shiny:
       - 总览: shiny/index.md
       - 学习路径: shiny/intro.md

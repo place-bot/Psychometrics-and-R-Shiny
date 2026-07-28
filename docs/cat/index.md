@@ -22,6 +22,7 @@
 
 - [BOBCAT](bobcat/index.md)：用双层优化从历史作答数据中学习自适应选题策略。
 - [NCAT](ncat/index.md)：把逐题选题写成强化学习问题，用双通道 attention 和 Q-learning 学习长期选题价值。
+- [Deep RL 自适应学习](adaptive-learning-drl/index.md)：把连续潜在能力作为状态、学习材料作为动作，用 DQN 学习闭环教学路径，并用转移模型提高小样本数据利用率。
 
 ## 两种数据驱动方法在 CAT 中的位置
 
@@ -48,3 +49,5 @@ s_{t+1}.
 \]
 
 它以 held-out query 题上的预测损失构造 reward，通过 Q-learning 训练策略；答对题和答错题由双通道 attention 编码。BOBCAT 与 NCAT 都会在每个真实答案到达后重新选择下一题，差别主要在训练目标的求解方法和状态表示。
+
+Deep RL 自适应学习研究外层教学决策。材料会改变学生能力，学习后通过测试或 CAT 重新估计能力，再选择下一份材料。它与 NCAT 都使用 Q-learning，但前者优化达成学习目标所需的路径，后者优化测量质量。

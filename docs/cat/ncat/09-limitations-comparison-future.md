@@ -16,6 +16,8 @@
 
 更细的 BOBCAT 目标和算法见[双层优化](../bobcat/02-bilevel.md)与[Framework 与算法](../bobcat/03-framework.md)。
 
+若动作改为学习材料、状态改为学习后的连续能力，Q-learning 对应外层教学推荐。完整模型、转移估计器与模拟证据见 [Deep RL 自适应学习](../adaptive-learning-drl/index.md)。
+
 ## 2. 与推荐系统“生成序列”的关键差异
 
 推荐页面常能同时展示多个商品，用户可能点击其中一个，也可能不点击。CAT 每一步通常只呈现一道题，而且这道题的答案是更新测量状态的关键观测。
