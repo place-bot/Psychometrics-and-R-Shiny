@@ -510,6 +510,26 @@ nav:
           - 局限、CAT 接口与未来工作: cat/adaptive-learning-drl/12-limitations-cat-comparison-future.md
           - 符号表、结论与阅读地图: cat/adaptive-learning-drl/13-symbols-summary.md
           - 参考文献: cat/adaptive-learning-drl/references.md
+  - NLP:
+      - 总览: nlp/index.md
+      - 词表示与 Word2Vec:
+          - Mikolov et al. (2013):
+              - 阅读导引: nlp/word2vec-2013/index.md
+              - 论文问题、文献身份与创新: nlp/word2vec-2013/01-paper-question-and-contributions.md
+              - 分布式词表示基础: nlp/word2vec-2013/02-distributed-representations.md
+              - 计算复杂度与神经语言模型基线: nlp/word2vec-2013/03-complexity-and-baselines.md
+              - Huffman Hierarchical Softmax: nlp/word2vec-2013/04-hierarchical-softmax.md
+              - CBOW：从上下文预测中心词: nlp/word2vec-2013/05-cbow.md
+              - Skip-gram：从中心词预测上下文: nlp/word2vec-2013/06-skip-gram.md
+              - SGD、反向传播与完整算法: nlp/word2vec-2013/07-training-algorithm.md
+              - 类比评测与向量运算: nlp/word2vec-2013/08-analogy-evaluation.md
+              - 实验设计、数据与比较框架: nlp/word2vec-2013/09-experiment-design.md
+              - 实验结果与证据分析: nlp/word2vec-2013/10-results-and-analysis.md
+              - 线性规律的含义与边界: nlp/word2vec-2013/11-linear-regularities.md
+              - 公开代码与最小实现: nlp/word2vec-2013/12-code-and-implementation.md
+              - 局限、后续工作与现代位置: nlp/word2vec-2013/13-limitations-followups.md
+              - 符号表、结论与阅读地图: nlp/word2vec-2013/14-symbols-conclusion.md
+              - 参考文献与资料: nlp/word2vec-2013/references.md
   - R Shiny:
       - 总览: shiny/index.md
       - 学习路径: shiny/intro.md
