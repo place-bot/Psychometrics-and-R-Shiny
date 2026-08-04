@@ -99,6 +99,14 @@ e_{ij}=a(\mathbf s_{i-1},\mathbf h_j),\qquad
 
 “代码公开”“权重可下载”“允许商用”“完整训练可复现”需要分别判断。本站在介绍模型时会落实到精确检查点和许可证，不按品牌统一贴上“开源”标签。
 
+## LLM 应用全景与书籍导读
+
+### Pai (2025)
+
+[《Designing Large Language Model Applications》专题导读](designing-llm-applications-2025/index.md)把单篇论文路线扩展为一张端到端系统地图。专题依照“模型从哪里来—怎样适配与运行—怎样组成应用”三层结构，讲解预训练数据、词表与 tokenizer、架构与学习目标、模型选择、微调、对齐、推理优化、工具调用、embedding、RAG 和系统架构。
+
+书中关于 tokenizer 的讨论在这里作为全系统入口：tokenization 会同时影响上下文预算、跨语言效率、延迟、embedding 和下游数据管线；BPE、Byte-level BPE 与 WordPiece 的算法推导和官方代码则由[子词分词专题](subword-tokenization/index.md)承接。导读还单独给出 CAT 场景的映射，说明实时选题、状态更新、约束检查和生成模型分别处在系统的哪一层。
+
 ## 后续专题接口
 
 后续论文可以沿以下关系接入：

@@ -717,6 +717,22 @@ nav:
               - 性能、显存与运维: nlp/llm-software-stack/06-performance-operations.md
               - 选型与结论: nlp/llm-software-stack/07-selection-conclusion.md
               - 官方资料: nlp/llm-software-stack/references.md
+      - LLM 书籍导读:
+          - Designing Large Language Model Applications:
+              - 专题导引: nlp/designing-llm-applications-2025/index.md
+              - 全书地图与阅读路线: nlp/designing-llm-applications-2025/01-book-map.md
+              - 预训练数据: nlp/designing-llm-applications-2025/02-pretraining-data.md
+              - 词表与 Tokenization: nlp/designing-llm-applications-2025/03-vocabulary-tokenization.md
+              - 架构与学习目标: nlp/designing-llm-applications-2025/04-architectures-objectives.md
+              - 模型选择与推理: nlp/designing-llm-applications-2025/05-model-selection-inference.md
+              - 微调与领域适配: nlp/designing-llm-applications-2025/06-finetuning-domain-adaptation.md
+              - 对齐训练与推理能力: nlp/designing-llm-applications-2025/07-alignment-reasoning.md
+              - 推理优化: nlp/designing-llm-applications-2025/08-inference-optimization.md
+              - 工具调用与 Agent: nlp/designing-llm-applications-2025/09-tools-agents.md
+              - Embedding 与 RAG: nlp/designing-llm-applications-2025/10-embeddings-rag.md
+              - 系统架构与 CAT 映射: nlp/designing-llm-applications-2025/11-system-architecture-cat.md
+              - 局限、结论与阅读建议: nlp/designing-llm-applications-2025/12-limitations-conclusion.md
+              - 参考资料: nlp/designing-llm-applications-2025/references.md
   - R Shiny:
       - 总览: shiny/index.md
       - 学习路径: shiny/intro.md
