@@ -69,29 +69,29 @@ Table 2 和 Table 4 对应实验使用：
 
 1. 计算
 
-   \[
-   p_r=\sigma(\mathbf u_{n_r}^\top\mathbf h);
-   \]
+    \[
+    p_r=\sigma(\mathbf u_{n_r}^\top\mathbf h);
+    \]
 
 2. 计算误差
 
-   \[
-   \delta_r=p_r-y_r;
-   \]
+    \[
+    \delta_r=p_r-y_r;
+    \]
 
 3. 累积输入梯度
 
-   \[
-   \mathbf g_h\mathrel{+}=\delta_r\mathbf u_{n_r};
-   \]
+    \[
+    \mathbf g_h\mathrel{+}=\delta_r\mathbf u_{n_r};
+    \]
 
 4. 更新节点向量
 
-   \[
-   \mathbf u_{n_r}
-   \leftarrow
-   \mathbf u_{n_r}-\eta\delta_r\mathbf h.
-   \]
+    \[
+    \mathbf u_{n_r}
+    \leftarrow
+    \mathbf u_{n_r}-\eta\delta_r\mathbf h.
+    \]
 
 遍历完路径后，用累计的 \(\mathbf g_h\) 更新输入表示的来源参数。
 
