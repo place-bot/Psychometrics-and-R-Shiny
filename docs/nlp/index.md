@@ -18,7 +18,7 @@
    └── 评价与解释：相似性、迁移能力、偏差与稳健性
 ```
 
-第一条主线从静态词向量开始。它回答一个基础问题：词原本只是词表中的离散编号，怎样仅凭大规模语料中的上下文共现，学习出能够表达语义和句法规律的连续向量？
+第一条主线从静态词向量开始，随后进入带注意力的序列到序列模型，再衔接完全基于 attention 的 Transformer。这样可以依次看清“词怎样获得向量”“模型怎样按生成步骤读取源句”以及“怎样移除 RNN 的串行状态链”。
 
 ## 词表示与 Word2Vec
 
@@ -34,6 +34,37 @@
 - 证明简单模型、更多语料和更高维向量可以形成很强的词表示。
 
 这篇论文适合作为 NLP 表示学习的起点，因为它同时连接了语言模型、表示学习、对比式预测目标、近似归一化、规模化训练和表示评价。
+
+## 神经机器翻译与注意力
+
+### Bahdanau, Cho & Bengio (2015)
+
+[Neural Machine Translation by Jointly Learning to Align and Translate](bahdanau-attention-2015/index.md) 针对固定向量 Encoder–Decoder 的长句瓶颈，为每个目标步骤重新计算源位置权重：
+
+\[
+e_{ij}=a(\mathbf s_{i-1},\mathbf h_j),\qquad
+\alpha_{ij}=\operatorname{softmax}_j(e_{ij}),\qquad
+\mathbf c_i=\sum_j\alpha_{ij}\mathbf h_j.
+\]
+
+专题完整讲解双向 GRU、additive attention、端到端梯度、deep output、beam search、WMT14 实验和 GroundHog 代码，并设专节解释 RNN 的递归依赖为什么限制训练并行化。
+
+## Transformer、预训练与参数高效适配
+
+| 专题 | 核心问题 |
+|---|---|
+| [Attention Is All You Need](transformer-2017/index.md) | 怎样用 self-attention 移除 RNN 训练中的位置递归 |
+| [LoRA](lora-2022/index.md) | 怎样用低秩增量高效适配 Transformer |
+| [BERT](bert-2019/index.md) | 怎样用 MLM 预训练深层双向 Transformer encoder |
+
+## BERT 术语对应的四篇代表文献
+
+“先进行语言建模预训练，再针对任务微调”涉及不同抽象层级。本站按用户指定顺序在 BERT 后分别展开：
+
+1. [迁移学习：Pan & Yang (2010)](transfer-learning-2010/index.md)
+2. [语言建模：Bengio et al. (2003)](neural-language-model-2003/index.md)
+3. [预训练：Dai & Le (2015)](sequence-pretraining-2015/index.md)
+4. [微调：ULMFiT (2018)](ulmfit-2018/index.md)
 
 ## 后续专题接口
 

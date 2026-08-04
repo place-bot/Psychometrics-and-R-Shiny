@@ -530,6 +530,106 @@ nav:
               - 局限、后续工作与现代位置: nlp/word2vec-2013/13-limitations-followups.md
               - 符号表、结论与阅读地图: nlp/word2vec-2013/14-symbols-conclusion.md
               - 参考文献与资料: nlp/word2vec-2013/references.md
+      - 神经机器翻译与注意力:
+          - Bahdanau et al. (2015):
+              - 阅读导引: nlp/bahdanau-attention-2015/index.md
+              - 论文身份、问题与创新: nlp/bahdanau-attention-2015/01-paper-identity-motivation.md
+              - NMT 概率与固定向量瓶颈: nlp/bahdanau-attention-2015/02-nmt-probability-and-fixed-vector.md
+              - 双向编码器与源端注释: nlp/bahdanau-attention-2015/03-bidirectional-encoder.md
+              - 逐步解码与条件生成: nlp/bahdanau-attention-2015/04-decoder-and-generation.md
+              - Additive Attention 完整推导: nlp/bahdanau-attention-2015/05-additive-attention.md
+              - 端到端目标与反向传播: nlp/bahdanau-attention-2015/06-end-to-end-training.md
+              - GRU、初始化与 Deep Output: nlp/bahdanau-attention-2015/07-gru-and-deep-output.md
+              - Beam Search 与推理: nlp/bahdanau-attention-2015/08-beam-search-and-inference.md
+              - 逐步手算：从注意力到梯度: nlp/bahdanau-attention-2015/09-worked-example.md
+              - 实验设计、数据与训练配置: nlp/bahdanau-attention-2015/10-experiment-design.md
+              - BLEU 结果与长度分析: nlp/bahdanau-attention-2015/11-results-and-length-analysis.md
+              - 软对齐与长句案例: nlp/bahdanau-attention-2015/12-alignment-and-long-sentences.md
+              - GroundHog 原始代码精读: nlp/bahdanau-attention-2015/13-groundhog-code-reading.md
+              - 现代 PyTorch 实现: nlp/bahdanau-attention-2015/14-modern-pytorch-implementation.md
+              - 注意力解释、复杂度与并行化: nlp/bahdanau-attention-2015/15-attention-interpretation-and-complexity.md
+              - 局限、Transformer 接口与后续工作: nlp/bahdanau-attention-2015/16-limitations-transformer-future.md
+              - 符号表、结论与阅读地图: nlp/bahdanau-attention-2015/17-symbols-conclusion.md
+              - 参考文献与一手资源: nlp/bahdanau-attention-2015/references.md
+      - Transformer:
+          - Vaswani et al. (2017):
+              - 阅读导引: nlp/transformer-2017/index.md
+              - 问题、创新与架构全景: nlp/transformer-2017/01-problem-contributions-architecture.md
+              - Q、K、V 的含义与形状: nlp/transformer-2017/02-query-key-value-shapes.md
+              - Scaled Dot-Product Attention: nlp/transformer-2017/03-scaled-dot-product-attention.md
+              - Padding Mask 与 Causal Mask: nlp/transformer-2017/04-masks.md
+              - Multi-Head Attention: nlp/transformer-2017/05-multi-head-attention.md
+              - Encoder、Decoder 与三种 Attention: nlp/transformer-2017/06-encoder-decoder.md
+              - 位置编码: nlp/transformer-2017/07-positional-encoding.md
+              - FFN、残差与 LayerNorm: nlp/transformer-2017/08-ffn-residual-layernorm.md
+              - 训练与自回归推理: nlp/transformer-2017/09-training-and-inference.md
+              - 复杂度、路径与并行化: nlp/transformer-2017/10-complexity-and-parallelism.md
+              - 完整手算: nlp/transformer-2017/11-worked-example.md
+              - 实验结果与消融: nlp/transformer-2017/12-experiments-results.md
+              - 代码精读与现代实现: nlp/transformer-2017/13-code-reading-implementation.md
+              - 局限、现代变体与结论: nlp/transformer-2017/14-limitations-modern-variants-conclusion.md
+              - 参考文献: nlp/transformer-2017/references.md
+      - 参数高效微调:
+          - Hu et al. (2022) LoRA:
+              - 阅读导引: nlp/lora-2022/index.md
+              - 问题与创新: nlp/lora-2022/01-problem-and-contributions.md
+              - 低秩更新的线性代数: nlp/lora-2022/02-low-rank-math.md
+              - 参数量、显存与训练成本: nlp/lora-2022/03-parameter-memory-compute.md
+              - Transformer 中改哪些矩阵: nlp/lora-2022/04-target-modules.md
+              - 初始化、缩放与 Rank: nlp/lora-2022/05-initialization-scaling-rank.md
+              - 训练、合并与部署: nlp/lora-2022/06-training-merge-deployment.md
+              - 完整手算: nlp/lora-2022/07-worked-example.md
+              - 与其他微调方法比较: nlp/lora-2022/08-method-comparison.md
+              - 实验设计与结果: nlp/lora-2022/09-experiments-results.md
+              - 低秩更新分析: nlp/lora-2022/10-rank-analysis.md
+              - loralib 代码精读: nlp/lora-2022/11-code-reading-implementation.md
+              - 局限、扩展与结论: nlp/lora-2022/12-limitations-extensions-conclusion.md
+              - 参考文献: nlp/lora-2022/references.md
+      - 双向预训练:
+          - Devlin et al. (2019) BERT:
+              - 阅读导引: nlp/bert-2019/index.md
+              - 问题与 Encoder-Only 架构: nlp/bert-2019/01-problem-architecture.md
+              - 输入表示: nlp/bert-2019/02-input-representation.md
+              - MLM 与 80/10/10: nlp/bert-2019/03-masked-language-model.md
+              - NSP 与样本构造: nlp/bert-2019/04-nsp-and-data-construction.md
+              - 预训练配置: nlp/bert-2019/05-pretraining-configuration.md
+              - 统一微调接口: nlp/bert-2019/06-finetuning-tasks.md
+              - 完整手算: nlp/bert-2019/07-worked-example.md
+              - 实验结果: nlp/bert-2019/08-experiments-results.md
+              - 消融研究: nlp/bert-2019/09-ablations.md
+              - 原始代码精读: nlp/bert-2019/10-code-reading-implementation.md
+              - 局限、后续与结论: nlp/bert-2019/11-limitations-followups-conclusion.md
+              - 参考文献: nlp/bert-2019/references.md
+      - BERT 术语对应文献:
+          - 迁移学习 · Pan & Yang (2010):
+              - 阅读导引: nlp/transfer-learning-2010/index.md
+              - 定义与分类: nlp/transfer-learning-2010/01-definitions-taxonomy.md
+              - 三种设置与四类方法: nlp/transfer-learning-2010/02-settings-methods.md
+              - 负迁移与手算: nlp/transfer-learning-2010/03-negative-transfer-worked-example.md
+              - BERT 接口与结论: nlp/transfer-learning-2010/04-bert-connection-conclusion.md
+              - 参考文献: nlp/transfer-learning-2010/references.md
+          - 语言建模 · Bengio et al. (2003):
+              - 阅读导引: nlp/neural-language-model-2003/index.md
+              - 概率与分布式表示: nlp/neural-language-model-2003/01-problem-probability.md
+              - 架构与训练: nlp/neural-language-model-2003/02-architecture-training.md
+              - 手算与 Perplexity: nlp/neural-language-model-2003/03-worked-example.md
+              - 实验、局限与结论: nlp/neural-language-model-2003/04-experiments-conclusion.md
+              - 参考文献: nlp/neural-language-model-2003/references.md
+          - 预训练 · Dai & Le (2015):
+              - 阅读导引: nlp/sequence-pretraining-2015/index.md
+              - 问题与无监督目标: nlp/sequence-pretraining-2015/01-problem-methods.md
+              - 完整算法: nlp/sequence-pretraining-2015/02-algorithm.md
+              - 实验与手算: nlp/sequence-pretraining-2015/03-experiments-worked-example.md
+              - 局限、接口与结论: nlp/sequence-pretraining-2015/04-limitations-connection-conclusion.md
+              - 参考文献: nlp/sequence-pretraining-2015/references.md
+          - 微调 · ULMFiT (2018):
+              - 阅读导引: nlp/ulmfit-2018/index.md
+              - 三阶段方法: nlp/ulmfit-2018/01-three-stage-method.md
+              - 三种微调技术: nlp/ulmfit-2018/02-finetuning-techniques.md
+              - 分类算法: nlp/ulmfit-2018/03-classifier-algorithm.md
+              - 实验、消融与低样本: nlp/ulmfit-2018/04-experiments-results.md
+              - 局限、接口与结论: nlp/ulmfit-2018/05-limitations-conclusion.md
+              - 参考文献: nlp/ulmfit-2018/references.md
   - R Shiny:
       - 总览: shiny/index.md
       - 学习路径: shiny/intro.md
