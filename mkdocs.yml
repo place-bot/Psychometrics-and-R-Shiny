@@ -630,6 +630,78 @@ nav:
               - 实验、消融与低样本: nlp/ulmfit-2018/04-experiments-results.md
               - 局限、接口与结论: nlp/ulmfit-2018/05-limitations-conclusion.md
               - 参考文献: nlp/ulmfit-2018/references.md
+      - 自回归大语言模型与对齐:
+          - Radford et al. (2019) GPT-2:
+              - 阅读导引: nlp/gpt2-2019/index.md
+              - 问题、贡献与证据边界: nlp/gpt2-2019/01-question-contributions.md
+              - 从语言模型到隐式多任务: nlp/gpt2-2019/02-lm-to-multitask.md
+              - WebText 数据集: nlp/gpt2-2019/03-webtext-data.md
+              - Byte-level BPE: nlp/gpt2-2019/04-byte-bpe.md
+              - GPT-2 架构与训练: nlp/gpt2-2019/05-architecture.md
+              - Zero-shot 评价协议: nlp/gpt2-2019/06-zero-shot-protocol.md
+              - 语言建模实验: nlp/gpt2-2019/07-language-modeling-experiments.md
+              - 阅读理解、摘要与翻译实验: nlp/gpt2-2019/08-transfer-experiments.md
+              - 泛化、重叠与记忆: nlp/gpt2-2019/09-generalization-memorization.md
+              - 官方代码精读: nlp/gpt2-2019/10-code-reading.md
+              - 完整数值例子: nlp/gpt2-2019/11-worked-example.md
+              - 局限、结论与后续: nlp/gpt2-2019/12-limitations-conclusion.md
+              - 参考文献: nlp/gpt2-2019/references.md
+          - Brown et al. (2020) GPT-3:
+              - 阅读导引: nlp/gpt3-2020/index.md
+              - 问题、贡献与证据边界: nlp/gpt3-2020/01-question-contributions.md
+              - Zero/One/Few-shot 与微调: nlp/gpt3-2020/02-learning-settings.md
+              - In-context learning 机制: nlp/gpt3-2020/03-in-context-mechanism.md
+              - 架构与八档模型规模: nlp/gpt3-2020/04-architecture-scaling.md
+              - 数据流水线与混合采样: nlp/gpt3-2020/05-data-pipeline.md
+              - 训练配置与计算量: nlp/gpt3-2020/06-training-compute.md
+              - 评价协议与提示构造: nlp/gpt3-2020/07-evaluation-protocol.md
+              - 核心实验结果: nlp/gpt3-2020/08-core-experiments.md
+              - 合成任务与定性实验: nlp/gpt3-2020/09-synthetic-qualitative.md
+              - 元学习解释: nlp/gpt3-2020/10-meta-learning-interpretation.md
+              - Scaling 曲线分析: nlp/gpt3-2020/11-scaling-analysis.md
+              - 数据污染审计: nlp/gpt3-2020/12-contamination.md
+              - 代码、限制与结论: nlp/gpt3-2020/13-repository-limitations-conclusion.md
+              - 参考文献: nlp/gpt3-2020/references.md
+          - Touvron et al. (2023) Llama 2:
+              - 阅读导引: nlp/llama2-2023/index.md
+              - 问题、贡献与模型家族: nlp/llama2-2023/01-question-contributions.md
+              - Base 与 Chat 完整流水线: nlp/llama2-2023/02-base-chat-pipeline.md
+              - 预训练数据、Tokenizer 与优化: nlp/llama2-2023/03-pretraining-data-tokenizer.md
+              - RMSNorm、SwiGLU、RoPE 与 GQA: nlp/llama2-2023/04-architecture.md
+              - 基础模型实验: nlp/llama2-2023/05-base-experiments.md
+              - 监督微调: nlp/llama2-2023/06-supervised-finetuning.md
+              - 偏好数据与双 Reward Model: nlp/llama2-2023/07-preference-reward-model.md
+              - Rejection Sampling: nlp/llama2-2023/08-rejection-sampling.md
+              - PPO、组合奖励与 KL: nlp/llama2-2023/09-ppo-rlhf.md
+              - 安全微调与红队: nlp/llama2-2023/10-safety-training.md
+              - Ghost Attention: nlp/llama2-2023/11-ghost-attention.md
+              - Chat 评价与证据边界: nlp/llama2-2023/12-chat-evaluation.md
+              - 官方代码、模板与许可: nlp/llama2-2023/13-code-release.md
+              - 局限、结论与演进: nlp/llama2-2023/14-limitations-conclusion.md
+              - 参考文献: nlp/llama2-2023/references.md
+      - 开放权重模型家族:
+          - Command R、Mistral、Phi 与 Llama:
+              - 专题导引: nlp/open-weight-model-families/index.md
+              - 开源代码、开放权重与开放训练: nlp/open-weight-model-families/01-open-source-open-weight.md
+              - Command R: nlp/open-weight-model-families/02-command-r.md
+              - Mistral: nlp/open-weight-model-families/03-mistral.md
+              - Phi: nlp/open-weight-model-families/04-phi.md
+              - Llama: nlp/open-weight-model-families/05-llama.md
+              - 技术横向比较: nlp/open-weight-model-families/06-technical-comparison.md
+              - 任务、算力与许可证选型: nlp/open-weight-model-families/07-selection-guide.md
+              - 结论与持续更新: nlp/open-weight-model-families/08-conclusion.md
+              - 官方资料: nlp/open-weight-model-families/references.md
+      - LLM 软件栈:
+          - Transformers、llama.cpp 与 LangChain:
+              - 专题导引: nlp/llm-software-stack/index.md
+              - 软件栈分层地图: nlp/llm-software-stack/01-stack-layers.md
+              - Hugging Face Transformers: nlp/llm-software-stack/02-transformers.md
+              - llama.cpp: nlp/llm-software-stack/03-llama-cpp.md
+              - LangChain: nlp/llm-software-stack/04-langchain.md
+              - 三者的系统集成: nlp/llm-software-stack/05-integration.md
+              - 性能、显存与运维: nlp/llm-software-stack/06-performance-operations.md
+              - 选型与结论: nlp/llm-software-stack/07-selection-conclusion.md
+              - 官方资料: nlp/llm-software-stack/references.md
   - R Shiny:
       - 总览: shiny/index.md
       - 学习路径: shiny/intro.md

@@ -66,6 +66,25 @@ e_{ij}=a(\mathbf s_{i-1},\mathbf h_j),\qquad
 3. [预训练：Dai & Le (2015)](sequence-pretraining-2015/index.md)
 4. [微调：ULMFiT (2018)](ulmfit-2018/index.md)
 
+## 自回归大语言模型与对话对齐
+
+从 GPT-2 到 GPT-3 再到 Llama 2，可以连续看到三次重点转移：先检验大规模语言模型能否零样本迁移，再系统研究 in-context learning，随后把重点推进到开放权重基础模型的 SFT、偏好建模与 RLHF。
+
+1. [GPT-2：Language Models are Unsupervised Multitask Learners](gpt2-2019/index.md)
+2. [GPT-3：Language Models are Few-Shot Learners](gpt3-2020/index.md)
+3. [Llama 2：Open Foundation and Fine-Tuned Chat Models](llama2-2023/index.md)
+
+## 模型家族与 LLM 软件栈
+
+论文路线之外，两个专题负责建立现代模型选型和系统实现的横向地图：
+
+| 专题 | 核心问题 |
+|---|---|
+| [Command R、Mistral、Phi 与 Llama](open-weight-model-families/index.md) | 怎样比较模型家族的架构、定位、部署与开放权重许可证 |
+| [Transformers、llama.cpp 与 LangChain](llm-software-stack/index.md) | 模型库、推理运行时与应用编排框架分别负责哪一层 |
+
+“代码公开”“权重可下载”“允许商用”“完整训练可复现”需要分别判断。本站在介绍模型时会落实到精确检查点和许可证，不按品牌统一贴上“开源”标签。
+
 ## 后续专题接口
 
 后续论文可以沿以下关系接入：
