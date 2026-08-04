@@ -530,6 +530,21 @@ nav:
               - 局限、后续工作与现代位置: nlp/word2vec-2013/13-limitations-followups.md
               - 符号表、结论与阅读地图: nlp/word2vec-2013/14-symbols-conclusion.md
               - 参考文献与资料: nlp/word2vec-2013/references.md
+      - 子词分词:
+          - BPE、Byte-level BPE 与 WordPiece:
+              - 专题导引: nlp/subword-tokenization/index.md
+              - 为什么需要子词: nlp/subword-tokenization/01-why-subwords.md
+              - Tokenizer 完整流水线: nlp/subword-tokenization/02-tokenizer-pipeline.md
+              - BPE 词表训练: nlp/subword-tokenization/03-bpe-training.md
+              - BPE 编码与 Merge Rank: nlp/subword-tokenization/04-bpe-encoding.md
+              - GPT-2 Byte-level BPE: nlp/subword-tokenization/05-byte-level-bpe.md
+              - WordPiece 训练思想: nlp/subword-tokenization/06-wordpiece-training.md
+              - BERT WordPiece 编码: nlp/subword-tokenization/07-wordpiece-encoding.md
+              - BPE 与 WordPiece 比较: nlp/subword-tokenization/08-bpe-wordpiece-comparison.md
+              - 完整手算: nlp/subword-tokenization/09-worked-example.md
+              - 官方代码与现代实现: nlp/subword-tokenization/10-code-implementation.md
+              - 评价、局限与结论: nlp/subword-tokenization/11-evaluation-limitations-conclusion.md
+              - 参考资料: nlp/subword-tokenization/references.md
       - 神经机器翻译与注意力:
           - Bahdanau et al. (2015):
               - 阅读导引: nlp/bahdanau-attention-2015/index.md

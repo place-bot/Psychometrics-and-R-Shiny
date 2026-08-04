@@ -7,6 +7,8 @@
 ```text
 离散符号
    │
+   ├── 分词与输入编码：BPE、Byte-level BPE、WordPiece
+   │
    ├── 词与子词表示：Word2Vec、GloVe、fastText
    │
    ├── 上下文表示：ELMo、BERT 与预训练语言模型
@@ -18,7 +20,7 @@
    └── 评价与解释：相似性、迁移能力、偏差与稳健性
 ```
 
-第一条主线从静态词向量开始，随后进入带注意力的序列到序列模型，再衔接完全基于 attention 的 Transformer。这样可以依次看清“词怎样获得向量”“模型怎样按生成步骤读取源句”以及“怎样移除 RNN 的串行状态链”。
+学习路线先从静态词向量理解“离散词怎样获得向量”，再补上字符串到 token ID 的子词分词层；随后进入带注意力的序列到序列模型，并衔接完全基于 attention 的 Transformer。这样可以依次看清输入单位怎样形成、模型怎样按生成步骤读取源句，以及怎样移除 RNN 的串行状态链。
 
 ## 词表示与 Word2Vec
 
@@ -34,6 +36,18 @@
 - 证明简单模型、更多语料和更高维向量可以形成很强的词表示。
 
 这篇论文适合作为 NLP 表示学习的起点，因为它同时连接了语言模型、表示学习、对比式预测目标、近似归一化、规模化训练和表示评价。
+
+## 子词分词
+
+### BPE、Byte-level BPE 与 WordPiece
+
+[子词分词专题](subword-tokenization/index.md)解释文本怎样从字符串变成模型可处理的 token IDs，并区分三条经常被混写的路线：
+
+- 原始 BPE 如何从数据压缩演化为基于高频 pair 的子词学习；
+- GPT-2 如何用可逆 UTF-8 字节映射构造 byte-level BPE；
+- BERT 如何把 BasicTokenizer 与 WordPiece longest-match-first 串联起来。
+
+专题完整讲解训练算法、merge rank、WordPiece likelihood 思想、`Ġ` 与 `##`、手算过程、官方代码、offset mapping、多语言效率和 tokenizer 评价。它也明确标注 BERT 并未公开当年 WordPiece 词表训练器，因此不会把社区重构的 pair score 当成已公开的内部实现。
 
 ## 神经机器翻译与注意力
 
@@ -92,7 +106,7 @@ e_{ij}=a(\mathbf s_{i-1},\mathbf h_j),\qquad
 | 方向 | 要解决的问题 | 代表性方法 |
 |---|---|---|
 | 训练目标改进 | 全词表归一化仍然昂贵 | Negative Sampling、NCE |
-| 子词表示 | 未登录词和形态信息缺失 | fastText |
+| 词内子串特征 | 静态词向量缺少形态信息 | fastText |
 | 全局共现 | 局部预测与矩阵分解的关系 | GloVe、SGNS-PMI 分析 |
 | 一词多义 | 每个词只有一个静态向量 | 多原型词向量、上下文表示 |
 | 上下文预训练 | 同一个词随句子改变表示 | ELMo、BERT |
