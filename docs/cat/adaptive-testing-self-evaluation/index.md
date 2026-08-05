@@ -39,7 +39,19 @@ SE(\widehat{\theta}_i)\le \varepsilon.
 
 ## 阅读清单
 
-### 1. Wise et al. (1991)：从全程自主选难度开始
+### 五篇核心文献
+
+| 顺序 | 文献 | 与本专题的关系 | 当前进度 |
+|---:|---|---|---|
+| 1 | [Wise et al. (1991), *A Comparison of Self-Adapted and Computer-Adaptive Tests*](wise-et-al-1991.md) | 让受测者在每一道题前选择难度，并与标准自适应测验直接比较 | **已完成精读** |
+| 2 | [Zhu and Fan (1999), *Adjusting Computer Adaptive Test Starting Points to Conserve Item Pool*](https://files.eric.ed.gov/fulltext/ED429997.pdf) | 用自报数学课程和平均成绩预测初始能力，只据此选择起始题，随后恢复标准 CAT | **下一篇** |
+| 3 | [van der Linden (1999), *Empirical Initialization of the Trait Estimator in Adaptive Testing*](https://doi.org/10.1177/01466219922031149) | 用测验前已知的背景变量构造个体化初始估计，为自报信息进入 CAT 提供统计框架 | 待精读 |
+| 4 | [Frans et al. (2023), *Empirical Priors in Polytomous Computerized Adaptive Tests: Risks and Rewards in Clinical Settings*](https://doi.org/10.1177/01466216221124091) | 在多级计分和临床场景中研究经验先验能否缩短测验，以及错误先验会造成什么风险 | 待精读 |
+| 5 | [Petersen et al. (2026), *Evaluating the Use of Prior Information to Individualise Start Item Selection for the EORTC CAT Core*](https://doi.org/10.1007/s11136-025-04101-y) | 在欧洲癌症研究与治疗组织（European Organisation for Research and Treatment of Cancer, EORTC）的 CAT 中，外部信息只决定第一题，此后使用原有选题和停止规则；机制上最接近本专题的设计 | 待精读 |
+
+建议阅读顺序不是简单按年份排列。第一篇已经读完；接下来先读第 2 篇，确认个体化起点为什么不一定缩短测验；再读第 4、5 篇，看现代临床 CAT 中的题量收益与风险；最后用第 3 篇补齐初始化模型的统计理论。
+
+### 第一篇已经读到什么
 
 [A Comparison of Self-Adapted and Computer-Adaptive Tests](wise-et-al-1991.md) 直接比较两种 20 题测验：
 
@@ -48,6 +60,16 @@ SE(\widehat{\theta}_i)\le \varepsilon.
 - 两组都在每题后得到正误反馈。
 
 论文发现 SA 组的平均能力估计更高、测后状态焦虑更低，但用时更长、能力估计误差方差更大。它证明了“受测者掌握的主观信息可能影响测验过程”值得研究，同时也暴露出效度、精度与因果解释上的难题。
+
+### 三篇补充文献
+
+| 文献 | 为什么补充阅读 |
+|---|---|
+| [Revuelta (2004), *Estimating Ability and Item-Selection Strategy in Self-Adapted Testing: A Latent Class Approach*](https://doi.org/10.3102/10769986029004379) | 把受测者的选题策略本身作为潜在类别建模，提醒我们“选择了什么难度”也可能是一类需要分析的数据。 |
+| [Wise et al. (2005), *An Investigation of the Effects of Self-Adapted Testing on Examinee Effort and Performance in a Low-Stakes Achievement Test*](https://files.eric.ed.gov/fulltext/ED490205.pdf) | 直接检验低风险测验中的努力与表现，帮助评估“低风险情境下受测者会认真、准确地提供自我信息”这一前提。 |
+| [Arieli-Attali et al. (2019), *Understanding Test Takers' Choices in a Self-Adapted Test: A Hidden Markov Modeling of Process Data*](https://doi.org/10.3389/fpsyg.2019.00083) | 使用隐马尔可夫模型分析逐题难度选择怎样随目标条件和作答过程变化，适合为前 \(k\) 题选择数据建立过程模型。 |
+
+三篇补充文献不负责回答“是否缩短测验”这一主问题，而是帮助理解受测者如何选择、低风险是否等于高投入，以及选择策略应不应该进入测量模型。
 
 ## 后续阅读要回答的问题
 
@@ -58,4 +80,4 @@ SE(\widehat{\theta}_i)\le \varepsilon.
 5. 效率收益是否只出现在极端能力或症状水平的受测者身上？
 6. 自主感、焦虑和动机的变化，是否会改变被测构念本身的作答过程？
 
-本专题后续将沿着“全程自主选题 - 个体化起点 - 经验先验 - 仅个体化第一题”的顺序继续整理文献。
+本专题后续将沿着“全程自主选题 - 个体化起点 - 经验先验 - 仅个体化第一题”的顺序继续整理文献，并把三篇补充文献用于解释选择过程与低风险作答行为。
