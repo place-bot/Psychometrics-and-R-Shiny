@@ -71,6 +71,17 @@ SE(\widehat{\theta}_i)\le \varepsilon.
 
 三篇补充文献不负责回答“是否缩短测验”这一主问题，而是帮助理解受测者如何选择、低风险是否等于高投入，以及选择策略应不应该进入测量模型。
 
+### 四篇已获取的延伸文献
+
+| 文献 | 在研究路线中的位置 |
+|---|---|
+| [Frosini et al. (1998), *Performing Automatic Exams*](https://doi.org/10.1016/S0360-1315(98)00042-6) | 先用一段类似自我适应测验（Self-Adapted Testing, SAT）的预考确定起始难度，再进入计算机化自适应测验（Computerized Adaptive Testing, CAT）；架构上非常接近“先由用户信息启动，再交回 CAT”。 |
+| [Bass et al. (2026), *Brief Reports: Impact of Informed Starting Value on Longitudinal Computer Adaptive Tests in PROMIS Assessments*](https://doi.org/10.1016/j.apro.2026.100322) | 在患者报告结局测量信息系统（Patient-Reported Outcomes Measurement Information System, PROMIS）的纵向复测中使用 informed starting value，直接考察受测负担、题量与估计误差。 |
+| [Chang and Ying (1999), *a-Stratified Multistage Computerized Adaptive Testing*](https://doi.org/10.1177/01466219922031338) | 导师提到的 a-stratified 基线：早期使用低区分度题，后期保留高区分度题，主要解决题库曝光与安全，而不是利用个体信息解决冷启动。 |
+| [Pitkin and Vispoel (2001), *Differences Between Self-Adapted and Computerized Adaptive Tests: A Meta-Analysis*](https://doi.org/10.1111/j.1745-3984.2001.tb01125.x) | 汇总早期 Self-Adapted Testing 与 Computerized Adaptive Testing 的比较结果，用来判断允许选择对能力估计与测后焦虑的平均影响。 |
+
+这四篇已经取得全文。Frosini et al. (1998) 和 Bass et al. (2026) 直接补充“如何启动”的证据；Chang and Ying (1999) 是不同机制的基线；Pitkin and Vispoel (2001) 提供整体证据背景。
+
 ## 后续阅读要回答的问题
 
 1. 自报信息究竟应当映射为一个点估计，还是一个带不确定性的先验分布？
