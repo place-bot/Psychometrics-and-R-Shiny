@@ -470,6 +470,9 @@ nav:
               - 类别清单: cdm/papers/categories/hmm-network-ml.md
   - CAT:
       - 总览: cat/index.md
+      - Adaptive Testing with Self-Evaluation:
+          - 专题导引: cat/adaptive-testing-self-evaluation/index.md
+          - Wise et al. (1991): cat/adaptive-testing-self-evaluation/wise-et-al-1991.md
       - BOBCAT:
           - 阅读导引: cat/bobcat/index.md
           - 基础准备: cat/bobcat/01-foundations.md

@@ -20,6 +20,7 @@
 
 当前已收录：
 
+- [Adaptive Testing with Self-Evaluation](adaptive-testing-self-evaluation/index.md)：让受测者的自我判断参与选题或初始化，研究这种额外信息能否改善 CAT 的冷启动、测验体验与效率。
 - [BOBCAT](bobcat/index.md)：用双层优化从历史作答数据中学习自适应选题策略。
 - [NCAT](ncat/index.md)：把逐题选题写成强化学习问题，用双通道 attention 和 Q-learning 学习长期选题价值。
 - [Deep RL 自适应学习](adaptive-learning-drl/index.md)：把连续潜在能力作为状态、学习材料作为动作，用 DQN 学习闭环教学路径，并用转移模型提高小样本数据利用率。
