@@ -44,12 +44,12 @@ SE(\widehat{\theta}_i)\le \varepsilon.
 | 顺序 | 文献 | 与本专题的关系 | 当前进度 |
 |---:|---|---|---|
 | 1 | [Wise et al. (1991), *A Comparison of Self-Adapted and Computer-Adaptive Tests*](wise-et-al-1991.md) | 让受测者在每一道题前选择难度，并与标准自适应测验直接比较 | **已完成精读** |
-| 2 | [Zhu and Fan (1999), *Adjusting Computer Adaptive Test Starting Points to Conserve Item Pool*](https://files.eric.ed.gov/fulltext/ED429997.pdf) | 用自报数学课程和平均成绩预测初始能力，只据此选择起始题，随后恢复标准 CAT | **下一篇** |
+| 2 | [Zhu and Fan (1999), *Adjusting Computer Adaptive Test Starting Points to Conserve Item Pool*](https://files.eric.ed.gov/fulltext/ED429997.pdf) | 用自报数学课程和平均成绩预测初始能力，只据此选择起始题，随后恢复标准 CAT | **已完成精读** |
 | 3 | [van der Linden (1999), *Empirical Initialization of the Trait Estimator in Adaptive Testing*](https://doi.org/10.1177/01466219922031149) | 用测验前已知的背景变量构造个体化初始估计，为自报信息进入 CAT 提供统计框架 | 待精读 |
 | 4 | [Frans et al. (2023), *Empirical Priors in Polytomous Computerized Adaptive Tests: Risks and Rewards in Clinical Settings*](https://doi.org/10.1177/01466216221124091) | 在多级计分和临床场景中研究经验先验能否缩短测验，以及错误先验会造成什么风险 | 待精读 |
 | 5 | [Petersen et al. (2026), *Evaluating the Use of Prior Information to Individualise Start Item Selection for the EORTC CAT Core*](https://doi.org/10.1007/s11136-025-04101-y) | 在欧洲癌症研究与治疗组织（European Organisation for Research and Treatment of Cancer, EORTC）的 CAT 中，外部信息只决定第一题，此后使用原有选题和停止规则；机制上最接近本专题的设计 | 待精读 |
 
-建议阅读顺序不是简单按年份排列。第一篇已经读完；接下来先读第 2 篇，确认个体化起点为什么不一定缩短测验；再读第 4、5 篇，看现代临床 CAT 中的题量收益与风险；最后用第 3 篇补齐初始化模型的统计理论。
+建议阅读顺序不是简单按年份排列。前两篇已经读完；接下来读第 4、5 篇，看现代临床 CAT 中的题量收益与风险；最后用第 3 篇补齐初始化模型的统计理论。
 
 ### 第一篇已经读到什么
 
