@@ -45,19 +45,20 @@ SE(\widehat{\theta}_i)\le \varepsilon.
 |---|---|---|
 | Sympson–Hetter（1985）题目曝光控制 | [完整方法笔记：接受概率、模拟标定、信息损失与条件曝光](sympson-hetter-1985.md) | Zhu and Fan（1999）使用的核心曝光控制机制，也是比较“自评起点能否分散题库使用”时必须固定或单独消融的基线。 |
 
-### 七篇核心文献
+### 八篇核心文献
 
 | 顺序 | 文献 | 与本专题的关系 | 当前进度 |
 |---:|---|---|---|
 | 1 | [Wise et al. (1991), *A Comparison of Self-Adapted and Computer-Adaptive Tests*](wise-et-al-1991.md) | 让受测者在每一道题前选择难度，并与标准自适应测验直接比较 | **已完成精读** |
 | 2 | [Zhu and Fan (1999), *Adjusting Computer Adaptive Test Starting Points to Conserve Item Pool*](zhu-fan-1999.md) | 用自报数学课程和平均成绩预测初始能力，只据此选择起始题，随后恢复标准 CAT | **已完成精读** |
 | 3 | [van der Linden (1999), *Empirical Initialization of the Trait Estimator in Adaptive Testing*](https://place-bot.github.io/Psychometrics-and-R-Shiny/cat/adaptive-testing-self-evaluation/van-der-linden-1999/) | 用测验前已知的背景变量构造个体化初始估计，为自报信息进入 CAT 提供统计框架 | **已完成精读** |
-| 4 | [Matteucci and Veldkamp (2009), *Computer Adaptive Testing with Empirical Prior Information: A Gibbs Sampler Approach for Ability Estimation*](https://amsacta.unibo.it/id/eprint/2659/1/matteucci_veldkamp_CAT_2009.pdf) | 背景变量构造的个体化经验先验同时进入能力初始化与逐题/最终能力估计；虽然仍用经典最大信息量准则，却已经通过改变当前能力估计改变实际选题路径 | **待精读：与本项目高度接近** |
+| 4 | [Matteucci and Veldkamp (2009), *Computer Adaptive Testing with Empirical Prior Information: A Gibbs Sampler Approach for Ability Estimation*](matteucci-veldkamp-2009.md) | 背景变量构造的个体化经验先验同时进入能力初始化与逐题/最终能力估计；虽然仍用经典最大信息量准则，却已经通过改变当前能力估计改变实际选题路径 | **已完成精读** |
 | 5 | [He et al. (2019), *Combining Text Mining of Long Constructed Responses and Item-Based Measures: A Hybrid Test Design to Screen for Posttraumatic Stress Disorder (PTSD)*](https://doi.org/10.3389/fpsyg.2019.02358) | 将受测者的创伤与症状 self-narrative 通过文本挖掘转换为个体化先验，再与 PTSD 问卷的 IRT 似然结合；题目却是按固定诊断切点的信息量排成全员相同的顺序，并非个体化实时选题 | **待精读：“受测者自产生信息 → prior”的直接先例** |
 | 6 | [Frans et al. (2023), *Empirical Priors in Polytomous Computerized Adaptive Tests: Risks and Rewards in Clinical Settings*](https://doi.org/10.1177/01466216221124091) | 在多级计分和临床场景中研究经验先验能否缩短测验，以及错误先验会造成什么风险 | 待精读 |
 | 7 | [Petersen et al. (2026), *Evaluating the Use of Prior Information to Individualise Start Item Selection for the EORTC CAT Core*](https://doi.org/10.1007/s11136-025-04101-y) | 在欧洲癌症研究与治疗组织（European Organisation for Research and Treatment of Cancer, EORTC）的 CAT 中，外部信息只决定第一题，此后使用原有选题和停止规则；机制上最接近本专题的设计 | 待精读 |
+| 8 | [Bass et al. (2026), *Brief Reports: Impact of Informed Starting Value on Longitudinal Computer Adaptive Tests in PROMIS Assessments*](https://doi.org/10.1016/j.apro.2026.100322) | 在患者报告结局测量信息系统（Patient-Reported Outcomes Measurement Information System, PROMIS）的纵向复测中使用 informed starting value，直接考察受测负担、题量与估计误差 | **待精读：核心文献** |
 
-建议阅读顺序不是简单按年份排列。前三篇已经读完；第 3 篇补齐了初始化模型的统计理论，第 4 篇检查经验先验如何进入整个逐题估计过程，第 5 篇再把辅助信息来源扩展到心理健康 self-narrative；最后用第 6、7 篇看现代临床 CAT 中的题量收益、错误先验风险和仅个性化第一题的效果边界。
+建议阅读顺序不是简单按年份排列。前四篇已经读完：第 3 篇补齐初始化模型的统计理论，第 4 篇说明经验先验怎样进入整个逐题估计过程，并因此改变实际选题路径。下一篇把辅助信息来源扩展到心理健康 self-narrative；最后用第 6 至第 8 篇看现代临床 CAT 中的题量收益、错误先验风险、仅个性化第一题和纵向复测起点的效果边界。
 
 ### 第一篇已经读到什么
 
@@ -79,9 +80,9 @@ SE(\widehat{\theta}_i)\le \varepsilon.
 
 [Empirical Initialization of the Trait Estimator in Adaptive Testing](van-der-linden-1999.md) 把测验前辅助变量建模为潜在能力的预测变量，并据此构造个体化初始点或完整经验先验。论文不是先估计每个人的 \(\widehat\theta\) 再做普通回归，而是把能力保留为潜变量，从完整逐题作答中联合估计回归系数与先验方差。实际数据示例使用前一测验的对数反应时预测后一词汇测验的能力，但没有重新比较标准 CAT 与个体化 prior CAT 的题量、精度或曝光，因此它是先验构造与估计方法论文，不是 CAT 效率实验。
 
-### 第四篇为什么必须精读
+### 第四篇已经读到什么
 
-[Computer Adaptive Testing with Empirical Prior Information: A Gibbs Sampler Approach for Ability Estimation](https://amsacta.unibo.it/id/eprint/2659/1/matteucci_veldkamp_CAT_2009.pdf) 把背景变量构造的经验先验同时放入 CAT 的初始化和中间/最终能力估计，并在每次更新后继续使用最大信息量选题。因此，“不改选题公式”不等于“不改实际选题路径”。这篇是评估本项目新颖性时最重要的对照：单纯“改 prior + 最大信息量”已经不能作为方法创新。
+[Computer Adaptive Testing with Empirical Prior Information: A Gibbs Sampler Approach for Ability Estimation](matteucci-veldkamp-2009.md) 把背景变量构造的经验先验同时放入 CAT 的初始化和中间/最终能力估计，并在每次更新后继续使用最大信息量选题。因此，“不改选题公式”不等于“不改实际选题路径”。在正确指定的模拟先验下，完整经验先验主要改善了 5 题短测验及极端能力处的估计；只改变起点的半经验条件总体较弱。随着题量增加，优势缩小，而且原表并不支持经验方法在每个能力点的 RMSE 都更低。论文采用固定题长，没有检验同一停止精度下能否减少题量，也没有模拟错误自评、不同先验方差或题目曝光。
 
 ### 第五篇将辅助信息扩展到自我叙述
 
@@ -97,16 +98,15 @@ SE(\widehat{\theta}_i)\le \varepsilon.
 
 三篇补充文献不负责回答“是否缩短测验”这一主问题，而是帮助理解受测者如何选择、低风险是否等于高投入，以及选择策略应不应该进入测量模型。
 
-### 四篇已获取的延伸文献
+### 三篇已获取的延伸文献
 
 | 文献 | 在研究路线中的位置 |
 |---|---|
 | [Frosini et al. (1998), *Performing Automatic Exams*](https://doi.org/10.1016/S0360-1315(98)00042-6) | 先用一段类似自我适应测验（Self-Adapted Testing, SAT）的预考确定起始难度，再进入计算机化自适应测验（Computerized Adaptive Testing, CAT）；架构上非常接近“先由用户信息启动，再交回 CAT”。 |
-| [Bass et al. (2026), *Brief Reports: Impact of Informed Starting Value on Longitudinal Computer Adaptive Tests in PROMIS Assessments*](https://doi.org/10.1016/j.apro.2026.100322) | 在患者报告结局测量信息系统（Patient-Reported Outcomes Measurement Information System, PROMIS）的纵向复测中使用 informed starting value，直接考察受测负担、题量与估计误差。 |
 | [Chang and Ying (1999), *a-Stratified Multistage Computerized Adaptive Testing*](https://doi.org/10.1177/01466219922031338) | 导师提到的 a-stratified 基线：早期使用低区分度题，后期保留高区分度题，主要解决题库曝光与安全，而不是利用个体信息解决冷启动。 |
 | [Pitkin and Vispoel (2001), *Differences Between Self-Adapted and Computerized Adaptive Tests: A Meta-Analysis*](https://doi.org/10.1111/j.1745-3984.2001.tb01125.x) | 汇总早期 Self-Adapted Testing 与 Computerized Adaptive Testing 的比较结果，用来判断允许选择对能力估计与测后焦虑的平均影响。 |
 
-这四篇已经取得全文。Frosini et al. (1998) 和 Bass et al. (2026) 直接补充“如何启动”的证据；Chang and Ying (1999) 是不同机制的基线；Pitkin and Vispoel (2001) 提供整体证据背景。
+这三篇已经取得全文。Frosini et al. (1998) 直接补充“如何启动”的证据；Chang and Ying (1999) 是不同机制的基线；Pitkin and Vispoel (2001) 提供整体证据背景。Bass et al. (2026) 因为直接检验纵向 CAT 的 informed starting value，已经移入核心文献。
 
 ## 后续阅读要回答的问题
 
