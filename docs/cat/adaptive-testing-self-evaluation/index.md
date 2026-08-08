@@ -53,12 +53,12 @@ SE(\widehat{\theta}_i)\le \varepsilon.
 | 2 | [Zhu and Fan (1999), *Adjusting Computer Adaptive Test Starting Points to Conserve Item Pool*](zhu-fan-1999.md) | 用自报数学课程和平均成绩预测初始能力，只据此选择起始题，随后恢复标准 CAT | **已完成精读** |
 | 3 | [van der Linden (1999), *Empirical Initialization of the Trait Estimator in Adaptive Testing*](https://place-bot.github.io/Psychometrics-and-R-Shiny/cat/adaptive-testing-self-evaluation/van-der-linden-1999/) | 用测验前已知的背景变量构造个体化初始估计，为自报信息进入 CAT 提供统计框架 | **已完成精读** |
 | 4 | [Matteucci and Veldkamp (2009), *Computer Adaptive Testing with Empirical Prior Information: A Gibbs Sampler Approach for Ability Estimation*](matteucci-veldkamp-2009.md) | 背景变量构造的个体化经验先验同时进入能力初始化与逐题/最终能力估计；虽然仍用经典最大信息量准则，却已经通过改变当前能力估计改变实际选题路径 | **已完成精读** |
-| 5 | [He et al. (2019), *Combining Text Mining of Long Constructed Responses and Item-Based Measures: A Hybrid Test Design to Screen for Posttraumatic Stress Disorder (PTSD)*](https://doi.org/10.3389/fpsyg.2019.02358) | 将受测者的创伤与症状 self-narrative 通过文本挖掘转换为个体化先验，再与 PTSD 问卷的 IRT 似然结合；题目却是按固定诊断切点的信息量排成全员相同的顺序，并非个体化实时选题 | **待精读：“受测者自产生信息 → prior”的直接先例** |
+| 5 | [He et al. (2019), *Combining Text Mining of Long Constructed Responses and Item-Based Measures: A Hybrid Test Design to Screen for Posttraumatic Stress Disorder (PTSD)*](he-et-al-2019.md) | 将受测者的创伤与症状 self-narrative 通过文本挖掘转换为个体化先验，再与 PTSD 问卷的 IRT 似然结合；题目却是按固定诊断切点的信息量排成全员相同的顺序，并非个体化实时选题 | **已完成精读** |
 | 6 | [Frans et al. (2023), *Empirical Priors in Polytomous Computerized Adaptive Tests: Risks and Rewards in Clinical Settings*](https://doi.org/10.1177/01466216221124091) | 在多级计分和临床场景中研究经验先验能否缩短测验，以及错误先验会造成什么风险 | 待精读 |
 | 7 | [Petersen et al. (2026), *Evaluating the Use of Prior Information to Individualise Start Item Selection for the EORTC CAT Core*](https://doi.org/10.1007/s11136-025-04101-y) | 在欧洲癌症研究与治疗组织（European Organisation for Research and Treatment of Cancer, EORTC）的 CAT 中，外部信息只决定第一题，此后使用原有选题和停止规则；机制上最接近本专题的设计 | 待精读 |
 | 8 | [Bass et al. (2026), *Brief Reports: Impact of Informed Starting Value on Longitudinal Computer Adaptive Tests in PROMIS Assessments*](https://doi.org/10.1016/j.apro.2026.100322) | 在患者报告结局测量信息系统（Patient-Reported Outcomes Measurement Information System, PROMIS）的纵向复测中使用 informed starting value，直接考察受测负担、题量与估计误差 | **待精读：核心文献** |
 
-建议阅读顺序不是简单按年份排列。前四篇已经读完：第 3 篇补齐初始化模型的统计理论，第 4 篇说明经验先验怎样进入整个逐题估计过程，并因此改变实际选题路径。下一篇把辅助信息来源扩展到心理健康 self-narrative；最后用第 6 至第 8 篇看现代临床 CAT 中的题量收益、错误先验风险、仅个性化第一题和纵向复测起点的效果边界。
+建议阅读顺序不是简单按年份排列。前五篇已经读完：第 3 篇补齐初始化模型的统计理论，第 4 篇说明经验先验怎样进入整个逐题估计过程，第 5 篇把辅助信息扩展到心理健康 self-narrative，并厘清“个体化 prior”与“个体化选题”不是一回事。接下来用第 6 至第 8 篇看现代临床 CAT 中的题量收益、错误先验风险、仅个性化第一题和纵向复测起点的效果边界。
 
 ### 第一篇已经读到什么
 
@@ -84,9 +84,9 @@ SE(\widehat{\theta}_i)\le \varepsilon.
 
 [Computer Adaptive Testing with Empirical Prior Information: A Gibbs Sampler Approach for Ability Estimation](matteucci-veldkamp-2009.md) 把背景变量构造的经验先验同时放入 CAT 的初始化和中间/最终能力估计，并在每次更新后继续使用最大信息量选题。因此，“不改选题公式”不等于“不改实际选题路径”。在正确指定的模拟先验下，完整经验先验主要改善了 5 题短测验及极端能力处的估计；只改变起点的半经验条件总体较弱。随着题量增加，优势缩小，而且原表并不支持经验方法在每个能力点的 RMSE 都更低。论文采用固定题长，没有检验同一停止精度下能否减少题量，也没有模拟错误自评、不同先验方差或题目曝光。
 
-### 第五篇将辅助信息扩展到自我叙述
+### 第五篇已经读到什么
 
-[Combining Text Mining of Long Constructed Responses and Item-Based Measures](https://doi.org/10.3389/fpsyg.2019.02358) 让受测者写下创伤经历和相关症状，通过文本挖掘得到个人文本分数，再建立 \(\theta_n\mid y_n\) 的正态先验并与 IRT 问卷似然结合。它证明了“受测者自己产生的信息进入个体化 prior”已有先例；但所有人的题目都按固定诊断切点处的信息量采用相同排序，不能把它误读为“文本 prior 驱动的个性化 CAT 选题”。
+[Combining Text Mining of Long Constructed Responses and Item-Based Measures](he-et-al-2019.md) 让受测者写下创伤经历与症状，通过既有文本分类器得到个人分数，再建立 \(\theta_n\mid y_n\) 的正态先验并与 IRT 问卷似然结合。在 99 人样本中，完整 21 题的分类准确率从 IRT-only 的 0.94 提高到 Hybrid 的 0.97；文本 prior 加 17 道题的平均后验标准误约等于无文本 prior 的完整 21 题。可是 21 道题是在共同诊断切点 \(-0.15\) 处按信息量预先排成同一顺序，prior 没有驱动个性化实时选题；论文也没有报告 17 题条件的分类准确率、覆盖率或错误 prior 风险。
 
 ### 三篇补充文献
 
