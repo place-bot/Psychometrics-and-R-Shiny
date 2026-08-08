@@ -54,11 +54,11 @@ SE(\widehat{\theta}_i)\le \varepsilon.
 | 3 | [van der Linden (1999), *Empirical Initialization of the Trait Estimator in Adaptive Testing*](https://place-bot.github.io/Psychometrics-and-R-Shiny/cat/adaptive-testing-self-evaluation/van-der-linden-1999/) | 用测验前已知的背景变量构造个体化初始估计，为自报信息进入 CAT 提供统计框架 | **已完成精读** |
 | 4 | [Matteucci and Veldkamp (2009), *Computer Adaptive Testing with Empirical Prior Information: A Gibbs Sampler Approach for Ability Estimation*](matteucci-veldkamp-2009.md) | 背景变量构造的个体化经验先验同时进入能力初始化与逐题/最终能力估计；虽然仍用经典最大信息量准则，却已经通过改变当前能力估计改变实际选题路径 | **已完成精读** |
 | 5 | [He et al. (2019), *Combining Text Mining of Long Constructed Responses and Item-Based Measures: A Hybrid Test Design to Screen for Posttraumatic Stress Disorder (PTSD)*](he-et-al-2019.md) | 将受测者的创伤与症状 self-narrative 通过文本挖掘转换为个体化先验，再与 PTSD 问卷的 IRT 似然结合；题目却是按固定诊断切点的信息量排成全员相同的顺序，并非个体化实时选题 | **已完成精读** |
-| 6 | [Frans et al. (2023), *Empirical Priors in Polytomous Computerized Adaptive Tests: Risks and Rewards in Clinical Settings*](https://doi.org/10.1177/01466216221124091) | 在多级计分和临床场景中研究经验先验能否缩短测验，以及错误先验会造成什么风险 | 待精读 |
+| 6 | [Frans et al. (2023), *Empirical Priors in Polytomous Computerized Adaptive Tests: Risks and Rewards in Clinical Settings*](frans-et-al-2023.md) | 在多级计分临床 CAT 中正交操纵先验均值偏差与先验方差，揭示窄 prior 缩短测验的同时也可能造成严重偏差、过早停止或题库耗尽 | **已完成精读** |
 | 7 | [Petersen et al. (2026), *Evaluating the Use of Prior Information to Individualise Start Item Selection for the EORTC CAT Core*](https://doi.org/10.1007/s11136-025-04101-y) | 在欧洲癌症研究与治疗组织（European Organisation for Research and Treatment of Cancer, EORTC）的 CAT 中，外部信息只决定第一题，此后使用原有选题和停止规则；机制上最接近本专题的设计 | 待精读 |
 | 8 | [Bass et al. (2026), *Brief Reports: Impact of Informed Starting Value on Longitudinal Computer Adaptive Tests in PROMIS Assessments*](https://doi.org/10.1016/j.apro.2026.100322) | 在患者报告结局测量信息系统（Patient-Reported Outcomes Measurement Information System, PROMIS）的纵向复测中使用 informed starting value，直接考察受测负担、题量与估计误差 | **待精读：核心文献** |
 
-建议阅读顺序不是简单按年份排列。前五篇已经读完：第 3 篇补齐初始化模型的统计理论，第 4 篇说明经验先验怎样进入整个逐题估计过程，第 5 篇把辅助信息扩展到心理健康 self-narrative，并厘清“个体化 prior”与“个体化选题”不是一回事。接下来用第 6 至第 8 篇看现代临床 CAT 中的题量收益、错误先验风险、仅个性化第一题和纵向复测起点的效果边界。
+建议阅读顺序不是简单按年份排列。前六篇已经读完：第 3 篇补齐初始化模型的统计理论，第 4 篇说明经验先验怎样进入整个逐题估计过程，第 5 篇把辅助信息扩展到心理健康 self-narrative，第 6 篇则揭示固定精度 CAT 中先验精度同时制造效率收益与错误先验风险。接下来用第 7、8 篇看仅个性化第一题和纵向复测起点的效果边界。
 
 ### 第一篇已经读到什么
 
@@ -87,6 +87,12 @@ SE(\widehat{\theta}_i)\le \varepsilon.
 ### 第五篇已经读到什么
 
 [Combining Text Mining of Long Constructed Responses and Item-Based Measures](he-et-al-2019.md) 让受测者写下创伤经历与症状，通过既有文本分类器得到个人分数，再建立 \(\theta_n\mid y_n\) 的正态先验并与 IRT 问卷似然结合。在 99 人样本中，完整 21 题的分类准确率从 IRT-only 的 0.94 提高到 Hybrid 的 0.97；文本 prior 加 17 道题的平均后验标准误约等于无文本 prior 的完整 21 题。可是 21 道题是在共同诊断切点 \(-0.15\) 处按信息量预先排成同一顺序，prior 没有驱动个性化实时选题；论文也没有报告 17 题条件的分类准确率、覆盖率或错误 prior 风险。
+
+### 第六篇已经读到什么
+
+[Empirical Priors in Polytomous Computerized Adaptive Tests](frans-et-al-2023.md) 使用五级计分临床题库、最大后验估计、最大 Fisher 信息量选题和共同的固定精度停止规则，分别操纵个体化 prior 的均值偏差与方差。仅把无偏 prior 的中心移到真实能力而维持方差为 1，并未明显缩短 CAT；效率收益主要来自更小的先验方差。可是窄而错误的 prior 可能把 CAT 送入题库低信息区，造成长测验或题库耗尽；也可能在高信息区迅速达到标准误阈值，形成“题量很短但估计严重偏”的隐蔽失败。
+
+第二项较现实的模拟用临床医生预先给出的 global score 构造个体化 prior。在 5,000 名模拟受测者中，经验 prior 使 68% 的人题量缩短，中位减少 20%（1 题），但没有带来明显的总体偏差改善。强制最少题数或放宽 prior 可以降低风险，却也会削弱题量收益。这篇因此直接支持我们把 prior 均值误差、先验方差与最少题数分开消融，并同时报告偏差、覆盖率、错误提前停止和题库耗尽，而不能只比较平均题量。
 
 ### 三篇补充文献
 
