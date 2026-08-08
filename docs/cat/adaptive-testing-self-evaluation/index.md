@@ -51,13 +51,13 @@ SE(\widehat{\theta}_i)\le \varepsilon.
 |---:|---|---|---|
 | 1 | [Wise et al. (1991), *A Comparison of Self-Adapted and Computer-Adaptive Tests*](wise-et-al-1991.md) | 让受测者在每一道题前选择难度，并与标准自适应测验直接比较 | **已完成精读** |
 | 2 | [Zhu and Fan (1999), *Adjusting Computer Adaptive Test Starting Points to Conserve Item Pool*](zhu-fan-1999.md) | 用自报数学课程和平均成绩预测初始能力，只据此选择起始题，随后恢复标准 CAT | **已完成精读** |
-| 3 | [van der Linden (1999), *Empirical Initialization of the Trait Estimator in Adaptive Testing*](van-der-linden-1999.md) | 用测验前已知的背景变量构造个体化初始估计，为自报信息进入 CAT 提供统计框架 | **精读中：引文地图已整理** |
+| 3 | [van der Linden (1999), *Empirical Initialization of the Trait Estimator in Adaptive Testing*](https://place-bot.github.io/Psychometrics-and-R-Shiny/cat/adaptive-testing-self-evaluation/van-der-linden-1999/) | 用测验前已知的背景变量构造个体化初始估计，为自报信息进入 CAT 提供统计框架 | **已完成精读** |
 | 4 | [Matteucci and Veldkamp (2009), *Computer Adaptive Testing with Empirical Prior Information: A Gibbs Sampler Approach for Ability Estimation*](https://amsacta.unibo.it/id/eprint/2659/1/matteucci_veldkamp_CAT_2009.pdf) | 背景变量构造的个体化经验先验同时进入能力初始化与逐题/最终能力估计；虽然仍用经典最大信息量准则，却已经通过改变当前能力估计改变实际选题路径 | **待精读：与本项目高度接近** |
 | 5 | [He et al. (2019), *Combining Text Mining of Long Constructed Responses and Item-Based Measures: A Hybrid Test Design to Screen for Posttraumatic Stress Disorder (PTSD)*](https://doi.org/10.3389/fpsyg.2019.02358) | 将受测者的创伤与症状 self-narrative 通过文本挖掘转换为个体化先验，再与 PTSD 问卷的 IRT 似然结合；题目却是按固定诊断切点的信息量排成全员相同的顺序，并非个体化实时选题 | **待精读：“受测者自产生信息 → prior”的直接先例** |
 | 6 | [Frans et al. (2023), *Empirical Priors in Polytomous Computerized Adaptive Tests: Risks and Rewards in Clinical Settings*](https://doi.org/10.1177/01466216221124091) | 在多级计分和临床场景中研究经验先验能否缩短测验，以及错误先验会造成什么风险 | 待精读 |
 | 7 | [Petersen et al. (2026), *Evaluating the Use of Prior Information to Individualise Start Item Selection for the EORTC CAT Core*](https://doi.org/10.1007/s11136-025-04101-y) | 在欧洲癌症研究与治疗组织（European Organisation for Research and Treatment of Cancer, EORTC）的 CAT 中，外部信息只决定第一题，此后使用原有选题和停止规则；机制上最接近本专题的设计 | 待精读 |
 
-建议阅读顺序不是简单按年份排列。前两篇已经读完；第 3 篇补齐初始化模型的统计理论，第 4 篇检查经验先验如何进入整个逐题估计过程，第 5 篇再把辅助信息来源扩展到心理健康 self-narrative；最后用第 6、7 篇看现代临床 CAT 中的题量收益、错误先验风险和仅个性化第一题的效果边界。
+建议阅读顺序不是简单按年份排列。前三篇已经读完；第 3 篇补齐了初始化模型的统计理论，第 4 篇检查经验先验如何进入整个逐题估计过程，第 5 篇再把辅助信息来源扩展到心理健康 self-narrative；最后用第 6、7 篇看现代临床 CAT 中的题量收益、错误先验风险和仅个性化第一题的效果边界。
 
 ### 第一篇已经读到什么
 
@@ -75,9 +75,9 @@ SE(\widehat{\theta}_i)\le \varepsilon.
 
 课程与平均成绩综合起点把首题分散到更宽的难度范围，降低了中间题目的集中曝光，并在多数条件下保持与无信息起点接近的能力相关。但它没有稳定缩短可变长度 CAT；在停止标准较宽松的短测验中，平均题量反而多出约一至两题。单独使用平均成绩还因大量 4.0 自报在高难度端形成曝光尖峰，说明错误或堆积的辅助信息可能只是把曝光从题库中间转移到题库尾部。
 
-### 第三篇的引文地图
+### 第三篇已经读到什么
 
-[Empirical Initialization of the Trait Estimator in Adaptive Testing](van-der-linden-1999.md) 把测验前辅助变量建模为潜在能力的预测变量，并据此构造个体化初始点或完整经验先验。独立笔记按论点整理了它引用的理论、经验研究与算法来源，也标出了哪些结论只是本文的理论动机、二手转引或尚未经过 CAT 对照实验验证。
+[Empirical Initialization of the Trait Estimator in Adaptive Testing](van-der-linden-1999.md) 把测验前辅助变量建模为潜在能力的预测变量，并据此构造个体化初始点或完整经验先验。论文不是先估计每个人的 \(\widehat\theta\) 再做普通回归，而是把能力保留为潜变量，从完整逐题作答中联合估计回归系数与先验方差。实际数据示例使用前一测验的对数反应时预测后一词汇测验的能力，但没有重新比较标准 CAT 与个体化 prior CAT 的题量、精度或曝光，因此它是先验构造与估计方法论文，不是 CAT 效率实验。
 
 ### 第四篇为什么必须精读
 

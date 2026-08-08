@@ -1,4 +1,4 @@
-# van der Linden（1999）：个体化初始化的引文证据地图
+# van der Linden（1999）：个体化经验初始化完整精读笔记
 
 ## 文献身份
 
@@ -9,8 +9,8 @@
 - 核心模型：潜在回归（latent regression）加经验贝叶斯初始化
 - 实例中的辅助信息：前一项测验的总作答时间，而不是受测者自评
 
-!!! abstract "这张引文地图怎么用"
-    本页不只是罗列参考文献，而是说明 van der Linden（1999）的每个关键论点由哪篇文献支撑、证据是直接还是间接，以及写进后续论文时最多能够主张到什么程度。
+!!! abstract "这篇论文到底完成了什么"
+    van der Linden（1999）提出了一套从“测验前辅助变量 + 已校准题目的逐题作答”直接估计个体化初始能力分布的方法。本页依次整理研究动机、引文证据、潜在回归、EM 估计、实际数据示例、CAT 中的两种用法及证据边界，并说明它对自评信息进入 CAT 的直接启示。
 
 !!! important "全篇最关键的观点：点估计可忽略，不等于误差可忽略"
     Mislevy and Wu（1988）区分了两个问题。对于一次已经完成的 CAT，如果只关心这名受测者实际得到的最大似然（maximum likelihood, ML）能力点估计，在满足可忽略性条件时，可以不把“系统为何选择这些题”的概率另外乘入似然：
@@ -203,42 +203,224 @@ CAT 中每个人只作答题库的一小部分，其余题目是按自适应规�
 
 van der Linden 的结论是“是否用先验信息选题属于政策选择，没有普遍的技术性禁止”，而不是“公平性已经得到证明”。
 
-## 7. 潜在回归与 EM：本文的方法从哪里来
+## 7. 真正的方法差别：先计分再回归，还是对潜在能力积分
 
-### Zwinderman（1991, 1997）：manifest predictors
+!!! important "一句话概括"
+    Schoonman 把 \(\widehat\theta_j\) 当作已经观察到的回归因变量；van der Linden 把 \(\theta_j\) 保留为潜变量，使用完整逐题作答对它的不确定性进行积分。两者的差别不是“做不做回归”，而是 **plug-in point estimate** 与 **integrating over latent-trait uncertainty** 的差别。
 
-[A Generalized Rasch Model for Manifest Predictors](https://doi.org/10.1007/BF02294492) 与 [Response Models with Manifest Predictors](https://doi.org/10.1007/978-1-4757-2691-6_14) 把观察到的预测变量放入潜在特质模型。当所有题目的区分度固定为 \(a_i=1\) 时，van der Linden 的模型与这一路径直接衔接。
+### 两条估计路径
 
-van der Linden 的扩展是：
+Schoonman 的两步法是：
 
-- 使用已校准的 2PLM 题目参数；
-- 从实际 CAT 的稀疏作答矩阵估计回归参数；
-- 同时估计先验残差方差 \(\sigma^2\)。
+\[
+\mathbf u_j
+\longrightarrow
+\widehat\theta_j
+\longrightarrow
+\widehat\theta_j\sim x_j.
+\]
 
-### Rigdon and Tsutakawa（1983）：EM 算法来源
+它先把每个人的 Vocabulary 逐题作答 \(\mathbf u_j\) 压缩成一个能力点估计 \(\widehat\theta_j\)，再使用普通最小二乘回归：
 
-[Parameter Estimation in Latent Trait Models](https://doi.org/10.1007/BF02293880) 提供潜在特质模型的 EM 参数估计思路。van der Linden 把每名受测者未观察到的残差 \(\varepsilon_j\) 当作 missing data：
+\[
+\widehat\theta_j
+=
+\beta_0+\beta_1x_j+e_j.
+\]
 
-- E 步计算给定作答与背景变量后的 \(\varepsilon_j\) 后验分布；
-- M 步更新 \(\beta\) 和 \(\sigma^2\)；
-- 未施测题目不进入该受测者的似然乘积，因此可处理 CAT 的稀疏数据。
+van der Linden 则按照下列方向建立联合生成模型：
 
-这比“先估计 \(\widehat\theta_j\)，再用普通最小二乘回归”更适合构造完整经验先验。后者把 \(\widehat\theta_j\) 的测量误差与真实预测残差混在一起，尤其会污染 \(\widehat\sigma^2\)。
+\[
+x_j
+\longrightarrow
+\theta_j
+\longrightarrow
+\mathbf u_j,
+\]
 
-### Neter et al.（1990）与 Ralston and Rabinowitz（1983）
+\[
+\theta_j\mid x_j
+\sim
+N(\beta_0+\beta_1x_j,\sigma^2),
+\qquad
+U_{ij}\mid\theta_j
+\sim
+\operatorname{Bernoulli}\{P_i(\theta_j)\}.
+\]
 
-这两项是工具性引文：
+这个模型问的是：哪一组 \(\beta_0,\beta_1,\sigma^2\) 最有可能生成当前观察到的全部逐题作答？
 
-- Neter et al. 支撑线性回归、变量单调变换与多项式预测项；
-- Ralston and Rabinowitz 支撑本文实现积分时使用的 Gauss–Hermite quadrature。
+### 两步回归为什么会污染 prior variance
 
-它们不负责支持个体化初始化的实质效果。
+假设真实的潜在回归为：
 
-## 8. 实际数据示例：Schoonman（1989）提供了什么
+\[
+\theta_j
+=
+\beta_0+\beta_1x_j+\varepsilon_j,
+\qquad
+\operatorname{Var}(\varepsilon_j)=\sigma^2.
+\]
 
-论文使用荷兰一般能力倾向测验组的数据，样本量为 \(N=306\)。受测者先完成 Name Comparison 测验，记录总作答时间；随后完成 Vocabulary 测验。作者用前一测验的对数总作答时间 \(x\) 预测后一测验的语言能力 \(\theta\)。
+但能力点估计本身带有误差：
 
-估计结果为：
+\[
+\widehat\theta_j
+=
+\theta_j+\delta_j.
+\]
+
+因此，两步回归实际拟合的是：
+
+\[
+\widehat\theta_j
+=
+\beta_0+\beta_1x_j
++
+\underbrace{\varepsilon_j}_{\text{真实预测残差}}
++
+\underbrace{\delta_j}_{\text{能力估计误差}}.
+\]
+
+如果两种误差独立，普通回归看到的残差方差大约是：
+
+\[
+\operatorname{Var}(e_j)
+=
+\sigma^2+\operatorname{Var}(\delta_j).
+\]
+
+但个体化 prior 需要的是真实条件异质性：
+
+\[
+\sigma^2
+=
+\operatorname{Var}(\theta_j\mid x_j),
+\]
+
+而不应把短测验本身对 \(\theta_j\) 计分不准的部分也塞进 prior variance。
+
+!!! example "一个假想的数值例子"
+    如果真实的 \(\sigma^2=0.8\)，而 \(\widehat\theta\) 的平均估计误差方差为 \(0.3\)，那么两步回归可能看到 \(0.8+0.3=1.1\) 的残差方差。由此构造的 \(N(\widehat\beta_0+\widehat\beta_1x,1.1)\) 比真正的 \(N(\beta_0+\beta_1x,0.8)\) 更宽，因而会低估辅助信息的预测价值。这些数字只是解释机制的假想例子，不是论文的估计结果。
+
+### 一个必须加上的统计限定
+
+如果能力估计误差满足 \(E(\delta_j\mid x_j)=0\)，且与 \(x_j\) 无关，那么“因变量含有经典测量误差”并不必然使 OLS 斜率 \(\widehat\beta_1\) 衰减：
+
+\[
+\frac{\operatorname{Cov}(x,\widehat\theta)}{\operatorname{Var}(x)}
+=
+\frac{\operatorname{Cov}(x,\theta+\delta)}{\operatorname{Var}(x)}
+=
+\frac{\operatorname{Cov}(x,\theta)}{\operatorname{Var}(x)}.
+\]
+
+所以 van der Linden 的原文只说：两步法可能仍然给出令人满意的 \(\beta\) 估计，但无法给出良好的 prior variance \(\sigma^2\) 估计。更明确会受到影响的是残差方差、回归不确定性以及相关系数。在经典独立误差下，相关的衰减可表示为：
+
+\[
+\operatorname{Cor}(\widehat\theta,x)
+=
+\operatorname{Cor}(\theta,x)
+\sqrt{
+\frac{\operatorname{Var}(\theta)}
+{\operatorname{Var}(\theta)+\operatorname{Var}(\delta)}
+}.
+\]
+
+### van der Linden 如何保留每个人的能力不确定性
+
+已校准的 2PLM 给出：
+
+\[
+P(U_{ij}=1\mid\theta_j)
+=
+\frac{\exp[a_i(\theta_j-b_i)]}
+{1+\exp[a_i(\theta_j-b_i)]}.
+\]
+
+不再先生成一个固定的 \(\widehat\theta_j\) 后，回归参数的边际似然可写为：
+
+\[
+L(\beta_0,\beta_1,\sigma^2)
+=
+\prod_{j=1}^{N}
+\int
+\left[
+\prod_{i=1}^{I}
+P_i(\theta)^{u_{ij}}
+\{1-P_i(\theta)\}^{1-u_{ij}}
+\right]
+\phi\left(
+\theta;
+\beta_0+\beta_1x_j,
+\sigma^2
+\right)
+\,d\theta.
+\]
+
+对每个人，这个式子不假定能力就是某个无误差的点，而是遍历所有可能的 \(\theta\)，根据逐题作答判断各个位置有多合理，再对它们积分。因此，两名同样得到 \(\widehat\theta=0.5\) 的受测者不再被当成同样精确：20 道高区分度题给出的 \(0.5\) 会比 4 道低区分度题给出的 \(0.5\) 更紧，对回归参数提供更多信息。
+
+### EM 算法实际在做什么
+
+对于每名受测者，未观察的残差为：
+
+\[
+\varepsilon_j
+=
+\theta_j-(\beta_0+\beta_1x_j).
+\]
+
+van der Linden 借用 Rigdon and Tsutakawa（1983）的思路，把 \(\varepsilon_j\) 当作 missing data：
+
+- **E 步：**根据当前 \(\beta_0,\beta_1,\sigma^2\)，结合个人的 \(x_j\) 和全部逐题作答 \(\mathbf u_j\)，计算 \(p(\varepsilon_j\mid\mathbf u_j,x_j,\beta_0,\beta_1,\sigma)\)。直观上是问：这个人的真实能力比回归预测值高多少或低多少？
+- **M 步：**根据上述后验分布重新更新 \(\beta_0,\beta_1,\sigma^2\)。残差方差的更新本质上是
+
+    \[
+    \widehat\sigma^2
+    =
+    \frac{1}{N}
+    \sum_{j=1}^{N}
+    E\left(
+    \varepsilon_j^2
+    \mid
+    \mathbf u_j,x_j
+    \right).
+    \]
+
+两步反复执行直到收敛。实例用 Gauss–Hermite quadrature 计算积分，并用 Newton’s method 更新 \(\beta_0\) 和 \(\beta_1\)。这里“直接估计真实 \(\theta\) 的回归”并不是说作者观察到了真实能力，而是说他把 \(\theta\) 作为潜变量，不把第一阶段的 \(\widehat\theta\) 冒充成无误差观测值。
+
+!!! note "方法的引文来源"
+    Zwinderman（1991, 1997）提供 manifest predictors 进入潜在特质模型的基础；Rigdon and Tsutakawa（1983）提供 EM 思路；Neter et al.（1990）支撑回归与变量变换；Ralston and Rabinowitz（1983）是 Gauss–Hermite quadrature 的数值计算来源。未施测题目不进入该受测者的似然乘积，因此同一思路也可用于实际 CAT 的稀疏作答数据。
+
+## 8. Empirical Example：从前测反应时到后测个体化 prior
+
+!!! abstract "这个实例的核心"
+    van der Linden 用前一个测验的反应时间，给后一个词汇测验建立个体化能力先验；并且不是先估计每个人的 \(\widehat\theta\) 再做普通回归，而是把回归模型和 IRT 作答模型联合估计，以避免 \(\widehat\theta\) 的测量误差被误当成先验不确定性。
+
+### 数据与预测关系
+
+论文使用荷兰一般能力倾向测验组的数据，样本量为：
+
+\[
+N=306.
+\]
+
+每个人依次完成两个测验：
+
+1. **Name Comparison test：**记录完成该测验的总反应时间 \(T_j\)，并使用对数时间 \(x_j=\log T_j\)。
+2. **Vocabulary test：**测量语言使用能力 \(\theta_j\)，研究者使用每名受测者的实际逐题作答 \(u_{ij}\in\{0,1\}\)。题库已经用 2PLM 标定，所以题目难度 \(b_i\) 和区分度 \(a_i\) 当作已知。
+
+两个测验都涉及简单的词语使用，因此作者预期语言能力越高者完成 Name Comparison 越快：
+
+\[
+\operatorname{Cor}(\theta,x)<0.
+\]
+
+Schoonman（1989）使用前述两步法，得到 \(\operatorname{Cor}(\widehat\theta,x)=-0.46\)。van der Linden 在潜变量层面联合估计后，报告真实 \(\theta\) 与对数反应时的估计相关为 \(-0.59\)，并把绝对值的差异解释为先估计 \(\widehat\theta\) 造成的信息损失。这是相关的测量误差衰减，不应被改写为“OLS 斜率必然从 \(-0.46\) 修正到 \(-0.59\)”。
+
+### 最终估计出的 prior
+
+多组起始值都收敛到：
 
 \[
 \widehat\beta_0=5.833,
@@ -248,26 +430,87 @@ van der Linden 的扩展是：
 \widehat\sigma^2=0.986.
 \]
 
-因此可以使用：
-
-\[
-\widehat\theta^{(0)}=5.833-1.279x
-\]
-
-作为初始点，或者使用：
+因此，新受测者只要提供 Name Comparison 的对数总反应时间 \(x\)，就可以得到：
 
 \[
 \theta\mid x
 \sim
-N(5.833-1.279x, 0.986)
+N(5.833-1.279x,0.986).
 \]
 
-作为经验先验。
+负斜率表示反应越慢，预测的 Vocabulary 潜在能力越低。
 
-Schoonman（1989）先对估计得到的 \(\widehat\theta\) 做普通回归，报告相关为 \(-0.46\)；van der Linden 直接处理潜变量与测量误差后，估计真实 \(\theta\) 和对数反应时的相关为 \(-0.59\)。作者把差异解释为先估计 \(\widehat\theta\) 所造成的信息损失。
+### 在新 CAT 中的两种使用方式
 
-!!! warning "实例只说明模型可以被估计"
-    论文没有用这一经验先验重新运行一组 CAT，再与标准先验比较题量、偏差或覆盖率。因此该实例是参数估计演示，不是 CAT 效率实验。
+**只作为初始点：**
+
+\[
+\widehat\theta^{(0)}
+=
+5.833-1.279x_{\mathrm{new}}.
+\]
+
+然后在这个位置选择信息量最大的第一道 Vocabulary 题：
+
+\[
+j_1
+=
+\arg\max_j I_j(\widehat\theta^{(0)}).
+\]
+
+这时前一测验的反应时只负责把新 CAT 送到较合适的起点。
+
+**作为完整的 Bayesian prior：**
+
+\[
+p_0(\theta\mid x_{\mathrm{new}})
+=
+N(5.833-1.279x_{\mathrm{new}},0.986).
+\]
+
+每作答一题就使用贝叶斯定理更新：
+
+\[
+p_t(\theta)
+\propto
+p_0(\theta\mid x_{\mathrm{new}})
+\prod_{s=1}^{t}
+P(U_{i_s}=u_{i_s}\mid\theta).
+\]
+
+这时辅助信息会持续影响中间能力估计、后续题目选择、最终估计和后验标准误。后续可以在 EAP 位置使用最大信息量选题，也可以使用最小期望后验方差等 Bayesian 准则。
+
+### 这个实例证明了什么，又没有证明什么
+
+它证明的是：可以从“测前辅助变量 + 逐题作答”中直接估计个体化 prior 的均值与方差，并避免把能力计分误差误当成背景变量的预测失败。
+
+它没有重新运行一组个体化 prior CAT 与标准 CAT 对照，因此没有直接比较：
+
+- 平均测验长度和相同 stopping rule 下的停止时间；
+- bias、均方根误差和区间覆盖率；
+- 实际题目路径和题目曝光；
+- 错误先验是否导致偏差或错误提前停止。
+
+!!! warning "它是先验构造示例，不是 CAT 效率实验"
+    本例的证据上限是“该联合模型可以被估计并得到个体化先验”，不是“该先验已被证明能缩短 CAT”。
+
+### 对自评 CAT 的直接启示
+
+如果将反应时 \(x_j\) 换成用户自评 \(s_j\)，最简单的训练方式是对 \(\widehat\theta_j\) 做普通回归。如果用来估计 \(\theta_j\) 的校准测验很长，\(\widehat\theta_j\) 足够精确，这种两步法可能够用。
+
+但如果校准测验本来就很短，更合理的做法是直接建立：
+
+\[
+\theta_j\mid s_j
+\sim
+N(\beta_0+\beta_1s_j,\sigma^2),
+\qquad
+U_{ij}\mid\theta_j
+\sim
+\operatorname{Bernoulli}\{P_i(\theta_j)\},
+\]
+
+再从逐题作答中联合估计 \(\beta_0,\beta_1,\sigma^2\)。这样才能把“用户自评预测不准”与“短测验对能力计分不准”分开。
 
 ## 9. 可以直接改写进论文的引用句
 
