@@ -45,17 +45,19 @@ SE(\widehat{\theta}_i)\le \varepsilon.
 |---|---|---|
 | Sympson–Hetter（1985）题目曝光控制 | [完整方法笔记：接受概率、模拟标定、信息损失与条件曝光](sympson-hetter-1985.md) | Zhu and Fan（1999）使用的核心曝光控制机制，也是比较“自评起点能否分散题库使用”时必须固定或单独消融的基线。 |
 
-### 五篇核心文献
+### 七篇核心文献
 
 | 顺序 | 文献 | 与本专题的关系 | 当前进度 |
 |---:|---|---|---|
 | 1 | [Wise et al. (1991), *A Comparison of Self-Adapted and Computer-Adaptive Tests*](wise-et-al-1991.md) | 让受测者在每一道题前选择难度，并与标准自适应测验直接比较 | **已完成精读** |
 | 2 | [Zhu and Fan (1999), *Adjusting Computer Adaptive Test Starting Points to Conserve Item Pool*](zhu-fan-1999.md) | 用自报数学课程和平均成绩预测初始能力，只据此选择起始题，随后恢复标准 CAT | **已完成精读** |
 | 3 | [van der Linden (1999), *Empirical Initialization of the Trait Estimator in Adaptive Testing*](van-der-linden-1999.md) | 用测验前已知的背景变量构造个体化初始估计，为自报信息进入 CAT 提供统计框架 | **精读中：引文地图已整理** |
-| 4 | [Frans et al. (2023), *Empirical Priors in Polytomous Computerized Adaptive Tests: Risks and Rewards in Clinical Settings*](https://doi.org/10.1177/01466216221124091) | 在多级计分和临床场景中研究经验先验能否缩短测验，以及错误先验会造成什么风险 | 待精读 |
-| 5 | [Petersen et al. (2026), *Evaluating the Use of Prior Information to Individualise Start Item Selection for the EORTC CAT Core*](https://doi.org/10.1007/s11136-025-04101-y) | 在欧洲癌症研究与治疗组织（European Organisation for Research and Treatment of Cancer, EORTC）的 CAT 中，外部信息只决定第一题，此后使用原有选题和停止规则；机制上最接近本专题的设计 | 待精读 |
+| 4 | [Matteucci and Veldkamp (2009), *Computer Adaptive Testing with Empirical Prior Information: A Gibbs Sampler Approach for Ability Estimation*](https://amsacta.unibo.it/id/eprint/2659/1/matteucci_veldkamp_CAT_2009.pdf) | 背景变量构造的个体化经验先验同时进入能力初始化与逐题/最终能力估计；虽然仍用经典最大信息量准则，却已经通过改变当前能力估计改变实际选题路径 | **待精读：与本项目高度接近** |
+| 5 | [He et al. (2019), *Combining Text Mining of Long Constructed Responses and Item-Based Measures: A Hybrid Test Design to Screen for Posttraumatic Stress Disorder (PTSD)*](https://doi.org/10.3389/fpsyg.2019.02358) | 将受测者的创伤与症状 self-narrative 通过文本挖掘转换为个体化先验，再与 PTSD 问卷的 IRT 似然结合；题目却是按固定诊断切点的信息量排成全员相同的顺序，并非个体化实时选题 | **待精读：“受测者自产生信息 → prior”的直接先例** |
+| 6 | [Frans et al. (2023), *Empirical Priors in Polytomous Computerized Adaptive Tests: Risks and Rewards in Clinical Settings*](https://doi.org/10.1177/01466216221124091) | 在多级计分和临床场景中研究经验先验能否缩短测验，以及错误先验会造成什么风险 | 待精读 |
+| 7 | [Petersen et al. (2026), *Evaluating the Use of Prior Information to Individualise Start Item Selection for the EORTC CAT Core*](https://doi.org/10.1007/s11136-025-04101-y) | 在欧洲癌症研究与治疗组织（European Organisation for Research and Treatment of Cancer, EORTC）的 CAT 中，外部信息只决定第一题，此后使用原有选题和停止规则；机制上最接近本专题的设计 | 待精读 |
 
-建议阅读顺序不是简单按年份排列。前两篇已经读完；目前用第 3 篇补齐初始化模型的统计理论与引文基础，接下来再读第 4、5 篇，看现代临床 CAT 中的题量收益与风险。
+建议阅读顺序不是简单按年份排列。前两篇已经读完；第 3 篇补齐初始化模型的统计理论，第 4 篇检查经验先验如何进入整个逐题估计过程，第 5 篇再把辅助信息来源扩展到心理健康 self-narrative；最后用第 6、7 篇看现代临床 CAT 中的题量收益、错误先验风险和仅个性化第一题的效果边界。
 
 ### 第一篇已经读到什么
 
@@ -76,6 +78,14 @@ SE(\widehat{\theta}_i)\le \varepsilon.
 ### 第三篇的引文地图
 
 [Empirical Initialization of the Trait Estimator in Adaptive Testing](van-der-linden-1999.md) 把测验前辅助变量建模为潜在能力的预测变量，并据此构造个体化初始点或完整经验先验。独立笔记按论点整理了它引用的理论、经验研究与算法来源，也标出了哪些结论只是本文的理论动机、二手转引或尚未经过 CAT 对照实验验证。
+
+### 第四篇为什么必须精读
+
+[Computer Adaptive Testing with Empirical Prior Information: A Gibbs Sampler Approach for Ability Estimation](https://amsacta.unibo.it/id/eprint/2659/1/matteucci_veldkamp_CAT_2009.pdf) 把背景变量构造的经验先验同时放入 CAT 的初始化和中间/最终能力估计，并在每次更新后继续使用最大信息量选题。因此，“不改选题公式”不等于“不改实际选题路径”。这篇是评估本项目新颖性时最重要的对照：单纯“改 prior + 最大信息量”已经不能作为方法创新。
+
+### 第五篇将辅助信息扩展到自我叙述
+
+[Combining Text Mining of Long Constructed Responses and Item-Based Measures](https://doi.org/10.3389/fpsyg.2019.02358) 让受测者写下创伤经历和相关症状，通过文本挖掘得到个人文本分数，再建立 \(\theta_n\mid y_n\) 的正态先验并与 IRT 问卷似然结合。它证明了“受测者自己产生的信息进入个体化 prior”已有先例；但所有人的题目都按固定诊断切点处的信息量采用相同排序，不能把它误读为“文本 prior 驱动的个性化 CAT 选题”。
 
 ### 三篇补充文献
 
