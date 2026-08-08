@@ -58,7 +58,7 @@ SE(\widehat{\theta}_i)\le \varepsilon.
 | 7 | [Petersen et al. (2026), *Evaluating the Use of Prior Information to Individualise Start Item Selection for the EORTC CAT Core*](petersen-et-al-2026.md) | 用已经完成的另一个生活质量领域预测目标领域位置，只据此选择第一题；第一题后恢复原有 CAT，直接检验轻量个性化首题的效果边界 | **已完成精读** |
 | 8 | [Bass et al. (2026), *Brief Reports: Impact of Informed Starting Value on Longitudinal Computer Adaptive Tests in PROMIS Assessments*](bass-et-al-2026.md) | 以第一次 PROMIS CAT 的最终分数构造第二次测量的个体化 prior，并系统改变 prior 标准差，检验小变化、大变化与题库覆盖如何共同决定题量和 RMSE | **已完成精读** |
 
-八篇核心文献已经全部完成精读：第 3 篇补齐初始化模型的统计理论，第 4 篇说明经验先验怎样进入整个逐题估计过程，第 5 篇把辅助信息扩展到心理健康 self-narrative，第 6 篇揭示固定精度 CAT 中先验精度同时制造效率收益与错误先验风险，第 7 篇直接检验只个性化第一题的轻量方案，第 8 篇则说明纵向复测还必须把真实状态变化的不确定性放进 prior。补充文献目前完成 2 篇，下一篇将用动态模型解释受测者的逐题难度选择。
+八篇核心文献和三篇补充文献已经全部完成精读：Revuelta（2004）建立静态潜在策略模型，Wise 等人（2005）检验低风险条件中的努力，Arieli-Attali 等人（2019）再把选择策略扩展为随题序变化的潜在状态。下一阶段进入三篇延伸文献，首先阅读“自我适应预考 + CAT”的混合启动架构。
 
 ### 第一篇已经读到什么
 
@@ -112,7 +112,7 @@ CAT 模拟显示，个体化首题的收益主要集中在 1 至 3 题以及远�
 |---|---|---|
 | [Revuelta (2004), *Estimating Ability and Item-Selection Strategy in Self-Adapted Testing: A Latent Class Approach*](revuelta-2004.md) | 把受测者的选题策略本身作为潜在类别建模，提醒我们“选择了什么难度”也可能是一类需要分析的数据。 | **已完成精读** |
 | [Wise et al. (2005), *An Investigation of the Effects of Self-Adapted Testing on Examinee Effort and Performance in a Low-Stakes Achievement Test*](wise-et-al-2005.md) | 直接检验低风险测验中的努力与表现，帮助评估“低风险情境下受测者会认真、准确地提供自我信息”这一前提。 | **已完成精读** |
-| [Arieli-Attali et al. (2019), *Understanding Test Takers' Choices in a Self-Adapted Test: A Hidden Markov Modeling of Process Data*](https://doi.org/10.3389/fpsyg.2019.00083) | 使用隐马尔可夫模型分析逐题难度选择怎样随目标条件和作答过程变化，适合为前 \(k\) 题选择数据建立过程模型。 | 待精读 |
+| [Arieli-Attali et al. (2019), *Understanding Test Takers' Choices in a Self-Adapted Test: A Hidden Markov Modeling of Process Data*](arieli-attali-et-al-2019.md) | 使用隐马尔可夫模型分析逐题难度选择怎样随目标条件和作答过程变化，适合为前 \(k\) 题选择数据建立过程模型。 | **已完成精读** |
 
 三篇补充文献不负责回答“是否缩短测验”这一主问题，而是帮助理解受测者如何选择、低风险是否等于高投入，以及选择策略应不应该进入测量模型。
 
@@ -127,6 +127,14 @@ CAT 模拟显示，个体化首题的收益主要集中在 1 至 3 题以及远�
 [An Investigation of the Effects of Self-Adapted Testing on Examinee Effort and Performance in a Low-Stakes Achievement Test](wise-et-al-2005.md) 在大学低风险场景中比较固定题目测验、CAT、逐题自选难度的 S-AT，以及带动态积分得失的游戏式 S-AT。四组都固定为 40 题；测验类型对平均能力、自报努力和反应时努力均无显著影响。总体 RTE 约为 .96，说明大多数作答未被 10 秒阈值判为快速猜测，却没有证据表明选择权能在这一较高基线之上进一步提高努力。
 
 这项研究不支持“低风险 + 自主选择会自动提高动机”的假设，也没有检验题量缩短。处理在场次层面分配、只有 15 个有效场次，非显著结果不能证明四种形式等效；原表还存在 RTE 样本量、SOS 自由度和监考者效应量标注不一致。研究更适合支持一种谨慎设计：将自评信号的路由价值、测量效率和动机体验分开检验，而不是把全程选题的动机收益当作既定机制。
+
+### 补充文献第三篇已经读到什么
+
+[Understanding Test Takers' Choices in a Self-Adapted Test](arieli-attali-et-al-2019.md) 对 583 名成年人各 40 次七级难度选择建立三状态 HMM。低、中、高潜在状态的选择中心约对应等级 1.33、3.57 和 6.02，自保持概率均超过 .90；这说明观察等级的小幅变动往往只是状态内波动，而同一个人也能在反馈累积后真正转换状态。
+
+前测越高，初始处于中、高状态的概率越大；控制前测后，performance-goal 组更可能从低状态开始，也更不容易离开低状态。累计正确率低时转换增多，置信度进一步调节转移方向。不过，论文最醒目的 66.1% 至 73.8% 上调概率来自极端且稀疏的正确率—置信度组合，属于模型外推。AIC 支持含完整 goal 交互的 62 参数模型，BIC 则选择较简单的正确率—置信度模型，不能声称复杂交互获得所有准则一致支持。
+
+这篇仍是完整序列的事后过程分析，没有让 HMM 驱动 CAT，也没有把状态标定为能力 prior。对本项目最直接的启示是把一次自评、前 \(k\) 题平均选择和在线 HMM filtering 分开消融，并避免使用当前或未来题目的正误预测已经发生的选择。
 
 ### 三篇已获取的延伸文献
 
@@ -147,4 +155,4 @@ CAT 模拟显示，个体化首题的收益主要集中在 1 至 3 题以及远�
 5. 效率收益是否只出现在极端能力或症状水平的受测者身上？
 6. 自主感、焦虑和动机的变化，是否会改变被测构念本身的作答过程？
 
-本专题后续将继续沿着“全程自主选题 - 个体化起点 - 经验先验 - 仅个体化第一题”的顺序整理文献。Revuelta（2004）补上了选择过程的潜在类别模型，Wise 等人（2005）表明低风险下全程选择没有产生可检测的努力收益；下一步用 Arieli-Attali 等人（2019）的动态模型解释策略怎样随题序改变。
+本专题后续将继续沿着“全程自主选题 - 个体化起点 - 经验先验 - 仅个体化第一题”的顺序整理文献。三篇补充文献已经完成：静态策略、低风险努力和动态状态均已形成独立笔记。下一步转入 Frosini 等人（1998），检查自我适应预考怎样与后续 CAT 串联。
