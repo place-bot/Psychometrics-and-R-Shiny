@@ -56,9 +56,9 @@ SE(\widehat{\theta}_i)\le \varepsilon.
 | 5 | [He et al. (2019), *Combining Text Mining of Long Constructed Responses and Item-Based Measures: A Hybrid Test Design to Screen for Posttraumatic Stress Disorder (PTSD)*](he-et-al-2019.md) | 将受测者的创伤与症状 self-narrative 通过文本挖掘转换为个体化先验，再与 PTSD 问卷的 IRT 似然结合；题目却是按固定诊断切点的信息量排成全员相同的顺序，并非个体化实时选题 | **已完成精读** |
 | 6 | [Frans et al. (2023), *Empirical Priors in Polytomous Computerized Adaptive Tests: Risks and Rewards in Clinical Settings*](frans-et-al-2023.md) | 在多级计分临床 CAT 中正交操纵先验均值偏差与先验方差，揭示窄 prior 缩短测验的同时也可能造成严重偏差、过早停止或题库耗尽 | **已完成精读** |
 | 7 | [Petersen et al. (2026), *Evaluating the Use of Prior Information to Individualise Start Item Selection for the EORTC CAT Core*](petersen-et-al-2026.md) | 用已经完成的另一个生活质量领域预测目标领域位置，只据此选择第一题；第一题后恢复原有 CAT，直接检验轻量个性化首题的效果边界 | **已完成精读** |
-| 8 | [Bass et al. (2026), *Brief Reports: Impact of Informed Starting Value on Longitudinal Computer Adaptive Tests in PROMIS Assessments*](https://doi.org/10.1016/j.apro.2026.100322) | 在患者报告结局测量信息系统（Patient-Reported Outcomes Measurement Information System, PROMIS）的纵向复测中使用 informed starting value，直接考察受测负担、题量与估计误差 | **待精读：核心文献** |
+| 8 | [Bass et al. (2026), *Brief Reports: Impact of Informed Starting Value on Longitudinal Computer Adaptive Tests in PROMIS Assessments*](bass-et-al-2026.md) | 以第一次 PROMIS CAT 的最终分数构造第二次测量的个体化 prior，并系统改变 prior 标准差，检验小变化、大变化与题库覆盖如何共同决定题量和 RMSE | **已完成精读** |
 
-建议阅读顺序不是简单按年份排列。前七篇已经读完：第 3 篇补齐初始化模型的统计理论，第 4 篇说明经验先验怎样进入整个逐题估计过程，第 5 篇把辅助信息扩展到心理健康 self-narrative，第 6 篇揭示固定精度 CAT 中先验精度同时制造效率收益与错误先验风险，第 7 篇则直接检验只个性化第一题的轻量方案。下一篇将用第 8 篇考察纵向复测中的 informed starting value。
+八篇核心文献已经全部完成精读：第 3 篇补齐初始化模型的统计理论，第 4 篇说明经验先验怎样进入整个逐题估计过程，第 5 篇把辅助信息扩展到心理健康 self-narrative，第 6 篇揭示固定精度 CAT 中先验精度同时制造效率收益与错误先验风险，第 7 篇直接检验只个性化第一题的轻量方案，第 8 篇则说明纵向复测还必须把真实状态变化的不确定性放进 prior。下一阶段转向补充文献，依次研究受测者怎样选题、低风险情境中的努力，以及选择策略的动态变化。
 
 ### 第一篇已经读到什么
 
@@ -99,6 +99,12 @@ SE(\widehat{\theta}_i)\le \varepsilon.
 [Evaluating the Use of Prior Information to Individualise Start Item Selection](petersen-et-al-2026.md) 是目前机制上最接近“只改变第一题”的研究。作者先在 10,084 次癌症患者评估中，用一个已经完成的生活质量领域简单回归预测另一个领域；随后只在预测位置选择目标 CAT 的第一题，第一题以后恢复原有流程。对每个目标领域挑选最佳单一预测领域时，预测-观察相关为 0.31 至 0.72，72% 至 89% 的预测位于观察分数 1 个标准差以内；若跨全部预测领域平均，表现明显较低，不能把摘要中的最佳结果推广到任意领域组合。
 
 CAT 模拟显示，个体化首题的收益主要集中在 1 至 3 题以及远离总体均值的患者；低分区跨领域平均可靠性提高 0.11，达到 4 至 5 题后多数差异消失。固定精度模拟中只有低身体功能条件最多平均减少 1.4 题，其余条件不超过 0.7 题。还要注意，模拟使用的是“真实分数、真实分数正负 5 或 10 分”的受控起点，并没有把实证回归的逐人预测误差端到端送入 CAT。因此它很好地证明首题路由的局部效果，却没有证明真实辅助信息能够普遍大幅缩短测验。
+
+### 第八篇已经读到什么
+
+[Impact of Informed Starting Value on Longitudinal Computer Adaptive Tests in PROMIS Assessments](bass-et-al-2026.md) 使用官方 PROMIS 成人与儿童题库模拟两次纵向 CAT。第一次使用标准 \(N(0,1)\) prior；第二次把第一次最终 EAP 设为 prior 均值，并将 prior 标准差设为 1、0.75、0.5 或 0.25。这里改变的是完整 prior 而不只是第一题，而且数值是标准差：\(SD=0.5\) 对应方差 0.25，\(SD=0.25\) 对应方差 0.0625。
+
+状态变化较小时，\(SD=0.5\) 往往以相同或更少的题量得到最低 RMSE，但总体改善较小且依赖题库覆盖。状态变化较大时，多数成人领域在 \(SD=1\) 最准确；最窄 prior 会把第二次估计强烈拉回旧分数。由于 \(SD=0.25\) 已小于 \(SE<0.3\) 的停止阈值，最少四题规则使 CAT 几乎全部在第四题停止，形成“更短但更不准确”的测验。论文最重要的方法启示是：纵向 prior 方差应同时包含上次计分误差与真实状态变化方差，不能把历史分数的精度直接当作当前状态的不确定性。
 
 ### 三篇补充文献
 
