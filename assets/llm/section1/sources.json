@@ -1,0 +1,32 @@
+[
+  {
+    "source": "Chapter1-L00 (L02).pdf",
+    "pages": 38,
+    "sha256": "e60dc64f3c2f580ab2f361964af652a02b22fa7d78f1941d3518e591e50b7e44",
+    "page": "01-hugging-face.md"
+  },
+  {
+    "source": "Chapter1-L01 (L03).pdf",
+    "pages": 26,
+    "sha256": "b09bab01407ef72f07871762d7ca7bfa21fc8bac8c961ef0c0e4bb509fabe103",
+    "page": "02-masked-lm.md"
+  },
+  {
+    "source": "Chapter1-L02 (L04).pdf",
+    "pages": 22,
+    "sha256": "0c61d7ec98cb184759f045f675b4d223f5dd1ecad157d7a2c28811f7f99be1d1",
+    "page": "03-causal-lm.md"
+  },
+  {
+    "source": "Chapter1-L03 (L05).pdf",
+    "pages": 40,
+    "sha256": "3f0393b39fedd832971200f6958990b5cd3f13f7478b6c922054995445238883",
+    "page": "04-scaling-icl-moe.md"
+  },
+  {
+    "source": "Chapter1-L04 (L06).pdf",
+    "pages": 61,
+    "sha256": "0331f36631a986c506c9b6495571c153c8695dbd6fbe537949c267714a2f4bdc",
+    "page": "05-instruction-tuning.md"
+  }
+]
