@@ -67,6 +67,9 @@ plugins:
             原文版本核对: Source-version audit
             总结与符号: Summary and notation
             首页: Home
+            心理测量与 Test Development: Psychological Measurement and Test Development
+            专题总览: Topic overview
+            Homework 1：项目编写、分析式评分与随机化反应: "Homework 1: Item Writing, Analytic Scoring, and Randomized Response"
             心理测量基础: Basics of psychometrics
             总览: Overview
             CTT 与 IRT 概览: Overview of CTT and IRT
@@ -628,6 +631,9 @@ nav:
       - 总览: psychometrics/index.md
       - CTT 与 IRT 概览: ctt_irt_intro.md
       - 基于模型的测量: modelbased.md
+  - 心理测量与 Test Development:
+      - 专题总览: test-development/index.md
+      - Homework 1：项目编写、分析式评分与随机化反应: test-development/homework-1.md
   - IRT 模型:
       - 总览: irt-models/index.md
       - 二分项目模型:

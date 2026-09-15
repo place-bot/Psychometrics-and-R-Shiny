@@ -7,6 +7,7 @@ The material is organized by topic for course review, quick reference, and conti
 ## Quick links
 
 - [Psychometrics foundations](psychometrics/index.md)
+- [Psychological Measurement and Test Development](test-development/index.md)
 - [IRT models](irt-models/index.md)
 - [IRT estimation and evaluation](irt-estimation/index.md)
 - [CTT/IRT application rules](10_rules_ctt_irt/index.md)

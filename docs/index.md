@@ -8,6 +8,7 @@
 
 - [LLM · Section 1 课程复习](llm/section1/index.md)
 - [心理测量基础](psychometrics/index.md)
+- [心理测量与 Test Development](test-development/index.md)
 - [IRT 模型](irt-models/index.md)
 - [IRT 估计与评估](irt-estimation/index.md)
 - [CTT/IRT 应用规则](10_rules_ctt_irt/index.md)
